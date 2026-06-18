@@ -1,103 +1,102 @@
-import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
-
-const ease = [0.22, 1, 0.36, 1] as const;
-
-const proof = ["NCAA", "ESPN", "Amazon", "Microsoft", "NYFW"];
-
 export function Hero() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-6 md:px-12 relative overflow-hidden">
-      {/* Subtle noise texture overlay */}
-      <div className="absolute inset-0 bg-noise opacity-5 pointer-events-none" />
-
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease }}
-        className="text-center relative"
+    <div id="top" style={{ maxWidth: 1240, margin: "0 auto", padding: "64px 32px 36px" }}>
+      <div
+        className="kosi-stack"
+        style={{ display: "grid", gridTemplateColumns: "1.35fr 1fr", gap: 48, alignItems: "center" }}
       >
-        <h1
-          className="font-serif font-light tracking-tight mb-4 text-ink"
-          style={{ fontSize: "clamp(4rem, 12vw, 12rem)", lineHeight: "0.95", fontWeight: 300 }}
-        >
-          It's Kosi
-        </h1>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="font-display font-medium uppercase tracking-[0.2em] text-sm md:text-base text-subtle"
-        >
-          ISOK
-        </motion.p>
-
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8, ease }}
-          className="font-display mt-6 text-base md:text-lg text-subtle"
-        >
-          DJ &amp; Content Creator
-        </motion.p>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.65, duration: 0.8, ease }}
-          className="mt-10 flex items-center justify-center gap-4"
-        >
-          <a
-            href="#mixes"
-            className="font-body font-medium text-sm md:text-base rounded-lg px-7 py-3 bg-ink text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand"
+        <div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              fontFamily: "'Space Mono', monospace",
+              fontSize: 13,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "#FF3B1D",
+              fontWeight: 700,
+              marginBottom: 24,
+            }}
           >
-            Listen
-          </a>
-          <a
-            href="mailto:contact@itskosi.com?subject=Booking%20inquiry"
-            className="font-body font-medium text-sm md:text-base rounded-lg px-7 py-3 border border-ink text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-brand hover:text-brand"
-          >
-            Book
-          </a>
-        </motion.div>
+            <span
+              style={{
+                width: 9,
+                height: 9,
+                borderRadius: "50%",
+                background: "#FF3B1D",
+                display: "inline-block",
+                animation: "kosi-blink 1.4s infinite",
+              }}
+            />
+            Seattle-based · travels worldwide
+          </div>
 
-        {/* Proof teaser */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.85, duration: 0.8 }}
-          className="font-display mt-10 text-[11px] md:text-xs uppercase tracking-[0.18em] text-subtle"
-        >
-          <span className="opacity-70">Played for</span>{" "}
-          {proof.map((name, i) => (
-            <span key={name}>
-              {i > 0 && <span className="mx-2 text-brand">·</span>}
-              {name}
+          <h1
+            style={{
+              fontFamily: "'Anton', sans-serif",
+              fontSize: "clamp(58px,9.2vw,134px)",
+              lineHeight: 0.82,
+              letterSpacing: "-0.01em",
+              textTransform: "uppercase",
+              margin: 0,
+            }}
+          >
+            Genre<br />Has No<br />
+            <span style={{ color: "#FF3B1D" }}>Curfew.</span>
+          </h1>
+
+          <p style={{ maxWidth: 520, fontSize: 18, lineHeight: 1.55, color: "#3a3833", margin: "30px 0 0", fontWeight: 500 }}>
+            Kosi <span style={{ color: "#86847c" }}>(ISOK)</span> is a Seattle-based, frequently-traveling open-format DJ &amp; content
+            creator — Hip-Hop, R&amp;B, Afrobeats, Dancehall, House, edits, you name it — woven into one seamless, room-reading set,
+            wherever the night is.
+          </p>
+
+          <div style={{ display: "flex", gap: 12, marginTop: 30, flexWrap: "wrap" }}>
+            <a
+              href="#mixes"
+              className="kosi-btn"
+              style={{ background: "#15130f", color: "#fff", padding: "16px 28px", borderRadius: 100, fontWeight: 700, fontSize: 15, textDecoration: "none" }}
+            >
+              Hear a set ▸
+            </a>
+            <a
+              href="#book"
+              className="kosi-btn"
+              style={{ border: "2px solid #15130f", padding: "14px 26px", borderRadius: 100, fontWeight: 700, fontSize: 15, textDecoration: "none", color: "#15130f" }}
+            >
+              Book Kosi
+            </a>
+          </div>
+        </div>
+
+        <div className="kosi-hero-photo" style={{ position: "relative" }}>
+          <div style={{ position: "relative", border: "2px solid #15130f", borderRadius: 6, overflow: "hidden", boxShadow: "12px 12px 0 #15130f" }}>
+            <img
+              src="/assets/kosi-gasworks.jpeg"
+              alt="Kosi (ISOK) DJing at golden hour at Gas Works Park, Seattle"
+              style={{ display: "block", width: "100%", height: 560, objectFit: "cover", objectPosition: "center 30%" }}
+            />
+            <span
+              style={{
+                position: "absolute",
+                bottom: 14,
+                left: 14,
+                fontFamily: "'Space Mono', monospace",
+                fontSize: 11,
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                background: "#F4F1EA",
+                border: "1px solid #15130f",
+                padding: "6px 10px",
+              }}
+            >
+              Gas Works Park · Seattle
             </span>
-          ))}
-        </motion.p>
-      </motion.div>
-
-      {/* Scroll cue */}
-      <motion.a
-        href="#about"
-        aria-label="Scroll down"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-subtle hover:text-brand transition-colors"
-      >
-        <motion.span
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          className="block"
-        >
-          <ChevronDown className="w-6 h-6" />
-        </motion.span>
-      </motion.a>
-    </section>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
