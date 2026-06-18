@@ -1,3 +1,4 @@
+import { CustomCursor } from "./portfolio/CustomCursor";
 import { Nav } from "./portfolio/Nav";
 import { Hero } from "./portfolio/Hero";
 import { Marquee } from "./portfolio/Marquee";
@@ -11,6 +12,7 @@ import { Footer } from "./portfolio/Footer";
 function Home() {
   return (
     <div style={{ fontFamily: "'Archivo', sans-serif", color: "#15130f", background: "#F4F1EA", overflowX: "hidden" }}>
+      <CustomCursor />
       <Nav />
       <Hero />
       <Marquee />

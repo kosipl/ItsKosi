@@ -1,3 +1,4 @@
+export { CustomCursor } from "./CustomCursor";
 export { Nav } from "./Nav";
 export { Hero } from "./Hero";
 export { Marquee } from "./Marquee";
