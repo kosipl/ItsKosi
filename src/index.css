@@ -124,6 +124,9 @@
   .kosi-cell:hover { background: #15130f; color: #F4F1EA; }
   .kosi-social:hover { color: #FF3B1D !important; }
 
+  /* Brand asterisk cursor — hide native cursor when active */
+  .kosi-cursor-none, .kosi-cursor-none * { cursor: none !important; }
+
   @media (max-width: 880px) {
     .kosi-stack { grid-template-columns: 1fr !important; }
     .kosi-clients { grid-template-columns: repeat(2, 1fr) !important; }
