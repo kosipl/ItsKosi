@@ -17,7 +17,17 @@ module.exports = {
   		}
   	},
   	extend: {
+  		fontFamily: {
+  			serif: ["'Fraunces'", 'serif'],
+  			display: ["'Space Grotesk'", 'sans-serif'],
+  			body: ["'Manrope'", 'sans-serif']
+  		},
   		colors: {
+  			ink: '#1A1A1A',
+  			subtle: '#6B6B6B',
+  			brand: '#E63946',
+  			paper: '#FAFAF8',
+  			hairline: '#E5E5E5',
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',

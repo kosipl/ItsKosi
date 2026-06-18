@@ -31,21 +31,16 @@ export function MediaGallery() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="max-w-[1200px] mx-auto px-6 md:px-12 py-40">
+    <section id="mixes" ref={ref} className="scroll-mt-24 max-w-[1200px] mx-auto px-6 md:px-12 py-40">
       {/* Divider line */}
-      <div className="border-t border-[#E5E5E5] mb-20" />
+      <div className="border-t border-hairline mb-20" />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
-        <h2
-          className="text-4xl md:text-5xl font-bold mb-16"
-          style={{
-            fontFamily: "'Space Grotesk', sans-serif",
-            color: "#1A1A1A",
-          }}
-        >
+        <div className="h-[2px] w-12 bg-brand mb-6" />
+        <h2 className="font-display text-4xl md:text-5xl font-bold mb-16 text-ink">
           Featured Mixes
         </h2>
 
@@ -73,14 +68,7 @@ export function MediaGallery() {
                   />
                 </div>
                 <div className="p-6">
-                  <div className="bg-white w-[80px] h-[80px]"></div>
-                  <h3
-                    className="text-xl font-semibold"
-                    style={{
-                      fontFamily: "'Manrope', sans-serif",
-                      color: "#1A1A1A",
-                    }}
-                  >
+                  <h3 className="font-body text-lg md:text-xl font-semibold leading-snug text-ink">
                     {video.title}
                   </h3>
                 </div>

@@ -10,49 +10,44 @@ export function ContactFooter() {
   return (
     <footer ref={ref} className="max-w-[1200px] mx-auto px-6 md:px-12 py-40">
       {/* Divider line */}
-      <div className="border-t border-[#E5E5E5] mb-20" />
+      <div className="border-t border-hairline mb-20" />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className="text-center"
       >
-        <h2
-          className="text-5xl md:text-7xl font-light mb-8"
-          style={{
-            fontFamily: "'Fraunces', serif",
-            fontWeight: 300,
-            color: "#1A1A1A",
-          }}
-        >
+        <h2 className="font-serif font-light text-5xl md:text-7xl mb-8 text-ink">
           Let's Connect
         </h2>
 
         <p
-          className="text-lg md:text-xl mb-12 max-w-2xl mx-auto"
-          style={{
-            fontFamily: "'Manrope', sans-serif",
-            color: "#6B6B6B",
-            lineHeight: "1.7",
-          }}
+          className="font-body text-lg md:text-xl mb-12 max-w-2xl mx-auto text-subtle"
+          style={{ lineHeight: "1.7" }}
         >
           Available for bookings, collaborations, and creative projects. Get in
           touch to discuss how we can work together.
         </p>
 
-        <motion.a
-          href="mailto:contact@itskosi.com"
+        <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="inline-block text-2xl md:text-3xl font-semibold mb-16 hover:text-[#E63946] transition-colors duration-300"
-          style={{
-            fontFamily: "'Manrope', sans-serif",
-            color: "#1A1A1A",
-          }}
+          className="mb-16 flex flex-col items-center gap-4"
         >
-          contact@itskosi.com
-        </motion.a>
+          <a
+            href="mailto:contact@itskosi.com?subject=Booking%20inquiry"
+            className="font-body font-medium text-base md:text-lg rounded-lg px-8 py-4 bg-ink text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand"
+          >
+            Book ISOK
+          </a>
+          <a
+            href="mailto:contact@itskosi.com"
+            className="font-body text-base text-subtle hover:text-brand transition-colors duration-300"
+          >
+            contact@itskosi.com
+          </a>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0 }}
