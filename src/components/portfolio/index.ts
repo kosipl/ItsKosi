@@ -1,8 +1,9 @@
 export { Nav } from "./Nav";
 export { Hero } from "./Hero";
-export { Bio } from "./Bio";
-export { FeaturedClients } from "./FeaturedClients";
-export { VenueShowcase } from "./VenueShowcase";
-export { SocialStats } from "./SocialStats";
-export { MediaGallery } from "./MediaGallery";
-export { ContactFooter } from "./ContactFooter";
+export { Marquee } from "./Marquee";
+export { Clients } from "./Clients";
+export { About } from "./About";
+export { Reach } from "./Reach";
+export { Mixes } from "./Mixes";
+export { Booking } from "./Booking";
+export { Footer } from "./Footer";

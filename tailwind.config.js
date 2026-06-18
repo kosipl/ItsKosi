@@ -18,16 +18,17 @@ module.exports = {
   	},
   	extend: {
   		fontFamily: {
-  			serif: ["'Fraunces'", 'serif'],
-  			display: ["'Space Grotesk'", 'sans-serif'],
-  			body: ["'Manrope'", 'sans-serif']
+  			display: ["'Anton'", 'sans-serif'],
+  			expanded: ["'Archivo Expanded'", "'Archivo'", 'sans-serif'],
+  			body: ["'Archivo'", 'sans-serif'],
+  			mono: ["'Space Mono'", 'monospace']
   		},
   		colors: {
-  			ink: '#1A1A1A',
-  			subtle: '#6B6B6B',
-  			brand: '#E63946',
-  			paper: '#FAFAF8',
-  			hairline: '#E5E5E5',
+  			ink: '#15130f',
+  			subtle: '#86847c',
+  			brand: '#FF3B1D',
+  			paper: '#F4F1EA',
+  			hairline: '#15130f',
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
