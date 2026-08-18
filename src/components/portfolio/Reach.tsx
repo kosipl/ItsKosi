@@ -5,10 +5,10 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: "1.4M+", label: "Views · past year", hot: true },
-  { value: "15K+", label: "Followers" },
-  { value: "5K+", label: "Creators used his sounds" },
-  { value: "200K+", label: "SoundCloud plays · 12mo" },
+  { value: "5M+", label: "Audience reach", hot: true },
+  { value: "50K+", label: "Followers" },
+  { value: "10K+", label: "Creators used his sounds" },
+  { value: "300K+", label: "SoundCloud plays · 12mo" },
 ];
 
 export function Reach() {
@@ -20,7 +20,7 @@ export function Reach() {
             The reach
           </h2>
           <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: "#86847c", textAlign: "right", lineHeight: 1.5, maxWidth: 360 }}>
-            1.4M+ views this past year — one clip<br />alone crossed 100K · 20K+ likes · 1K+ comments
+            One clip alone crossed 400K views —<br />50K+ likes · 2K+ comments
           </div>
         </div>
 
