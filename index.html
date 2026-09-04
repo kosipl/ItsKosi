@@ -458,7 +458,7 @@
                 <div style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 82;font-weight:780;font-size:clamp(20px,2.6vw,32px);line-height:1.05;text-transform:uppercase;color:#2B2622;">{{ watchTitle }}</div>
                 <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;color:#7A6E60;">{{ watchPlatform }} · {{ watchCount }}</div>
               </div>
-              <button type="button" onClick="{{ openActiveWatch }}" style="background:none;border:0;border-bottom:1px solid rgba(43,38,34,.45);padding:0 0 3px;color:#2B2622;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;white-space:nowrap;cursor:pointer;">WATCH HERE</button>
+              <button type="button" onClick="{{ openActiveWatch }}" style="background:none;border:0;border-bottom:1px solid rgba(43,38,34,.45);padding:0 0 3px;color:#2B2622;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;white-space:nowrap;cursor:pointer;">{{ watchAction }}</button>
             </div>
           </div>
           </div>
@@ -1053,6 +1053,13 @@ class Component extends DCLogic {
   }
 
   _openWatch(index, e) {
+    const total = this._watchClips.length;
+    const clip = this._watchClips[((index % total) + total) % total];
+    if (clip.platform === 'TIKTOK') {
+      const opened = window.open(clip.url, '_blank', 'noopener,noreferrer');
+      if (opened) opened.opener = null;
+      return;
+    }
     this._watchTrigger = e && e.currentTarget;
     this._watchScrollY = scrollY;
     this.setState({ watchOpen: true, watchIndex: index });
@@ -1487,7 +1494,6 @@ class Component extends DCLogic {
     const watchTotal = this._watchClips.length;
     const watchActive = ((this.state.activeWatch % watchTotal) + watchTotal) % watchTotal;
     const watch = this._watchClips[watchActive];
-    const lightWatchPreviews = typeof matchMedia === 'function' && matchMedia('(max-width:700px), (pointer:coarse)').matches;
     const watchCards = this._watchClips.map((clip, index) => {
       let delta = index - watchActive;
       if (delta > watchTotal / 2) delta -= watchTotal;
@@ -1498,14 +1504,14 @@ class Component extends DCLogic {
         platform: clip.platform,
         embed: clip.embed,
         poster: clip.poster,
-        lightPreview: lightWatchPreviews,
-        richPreview: !lightWatchPreviews,
+        lightPreview: true,
+        richPreview: false,
         active: delta === 0 ? 'true' : 'false',
         transform: this._watchCardTransform(delta),
         opacity: visible ? '1' : '0',
         z: String(30 - Math.abs(delta)),
         pointer: visible ? 'auto' : 'none',
-        cue: delta === 0 ? 'WATCH' : 'BRING TO FRONT',
+        cue: delta === 0 ? (clip.platform === 'TIKTOK' ? 'OPEN TIKTOK' : 'WATCH') : 'BRING TO FRONT',
         label: delta === 0 ? 'Open ' + clip.title + ' on ' + clip.platform : 'Bring ' + clip.title + ' to the front',
         select: (e) => this._selectWatch(index, e)
       };
@@ -1539,6 +1545,7 @@ class Component extends DCLogic {
       watchCards,
       watchTitle: watch.title,
       watchPlatform: watch.platform,
+      watchAction: watch.platform === 'TIKTOK' ? 'WATCH ON TIKTOK ↗' : 'WATCH HERE',
       watchCount: String(watchActive + 1).padStart(2, '0') + ' / ' + String(watchTotal).padStart(2, '0'),
       watchOpen: this.state.watchOpen,
       watchOverlayTitle: watchOverlay.title,
