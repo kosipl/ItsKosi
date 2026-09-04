@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Record Shop — Kosi</title>
+<title>Kosi’s Record Shop</title>
 <meta name="description" content="Browse Kosi's complete catalog of DJ mixes, mashups, edits, beat tapes, and original releases.">
 <meta name="author" content="Kosi">
 <meta name="theme-color" content="#F7F4EE">
@@ -12,12 +12,12 @@
 <link rel="apple-touch-icon" href="../favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="It's Kosi">
-<meta property="og:title" content="The Record Shop — Kosi">
+<meta property="og:title" content="Kosi’s Record Shop">
 <meta property="og:description" content="Every Kosi DJ mix, mashup, and edit in one place.">
 <meta property="og:url" content="https://itskosi.com/music/">
 <meta property="og:image" content="https://itskosi.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The Record Shop — Kosi">
+<meta name="twitter:title" content="Kosi’s Record Shop">
 <meta name="twitter:description" content="Every Kosi DJ mix, mashup, and edit in one place.">
 <meta name="twitter:image" content="https://itskosi.com/og-image.png">
 <script>try{if(sessionStorage.getItem('kosi:record-shop-entry')){document.documentElement.classList.add('from-home');sessionStorage.removeItem('kosi:record-shop-entry');}}catch(_){}</script>
@@ -31,7 +31,7 @@
 <script src="../support.js"></script>
 </head>
 <body>
-<div class="music-entry" aria-hidden="true"><span>THE RECORD SHOP</span></div>
+<div class="music-entry" aria-hidden="true"><span>KOSI’S RECORD SHOP</span></div>
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,8 +47,6 @@
   a{color:var(--ink);text-decoration:none;}
   a:hover{color:var(--muted);}
   button{font:inherit;}
-  .site-nav a{transition:color .2s ease;}
-  .nav-short{display:none;}
   .release-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(46%,var(--tile)),1fr));gap:clamp(24px,3vw,44px) clamp(14px,1.8vw,28px);}
   .release-shelf{content-visibility:auto;contain-intrinsic-size:auto 1400px;}
   .release-tile{cursor:pointer;outline:none;transition:transform .34s cubic-bezier(.16,.84,.44,1);content-visibility:auto;contain-intrinsic-size:auto 320px;}
@@ -77,13 +75,93 @@
   @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
   @keyframes fadeIn{from{opacity:0}to{opacity:1}}
   @keyframes panelIn{from{opacity:0;transform:translateY(22px) scale(.985)}to{opacity:1;transform:none}}
+  /* ---- site header: same system as the home page, re-tinted for paper ---- */
+  :root{--hdr-x:clamp(20px,4vw,56px);--hdr-y:22px;--hdr-h:38px;}
+  [id]{scroll-margin-top:calc(var(--hdr-y) * 2 + var(--hdr-h) + 14px);}
+  .header-burger{position:fixed;top:var(--hdr-y);left:var(--hdr-x);width:var(--hdr-h);height:var(--hdr-h);z-index:81;display:flex;align-items:center;justify-content:flex-start;background:none;border:0;padding:0;cursor:pointer;}
+  .header-burger-bars{position:relative;display:block;width:22px;height:1.5px;background:var(--ink);}
+  .header-burger-bars::before,.header-burger-bars::after{content:"";position:absolute;left:0;width:22px;height:1.5px;background:var(--ink);}
+  .header-burger-bars::before{top:-6px;}
+  .header-burger-bars::after{top:6px;}
+  .header-burger:focus-visible{outline:2px solid var(--ink);outline-offset:6px;}
+  .floating-header{position:fixed;top:0;left:0;right:0;z-index:80;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding:var(--hdr-y) var(--hdr-x);min-height:calc(var(--hdr-h) + var(--hdr-y) * 2);pointer-events:none;}
+  .floating-header a,.floating-header button{pointer-events:auto;}
+  .header-scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;background:rgba(247,244,238,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid rgba(43,38,34,.14);}
+  .header-nav{grid-column:1;display:flex;align-items:center;gap:clamp(18px,2.2vw,34px);padding-left:calc(var(--hdr-h) + 16px);min-width:0;}
+  .header-link{position:relative;display:inline-flex;align-items:center;gap:7px;background:none;border:0;padding:6px 0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);cursor:pointer;white-space:nowrap;}
+  .header-link::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.16,.84,.44,1);}
+  .header-link:hover::after,.header-link:focus-visible::after,.header-music[data-open] .header-music-trigger::after{transform:scaleX(1);}
+  .header-link[data-current]::after{transform:scaleX(1);opacity:.42;}
+  .header-link:hover,.header-link:focus-visible{color:var(--ink);}
+  .header-link:focus-visible{outline:2px solid var(--ink);outline-offset:5px;}
+  .header-caret{display:block;width:0;height:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent;border-top:4px solid var(--ink);transition:transform .3s cubic-bezier(.16,.84,.44,1);}
+  .header-music{position:relative;}
+  .header-music[data-open] .header-caret{transform:rotate(180deg);}
+  .header-music-panel{position:absolute;top:calc(100% + 14px);left:0;z-index:82;min-width:296px;background:var(--paper);border:1px solid rgba(43,38,34,.28);pointer-events:auto;opacity:0;transform:translateY(-5px);transition:opacity .16s ease,transform .16s cubic-bezier(.16,.84,.44,1);}
+  .header-music[data-open] .header-music-panel{opacity:1;transform:none;}
+  .header-music-item{display:flex;align-items:baseline;justify-content:space-between;gap:26px;padding:14px 18px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);transition:background .18s ease,color .18s ease;}
+  .header-music-item + .header-music-item{border-top:1px solid rgba(43,38,34,.16);}
+  .header-music-item:hover,.header-music-item:focus-visible{background:var(--ink);color:var(--paper);outline:none;}
+  .header-music-tag{font-size:9.5px;letter-spacing:.2em;color:var(--muted);}
+  .header-music-item:hover .header-music-tag,.header-music-item:focus-visible .header-music-tag{color:rgba(247,244,238,.72);}
+  .header-wordmark{grid-column:2;justify-self:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:20px;letter-spacing:.04em;color:var(--ink);white-space:nowrap;}
+  .header-wordmark:hover{color:var(--ink);}
+  .header-wordmark:focus-visible{outline:2px solid var(--ink);outline-offset:6px;}
+  .header-right{grid-column:3;justify-self:end;display:flex;align-items:center;gap:clamp(14px,1.8vw,26px);}
+  .header-socials{display:flex;align-items:center;gap:15px;}
+  .header-social{display:inline-flex;align-items:center;justify-content:center;color:var(--ink);opacity:.62;transition:opacity .22s ease,transform .22s cubic-bezier(.16,.84,.44,1);}
+  .header-social svg{display:block;width:16px;height:16px;fill:currentColor;}
+  .header-social:hover,.header-social:focus-visible{opacity:1;color:var(--ink);transform:translateY(-1px);}
+  .header-social:focus-visible{outline:2px solid var(--ink);outline-offset:5px;}
+  .header-book{border:1px solid var(--ink);padding:9px 16px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);white-space:nowrap;transition:background .22s ease,color .22s ease;}
+  .header-book:hover,.header-book:focus-visible{background:var(--ink);color:var(--paper);}
+  .header-book:focus-visible{outline:2px solid var(--ink);outline-offset:4px;}
+  /* ---- full-screen menu ---- */
+  .menu-panel{touch-action:pan-y;overscroll-behavior:contain;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  .menu-panel.menu-opening{animation:menuReveal .74s cubic-bezier(.16,.84,.44,1) both;}
+  .menu-opening .menu-meta{animation:menuMetaIn .48s .18s ease both;}
+  .menu-opening .menu-nav>.menu-music-group,.menu-opening .menu-nav>.menu-primary{opacity:0;animation:menuItemIn .62s cubic-bezier(.16,.84,.44,1) both;}
+  .menu-opening .menu-nav>:nth-child(1){animation-delay:.12s;}
+  .menu-opening .menu-nav>:nth-child(2){animation-delay:.17s;}
+  .menu-opening .menu-nav>:nth-child(3){animation-delay:.22s;}
+  .menu-opening .menu-nav>:nth-child(4){animation-delay:.27s;}
+  .menu-opening .menu-nav>:nth-child(5){animation-delay:.32s;}
+  .menu-opening .menu-nav>:nth-child(6){animation-delay:.37s;}
+  .menu-panel.menu-closing{animation:menuClose .52s cubic-bezier(.55,.06,.68,.19) both;pointer-events:none;}
+  .menu-closing .menu-meta{animation:menuMetaOut .24s ease both;}
+  .menu-closing .menu-nav>.menu-music-group,.menu-closing .menu-nav>.menu-primary{animation:menuItemOut .28s ease both;}
+  .menu-primary{font-size:clamp(38px,min(8vw,9vh),104px)!important;}
+  .menu-music-group{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(5px,1vh,11px);}
+  .menu-sublink{position:relative;margin-left:clamp(14px,2.5vw,38px);padding-bottom:5px;font-family:'IBM Plex Mono',monospace!important;font-size:clamp(12px,min(1.5vw,2vh),17px)!important;font-weight:500!important;line-height:1.2!important;letter-spacing:.18em!important;color:var(--muted)!important;transition:color .22s ease,transform .32s cubic-bezier(.16,.84,.44,1),letter-spacing .32s ease;}
+  .menu-sublink::after{content:"";position:absolute;left:1.75em;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .32s cubic-bezier(.16,.84,.44,1);}
+  .menu-sublink:hover,.menu-sublink:focus-visible{color:var(--ink)!important;transform:translateX(10px);letter-spacing:.21em!important;}
+  .menu-sublink:hover::after,.menu-sublink:focus-visible::after{transform:scaleX(1);}
+  .menu-sublink:focus-visible{outline:none;}
+  .menu-sublink[aria-current]{color:var(--ink)!important;}
+  .menu-sublink[aria-current]::after{transform:scaleX(1);opacity:.42;}
+  .menu-close{display:inline-flex;align-items:center;justify-content:center;width:clamp(42px,3.2vw,46px);height:clamp(42px,3.2vw,46px);flex:none;background:none;border:1px solid var(--ink);color:var(--ink);padding:0;cursor:pointer;transition:background .24s ease,color .24s ease,transform .38s cubic-bezier(.16,.84,.44,1);}
+  .menu-close svg{width:46%;height:46%;display:block;}
+  .menu-close:hover,.menu-close:focus-visible{background:var(--ink);color:var(--paper);transform:rotate(90deg);}
+  .menu-close:focus-visible{outline:none;box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--ink);}
+  @keyframes menuReveal{0%{opacity:.4;clip-path:circle(0% at 4% 4%)}100%{opacity:1;clip-path:circle(150% at 4% 4%)}}
+  @keyframes menuClose{0%{opacity:1;clip-path:circle(150% at 4% 4%)}100%{opacity:.35;clip-path:circle(0% at 4% 4%)}}
+  @keyframes menuMetaIn{0%{opacity:0}100%{opacity:1}}
+  @keyframes menuMetaOut{0%{opacity:1}100%{opacity:0}}
+  @keyframes menuItemIn{0%{opacity:0;transform:translateX(-34px)}100%{opacity:1;transform:translateX(0)}}
+  @keyframes menuItemOut{0%{opacity:1;transform:translateX(0)}100%{opacity:0;transform:translateX(-18px)}}
   @media (max-width:700px){
     body::after{display:none;}
-    .site-header{display:grid!important;grid-template-columns:1fr;align-items:center!important;gap:14px!important;padding:15px 18px!important;-webkit-backdrop-filter:blur(8px)!important;backdrop-filter:blur(8px)!important;}
-    .site-brand{font-size:18px!important;}
-    .site-nav{width:100%;display:grid!important;grid-template-columns:repeat(5,auto);justify-content:space-between!important;align-items:center;gap:7px!important;border-top:1px solid rgba(43,38,34,.13);padding-top:13px;font-size:10px!important;letter-spacing:.09em!important;}
-    .nav-full{display:none;}
-    .nav-short{display:inline;}
+    :root{--hdr-x:18px;--hdr-y:13px;--hdr-h:34px;}
+    .header-nav,.header-socials{display:none;}
+    .header-wordmark{font-size:18px;}
+    .header-book{padding:11px 14px;font-size:10px;letter-spacing:.18em;}
+    .menu-panel{height:100dvh;padding:18px!important;gap:28px;justify-content:flex-start!important;}
+    .menu-meta:first-child{position:sticky;top:0;z-index:2;background:var(--paper);padding-bottom:12px;}
+    .menu-nav{gap:5px!important;margin:auto 0;}
+    .menu-primary{font-size:clamp(34px,min(10vw,7.2vh),58px)!important;line-height:.95!important;}
+    .menu-music-group{gap:7px;}
+    .menu-sublink{font-size:clamp(11px,min(3vw,1.7vh),14px)!important;line-height:1.35!important;}
+    .menu-meta:last-child{gap:14px 22px!important;padding-bottom:max(4px,env(safe-area-inset-bottom));}
     .release-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
     .release-shelf{padding-left:18px!important;padding-right:18px!important;padding-bottom:62px!important;contain-intrinsic-size:auto 1100px;}
     .cover-shell::after{animation:none;background:linear-gradient(105deg,rgba(230,225,215,.22),rgba(247,244,238,.7),rgba(230,225,215,.22));}
@@ -99,30 +177,72 @@
     .previous-release,.next-release{min-height:42px;font-size:9px!important;letter-spacing:.12em!important;}
     .modal-close{position:fixed!important;top:12px!important;right:12px!important;min-height:44px;background:rgba(247,244,238,.94)!important;}
   }
-  @media (max-width:420px){.site-nav{font-size:9px!important;gap:5px!important;letter-spacing:.07em!important;}.release-grid{column-gap:12px;}.release-meta{font-size:8.5px!important;letter-spacing:.12em!important;}}
+  @media (max-width:420px){.release-grid{column-gap:12px;}.release-meta{font-size:8.5px!important;letter-spacing:.12em!important;}}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.08s!important;}}
 </style>
 </helmet>
 
 <div style="min-height:100vh;background:var(--paper);">
-  <header class="site-header" style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px clamp(20px,4vw,56px);border-bottom:1px solid rgba(43,38,34,.14);position:sticky;top:0;background:rgba(247,244,238,.96);backdrop-filter:blur(12px);z-index:70;">
-    <a class="site-brand" href="../" aria-label="Kosi home" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:19px;letter-spacing:.04em;">KOSI</a>
-    <nav class="site-nav" aria-label="Primary navigation" style="display:flex;gap:clamp(14px,2.4vw,30px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;color:var(--muted);">
-      <a href="../">HOME</a>
-      <a href="../?section=mixes"><span class="nav-full">THE MIXES</span><span class="nav-short">MIXES</span></a>
-      <a href="#shop" aria-current="page" style="color:var(--ink);"><span class="nav-full">RECORD SHOP</span><span class="nav-short">SHOP</span></a>
-      <a href="../?section=shows">SHOWS</a>
-      <a href="../?section=booking"><span class="nav-full">BOOKING</span><span class="nav-short">BOOK</span></a>
+  <button type="button" class="header-burger" onClick="{{ openMenu }}" aria-label="Open menu" aria-expanded="{{ menuExpanded }}">
+    <span class="header-burger-bars" aria-hidden="true"></span>
+  </button>
+
+  <div class="floating-header">
+    <span class="header-scrim" aria-hidden="true"></span>
+    <nav class="header-nav" aria-label="Primary">
+      <div class="header-music" data-music-menu>
+        <button type="button" class="header-link header-music-trigger" data-current aria-expanded="false" aria-controls="header-music-panel">Music<span class="header-caret" aria-hidden="true"></span></button>
+        <div class="header-music-panel" id="header-music-panel" hidden>
+          <a class="header-music-item" href="../?section=mixes"><span>The Mixes</span><span class="header-music-tag">Featured</span></a>
+          <a class="header-music-item" href="#shop" aria-current="page"><span>Kosi’s Record Shop</span><span class="header-music-tag">Current</span></a>
+        </div>
+      </div>
+      <a class="header-link" href="../?section=shows">Shows</a>
     </nav>
-  </header>
+    <a class="header-wordmark" href="../" aria-label="Kosi home">KOSI</a>
+    <div class="header-right">
+      <div class="header-socials">
+        <a class="header-social" href="https://soundcloud.com/iisokk" target="_blank" rel="noopener noreferrer" aria-label="Kosi on SoundCloud"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.999 14.165c-.052 1.796-1.612 3.169-3.4 3.169h-8.18a.68.68 0 0 1-.675-.683V7.862a.747.747 0 0 1 .452-.724s.75-.513 2.333-.513a5.364 5.364 0 0 1 2.763.755 5.433 5.433 0 0 1 2.57 3.54c.282-.08.574-.121.868-.12.884 0 1.73.358 2.347.992s.948 1.49.922 2.373ZM10.721 8.421c.247 2.98.427 5.697 0 8.672a.264.264 0 0 1-.53 0c-.395-2.946-.22-5.718 0-8.672a.264.264 0 0 1 .53 0ZM9.072 9.448c.285 2.659.37 4.986-.006 7.655a.277.277 0 0 1-.55 0c-.331-2.63-.256-5.02 0-7.655a.277.277 0 0 1 .556 0Zm-1.663-.257c.27 2.726.39 5.171 0 7.904a.266.266 0 0 1-.532 0c-.38-2.69-.257-5.21 0-7.904a.266.266 0 0 1 .532 0Zm-1.647.77a26.108 26.108 0 0 1-.008 7.147.272.272 0 0 1-.542 0 27.955 27.955 0 0 1 0-7.147.275.275 0 0 1 .55 0Zm-1.67 1.769c.421 1.865.228 3.5-.029 5.388a.257.257 0 0 1-.514 0c-.21-1.858-.398-3.549 0-5.389a.272.272 0 0 1 .543 0Zm-1.655-.273c.388 1.897.26 3.508-.01 5.412-.026.28-.514.283-.54 0-.244-1.878-.347-3.54-.01-5.412a.283.283 0 0 1 .56 0Zm-1.668.911c.4 1.268.257 2.292-.026 3.572a.257.257 0 0 1-.514 0c-.241-1.262-.354-2.312-.023-3.572a.283.283 0 0 1 .563 0Z"/></svg></a>
+        <a class="header-social" href="https://www.instagram.com/kosipl/" target="_blank" rel="noopener noreferrer" aria-label="Kosi on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a>
+        <a class="header-social" href="https://www.tiktok.com/@kosipl" target="_blank" rel="noopener noreferrer" aria-label="Kosi on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+        <a class="header-social" href="https://www.youtube.com/@iisokk" target="_blank" rel="noopener noreferrer" aria-label="Kosi on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a class="header-social" href="https://iisokk.bandcamp.com/" target="_blank" rel="noopener noreferrer" aria-label="Kosi on Bandcamp"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/></svg></a>
+      </div>
+      <a class="header-book" href="../?section=booking">Book</a>
+    </div>
+  </div>
+
+  <sc-if value="{{ menu }}" hint-placeholder-val="{{ false }}">
+    <div class="menu-panel {{ menuClass }}" style="position:fixed;inset:0;z-index:120;background:var(--paper);display:flex;flex-direction:column;justify-content:space-between;padding:clamp(24px,5vw,64px);">
+      <div class="menu-meta" style="display:flex;justify-content:space-between;align-items:center;">
+        <button type="button" class="menu-close" onClick="{{ closeMenu }}" aria-label="Close menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 4 20 20M20 4 4 20"/></svg>
+        </button>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:var(--muted);">ITSKOSI.COM</span>
+      </div>
+      <nav class="menu-nav" style="display:flex;flex-direction:column;gap:clamp(1px,.45vh,6px);">
+        <div class="menu-music-group">
+          <span class="menu-primary" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Music</span>
+          <a class="menu-sublink" href="../?section=mixes">↳ THE MIXES · FEATURED</a>
+          <a class="menu-sublink" href="#shop" aria-current="page" onClick="{{ closeMenuHere }}">↳ KOSI’S RECORD SHOP · ALL</a>
+        </div>
+        <a class="menu-primary" href="../?section=shows" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Shows</a>
+        <a class="menu-primary" href="../?section=about" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">About</a>
+        <a class="menu-primary" href="../?section=booking" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Booking</a>
+      </nav>
+      <div class="menu-meta" style="display:flex;gap:28px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--muted);flex-wrap:wrap;">
+        <a href="https://soundcloud.com/iisokk" target="_blank" rel="noopener noreferrer">SOUNDCLOUD</a>
+        <a href="https://www.instagram.com/kosipl/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+        <a href="https://www.tiktok.com/@kosipl" target="_blank" rel="noopener noreferrer">TIKTOK</a>
+        <a href="https://www.youtube.com/@iisokk" target="_blank" rel="noopener noreferrer">YOUTUBE</a>
+        <a href="https://iisokk.bandcamp.com/" target="_blank" rel="noopener noreferrer">BANDCAMP</a>
+      </div>
+    </div>
+  </sc-if>
 
   <main>
-    <section id="shop" data-screen-label="Record Shop" style="padding:clamp(50px,7vw,92px) clamp(20px,5vw,72px) clamp(42px,5vw,72px);max-width:1500px;margin:0 auto;width:100%;">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:var(--muted);padding-bottom:16px;">
-        <span>FULL CATALOG</span>
-        <span>{{ countLabel }}</span>
-      </div>
-      <h1 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 66;font-weight:900;font-size:clamp(58px,12.5vw,196px);line-height:.84;letter-spacing:-.025em;text-transform:uppercase;color:var(--ink);animation:rise .9s cubic-bezier(.16,.84,.44,1) both;">The Record Shop</h1>
+    <section id="shop" data-screen-label="Kosi’s Record Shop" style="padding:calc(var(--hdr-h) + var(--hdr-y) * 2 + clamp(30px,4.5vw,68px)) clamp(20px,5vw,72px) clamp(42px,5vw,72px);max-width:1500px;margin:0 auto;width:100%;">
+      <h1 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 66;font-weight:900;font-size:clamp(58px,12.5vw,196px);line-height:.84;letter-spacing:-.025em;text-transform:uppercase;color:var(--ink);animation:rise .9s cubic-bezier(.16,.84,.44,1) both;">Kosi’s Record Shop</h1>
       <p style="margin:28px 0 0;max-width:52ch;font-size:clamp(16px,1.3vw,18px);line-height:1.55;color:#6B6259;text-wrap:pretty;">Every mix, mashup, and edit — browse the full shelf.</p>
     </section>
 
@@ -171,8 +291,8 @@
         <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--muted);">PAGES</span>
         <a href="../" style="font-size:16px;">Home</a>
         <a href="../?section=mixes" style="font-size:16px;">The Mixes</a>
-        <a href="#shop" style="font-size:16px;">The Record Shop</a>
-        <a href="../?section=shows" style="font-size:16px;">Residency &amp; Shows</a>
+        <a href="#shop" style="font-size:16px;">Kosi’s Record Shop</a>
+        <a href="../?section=shows" style="font-size:16px;">Shows</a>
         <a href="../?section=booking" style="font-size:16px;">Booking</a>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;">
@@ -334,10 +454,14 @@ const CATALOG = [
 ];
 
 class Component extends DCLogic {
-  state = { openSlug: null, badHash: false };
+  state = { openSlug: null, badHash: false, menu: false, menuClosing: false };
 
   componentDidMount() {
     this._onKey = (e) => {
+      if (this.state.menu) {
+        if (e.key === 'Escape') this._closeMenu();
+        return;
+      }
       if (!this.state.openSlug) return;
       if (e.key === 'Escape') this._close();
       if (e.key === 'ArrowLeft') { e.preventDefault(); this._stepOpenRelease(-1); }
@@ -346,13 +470,132 @@ class Component extends DCLogic {
     this._onHash = () => this._readHash();
     document.addEventListener('keydown', this._onKey);
     addEventListener('hashchange', this._onHash);
+    this._setupHeaderMenu();
     this._readHash();
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this._onKey);
     removeEventListener('hashchange', this._onHash);
+    if (this._menuTimer) clearTimeout(this._menuTimer);
+    this._teardownHeaderMenu();
     this._unlockPageScroll(false);
+  }
+
+  // ---- header music disclosure ---------------------------------------------
+  _setupHeaderMenu() {
+    const wrap = document.querySelector('[data-music-menu]');
+    if (!wrap) return;
+    const trigger = wrap.querySelector('.header-music-trigger');
+    const panel = wrap.querySelector('.header-music-panel');
+    if (!trigger || !panel) return;
+
+    const clearHover = () => {
+      if (this._musicOpenTimer) clearTimeout(this._musicOpenTimer);
+      if (this._musicCloseTimer) clearTimeout(this._musicCloseTimer);
+      this._musicOpenTimer = this._musicCloseTimer = null;
+    };
+
+    const open = () => {
+      if (this._musicOpen) return;
+      this._musicOpen = true;
+      if (this._musicHideTimer) clearTimeout(this._musicHideTimer);
+      panel.hidden = false;
+      trigger.setAttribute('aria-expanded', 'true');
+      // One frame with the panel laid out but not yet flagged open, so the
+      // transition has a from-state to animate out of.
+      requestAnimationFrame(() => { if (this._musicOpen) wrap.setAttribute('data-open', 'true'); });
+    };
+
+    const close = (returnFocus) => {
+      if (!this._musicOpen) return;
+      this._musicOpen = false;
+      wrap.removeAttribute('data-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      if (this._musicHideTimer) clearTimeout(this._musicHideTimer);
+      this._musicHideTimer = setTimeout(() => { if (!this._musicOpen) panel.hidden = true; }, 220);
+      if (returnFocus) trigger.focus();
+    };
+    this._closeHeaderMenu = close;
+
+    // Hover is a mouse affordance only; touch goes through click.
+    wrap.addEventListener('pointerenter', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      clearHover();
+      this._musicOpenTimer = setTimeout(open, 80);
+    });
+    wrap.addEventListener('pointerleave', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      clearHover();
+      this._musicCloseTimer = setTimeout(() => close(false), 180);
+    });
+
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      clearHover();
+      if (this._musicOpen) close(false); else open();
+    });
+
+    const items = () => Array.from(panel.querySelectorAll('a'));
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        open();
+        requestAnimationFrame(() => { const first = items()[0]; if (first) first.focus(); });
+      } else if (e.key === 'Escape') {
+        close(true);
+      }
+    });
+    panel.addEventListener('keydown', (e) => {
+      const list = items();
+      const i = list.indexOf(document.activeElement);
+      if (e.key === 'Escape') { e.preventDefault(); close(true); }
+      else if (e.key === 'ArrowDown') { e.preventDefault(); (list[i + 1] || list[0]).focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); (list[i - 1] || list[list.length - 1]).focus(); }
+    });
+    // The Mixes is a real navigation and #shop is this page, so neither is
+    // intercepted here — following either one just closes the panel.
+    panel.addEventListener('click', () => close(false));
+
+    this._onMusicPointerDown = (e) => { if (this._musicOpen && !wrap.contains(e.target)) close(false); };
+    this._onMusicKey = (e) => { if (e.key === 'Escape' && this._musicOpen) close(false); };
+    this._onMusicFocusOut = (e) => { if (this._musicOpen && !wrap.contains(e.relatedTarget)) close(false); };
+    document.addEventListener('pointerdown', this._onMusicPointerDown, true);
+    document.addEventListener('keydown', this._onMusicKey);
+    wrap.addEventListener('focusout', this._onMusicFocusOut);
+  }
+
+  _teardownHeaderMenu() {
+    if (this._musicOpenTimer) clearTimeout(this._musicOpenTimer);
+    if (this._musicCloseTimer) clearTimeout(this._musicCloseTimer);
+    if (this._musicHideTimer) clearTimeout(this._musicHideTimer);
+    if (this._onMusicPointerDown) document.removeEventListener('pointerdown', this._onMusicPointerDown, true);
+    if (this._onMusicKey) document.removeEventListener('keydown', this._onMusicKey);
+    this._onMusicPointerDown = this._onMusicKey = this._onMusicFocusOut = this._closeHeaderMenu = null;
+  }
+
+  // ---- full-screen menu ----------------------------------------------------
+  _openMenu(e) {
+    if (this.state.menu || this.state.openSlug) return;
+    this._menuTrigger = (e && e.currentTarget) || null;
+    if (this._closeHeaderMenu) this._closeHeaderMenu(false);
+    this._lockPageScroll();
+    this.setState({ menu: true, menuClosing: false });
+  }
+
+  _closeMenu(afterClose) {
+    if (!this.state.menu || this.state.menuClosing) return;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.setState({ menuClosing: true }, () => {
+      this._menuTimer = setTimeout(() => {
+        this.setState({ menu: false, menuClosing: false }, () => requestAnimationFrame(() => {
+          this._unlockPageScroll();
+          if (this._menuTrigger && this._menuTrigger.focus) this._menuTrigger.focus({ preventScroll: true });
+          if (typeof afterClose === 'function') afterClose();
+        }));
+      }, reduced ? 20 : 520);
+    });
   }
 
   _lockPageScroll() {
@@ -496,7 +739,19 @@ class Component extends DCLogic {
         shelfData('Mashups / Edits', 'mashups-edits', edits, 'New mashups coming soon — check the DJ Mixes shelf.'),
         shelfData('Projects / Originals', 'projects-originals', projects, 'New original projects coming soon.')
       ],
-      countLabel:CATALOG.length + ' RELEASES · UPDATED SEPT 2026',
+      menu:this.state.menu,
+      menuExpanded:this.state.menu ? 'true' : 'false',
+      menuClass:this.state.menuClosing ? 'menu-closing' : 'menu-opening',
+      openMenu:(e) => this._openMenu(e),
+      closeMenu:() => this._closeMenu(),
+      // #shop is this page, so close first and then jump — no navigation.
+      closeMenuHere:(e) => {
+        e.preventDefault();
+        this._closeMenu(() => {
+          history.replaceState(null, '', location.pathname + location.search + '#shop');
+          scrollTo({ top:0, behavior:'auto' });
+        });
+      },
       badHash:this.state.badHash,
       clearBadHash:() => { history.replaceState(null, '', location.pathname + location.search + '#shop'); this.setState({ badHash:false }); },
       focus,

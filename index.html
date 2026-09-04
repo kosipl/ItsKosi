@@ -24,6 +24,7 @@
 <meta name="twitter:description" content="Seattle-based open-format DJ and MC performing across the U.S. and internationally.">
 <meta name="twitter:image" content="https://itskosi.com/og-image.png">
 <script>try{history.scrollRestoration='manual';}catch(_){}</script>
+<script>try{if(location.hash||new URLSearchParams(location.search).get('section'))document.documentElement.classList.add('kosi-deep-link');}catch(_){}</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -69,6 +70,46 @@
   .about-media{position:absolute;inset:0;display:block;}
   .about-bg{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 34%;}
   .about-scrim{position:absolute;inset:0;background:linear-gradient(102deg,rgba(43,38,34,.9) 0%,rgba(43,38,34,.78) 30%,rgba(43,38,34,.54) 60%,rgba(43,38,34,.34) 100%);}
+  :root{--hdr-x:clamp(20px,4vw,56px);--hdr-y:22px;--hdr-h:38px;}
+  .header-burger{position:fixed;top:var(--hdr-y);left:var(--hdr-x);width:var(--hdr-h);height:var(--hdr-h);z-index:81;display:flex;align-items:center;justify-content:flex-start;background:none;border:0;padding:0;cursor:pointer;filter:drop-shadow(0 1px 10px rgba(43,38,34,.5));}
+  .header-burger[data-solo]{mix-blend-mode:difference;filter:none;}
+  .header-burger-bars{position:relative;display:block;width:22px;height:1.5px;background:#F7F4EE;}
+  .header-burger-bars::before,.header-burger-bars::after{content:"";position:absolute;left:0;width:22px;height:1.5px;background:#F7F4EE;}
+  .header-burger-bars::before{top:-6px;}
+  .header-burger-bars::after{top:6px;}
+  .header-burger:focus-visible{outline:2px solid #F7F4EE;outline-offset:6px;}
+  .floating-header{position:fixed;top:0;left:0;right:0;z-index:80;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding:var(--hdr-y) var(--hdr-x);min-height:calc(var(--hdr-h) + var(--hdr-y) * 2);pointer-events:none;}
+  .floating-header a,.floating-header button{pointer-events:auto;}
+  .header-scrim{position:absolute;top:0;left:0;right:0;height:210px;pointer-events:none;background:linear-gradient(to bottom,rgba(43,38,34,.6),rgba(43,38,34,.12) 62%,rgba(43,38,34,0));opacity:var(--hfo,1);visibility:var(--hfv,visible);}
+  .header-nav,.header-wordmark,.header-right{opacity:var(--hfo,1);visibility:var(--hfv,visible);}
+  .header-nav{grid-column:1;display:flex;align-items:center;gap:clamp(18px,2.2vw,34px);padding-left:calc(var(--hdr-h) + 16px);min-width:0;}
+  .header-link{position:relative;display:inline-flex;align-items:center;gap:7px;background:none;border:0;padding:6px 0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#F7F4EE;cursor:pointer;white-space:nowrap;text-shadow:0 1px 12px rgba(43,38,34,.5);}
+  .header-link::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:#F7F4EE;transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.16,.84,.44,1);}
+  .header-link:hover::after,.header-link:focus-visible::after,.header-music[data-open] .header-music-trigger::after{transform:scaleX(1);}
+  .header-link:hover,.header-link:focus-visible{color:#F7F4EE;}
+  .header-link:focus-visible{outline:2px solid #F7F4EE;outline-offset:5px;}
+  .header-caret{display:block;width:0;height:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent;border-top:4px solid #F7F4EE;transition:transform .3s cubic-bezier(.16,.84,.44,1);}
+  .header-music{position:relative;}
+  .header-music[data-open] .header-caret{transform:rotate(180deg);}
+  .header-music-panel{position:absolute;top:calc(100% + 14px);left:0;z-index:82;min-width:296px;background:#F7F4EE;border:1px solid rgba(43,38,34,.28);pointer-events:auto;opacity:0;transform:translateY(-5px);transition:opacity .16s ease,transform .16s cubic-bezier(.16,.84,.44,1);}
+  .header-music[data-open] .header-music-panel{opacity:1;transform:none;}
+  .header-music-item{display:flex;align-items:baseline;justify-content:space-between;gap:26px;padding:14px 18px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#2B2622;transition:background .18s ease,color .18s ease;}
+  .header-music-item + .header-music-item{border-top:1px solid rgba(43,38,34,.16);}
+  .header-music-item:hover,.header-music-item:focus-visible{background:#2B2622;color:#F7F4EE;outline:none;}
+  .header-music-tag{font-size:9.5px;letter-spacing:.2em;color:#7A6E60;}
+  .header-music-item:hover .header-music-tag,.header-music-item:focus-visible .header-music-tag{color:rgba(247,244,238,.72);}
+  .header-wordmark{grid-column:2;justify-self:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:20px;letter-spacing:.04em;color:#F7F4EE;white-space:nowrap;text-shadow:0 1px 12px rgba(43,38,34,.5);}
+  .header-wordmark:focus-visible{outline:2px solid #F7F4EE;outline-offset:6px;}
+  .header-right{grid-column:3;justify-self:end;display:flex;align-items:center;gap:clamp(14px,1.8vw,26px);}
+  .header-socials{display:flex;align-items:center;gap:15px;}
+  .header-social{display:inline-flex;align-items:center;justify-content:center;color:#F7F4EE;opacity:.82;transition:opacity .22s ease,transform .22s cubic-bezier(.16,.84,.44,1);filter:drop-shadow(0 1px 10px rgba(43,38,34,.5));}
+  .header-social svg{display:block;width:16px;height:16px;fill:currentColor;}
+  .header-social:hover,.header-social:focus-visible{opacity:1;color:#F7F4EE;transform:translateY(-1px);}
+  .header-social:focus-visible{outline:2px solid #F7F4EE;outline-offset:5px;}
+  .header-book{border:1px solid #F7F4EE;padding:9px 16px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#F7F4EE;white-space:nowrap;transition:background .22s ease,color .22s ease;text-shadow:0 1px 12px rgba(43,38,34,.5);}
+  .header-book:hover,.header-book:focus-visible{background:#F7F4EE;color:#2B2622;text-shadow:none;}
+  .header-book:focus-visible{outline:2px solid #F7F4EE;outline-offset:4px;}
+  html.kosi-deep-link .header-scrim,html.kosi-deep-link .header-nav,html.kosi-deep-link .header-wordmark,html.kosi-deep-link .header-right{opacity:0;visibility:hidden;}
   .watch-card[data-active="true"]{filter:saturate(1);}
   .watch-card:not([data-active="true"]){filter:saturate(.82) brightness(.94);}
   .watch-card-platform{position:absolute;left:10px;top:9px;background:#2B2622;color:#F7F4EE;padding:6px 8px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;}
@@ -100,6 +141,10 @@
   .menu-sublink:hover,.menu-sublink:focus-visible{color:#2B2622!important;transform:translateX(10px);letter-spacing:.21em!important;}
   .menu-sublink:hover::after,.menu-sublink:focus-visible::after{transform:scaleX(1);}
   .menu-sublink:focus-visible{outline:none;}
+  .menu-close{display:inline-flex;align-items:center;justify-content:center;width:clamp(42px,3.2vw,46px);height:clamp(42px,3.2vw,46px);flex:none;background:none;border:1px solid #2B2622;color:#2B2622;padding:0;cursor:pointer;transition:background .24s ease,color .24s ease,transform .38s cubic-bezier(.16,.84,.44,1);}
+  .menu-close svg{width:46%;height:46%;display:block;}
+  .menu-close:hover,.menu-close:focus-visible{background:#2B2622;color:#F7F4EE;transform:rotate(90deg);}
+  .menu-close:focus-visible{outline:none;box-shadow:0 0 0 2px #F7F4EE,0 0 0 4px #2B2622;}
   .record-transition{position:fixed;inset:0;z-index:150;display:grid;place-items:center;background:#EADFCB;clip-path:circle(0 at 50% 50%);animation:recordWipe .82s cubic-bezier(.76,0,.24,1) both;pointer-events:none;}
   .record-transition::before,.record-transition::after{content:"";position:absolute;left:50%;top:50%;border:1px solid rgba(43,38,34,.28);border-radius:50%;transform:translate(-50%,-50%);animation:recordRing .68s .08s cubic-bezier(.16,.84,.44,1) both;}
   .record-transition::before{width:24vmin;height:24vmin;}
@@ -128,12 +173,12 @@
   body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.055;mix-blend-mode:multiply;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22/></filter><rect width=%22160%22 height=%22160%22 filter=%22url(%23n)%22/></svg>');}
   @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
   @keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
-  @keyframes menuReveal{0%{opacity:.4;clip-path:circle(0% at 96% 4%)}100%{opacity:1;clip-path:circle(150% at 96% 4%)}}
-  @keyframes menuClose{0%{opacity:1;clip-path:circle(150% at 96% 4%)}100%{opacity:.35;clip-path:circle(0% at 96% 4%)}}
+  @keyframes menuReveal{0%{opacity:.4;clip-path:circle(0% at 4% 4%)}100%{opacity:1;clip-path:circle(150% at 4% 4%)}}
+  @keyframes menuClose{0%{opacity:1;clip-path:circle(150% at 4% 4%)}100%{opacity:.35;clip-path:circle(0% at 4% 4%)}}
   @keyframes menuMetaIn{0%{opacity:0}100%{opacity:1}}
   @keyframes menuMetaOut{0%{opacity:1}100%{opacity:0}}
-  @keyframes menuItemIn{0%{opacity:0;transform:translateY(28px)}100%{opacity:1;transform:translateY(0)}}
-  @keyframes menuItemOut{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-14px)}}
+  @keyframes menuItemIn{0%{opacity:0;transform:translateX(-34px)}100%{opacity:1;transform:translateX(0)}}
+  @keyframes menuItemOut{0%{opacity:1;transform:translateX(0)}100%{opacity:0;transform:translateX(-18px)}}
   @keyframes recordWipe{0%{clip-path:circle(0 at 50% 50%)}100%{clip-path:circle(76vmax at 50% 50%)}}
   @keyframes recordRing{0%{opacity:0;transform:translate(-50%,-50%) scale(.25)}100%{opacity:1;transform:translate(-50%,-50%) scale(1)}}
   @keyframes recordLabelIn{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:none}}
@@ -145,9 +190,11 @@
     .about-bg{object-position:50% 26%;}
     .about-scrim{background:linear-gradient(to bottom,rgba(43,38,34,.58) 0%,rgba(43,38,34,.72) 44%,rgba(43,38,34,.9) 100%);}
     [data-layer]{will-change:opacity;}
-    .floating-header{padding:13px 18px!important;mix-blend-mode:normal!important;background:rgba(247,244,238,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,38,34,.14);}
-    .floating-header a,.floating-header button{color:#2B2622!important;border-color:#2B2622!important;}
-    .floating-header button{min-height:44px;padding:10px 15px!important;}
+    :root{--hdr-x:18px;--hdr-y:13px;--hdr-h:34px;}
+    .floating-header{gap:12px;}
+    .header-nav,.header-socials{display:none;}
+    .header-wordmark{font-size:18px;}
+    .header-book{padding:11px 14px;font-size:10px;letter-spacing:.18em;}
     .menu-panel{height:100dvh;padding:18px!important;gap:28px;justify-content:flex-start!important;}
     .menu-meta:first-child{position:sticky;top:0;z-index:2;background:#F7F4EE;padding-bottom:12px;}
     .menu-nav{gap:5px!important;margin:auto 0;}
@@ -174,26 +221,50 @@
 
 <div>
 
-  <div class="floating-header" style="position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,4vw,56px);mix-blend-mode:difference;">
-    <a href="#top" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:20px;letter-spacing:.04em;color:#F7F4EE;">KOSI</a>
-    <button onClick="{{ openMenu }}" style="background:none;border:1px solid #F7F4EE;color:#F7F4EE;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:9px 16px;cursor:pointer;">MENU</button>
+  <button type="button" class="header-burger" onClick="{{ openMenu }}" aria-label="Open menu" aria-expanded="{{ menuExpanded }}">
+    <span class="header-burger-bars" aria-hidden="true"></span>
+  </button>
+
+  <div class="floating-header">
+    <span class="header-scrim" aria-hidden="true"></span>
+    <nav class="header-nav" aria-label="Primary">
+      <div class="header-music" data-music-menu>
+        <button type="button" class="header-link header-music-trigger" aria-expanded="false" aria-controls="header-music-panel">Music<span class="header-caret" aria-hidden="true"></span></button>
+        <div class="header-music-panel" id="header-music-panel" hidden>
+          <a class="header-music-item" href="#mixes"><span>The Mixes</span><span class="header-music-tag">Featured</span></a>
+          <a class="header-music-item" href="music/"><span>Kosi’s Record Shop</span><span class="header-music-tag">All</span></a>
+        </div>
+      </div>
+      <a class="header-link" href="#shows">Shows</a>
+    </nav>
+    <a class="header-wordmark" href="#top">KOSI</a>
+    <div class="header-right">
+      <div class="header-socials">
+        <a class="header-social" href="https://soundcloud.com/iisokk" target="_blank" rel="noopener noreferrer" aria-label="Kosi on SoundCloud"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.999 14.165c-.052 1.796-1.612 3.169-3.4 3.169h-8.18a.68.68 0 0 1-.675-.683V7.862a.747.747 0 0 1 .452-.724s.75-.513 2.333-.513a5.364 5.364 0 0 1 2.763.755 5.433 5.433 0 0 1 2.57 3.54c.282-.08.574-.121.868-.12.884 0 1.73.358 2.347.992s.948 1.49.922 2.373ZM10.721 8.421c.247 2.98.427 5.697 0 8.672a.264.264 0 0 1-.53 0c-.395-2.946-.22-5.718 0-8.672a.264.264 0 0 1 .53 0ZM9.072 9.448c.285 2.659.37 4.986-.006 7.655a.277.277 0 0 1-.55 0c-.331-2.63-.256-5.02 0-7.655a.277.277 0 0 1 .556 0Zm-1.663-.257c.27 2.726.39 5.171 0 7.904a.266.266 0 0 1-.532 0c-.38-2.69-.257-5.21 0-7.904a.266.266 0 0 1 .532 0Zm-1.647.77a26.108 26.108 0 0 1-.008 7.147.272.272 0 0 1-.542 0 27.955 27.955 0 0 1 0-7.147.275.275 0 0 1 .55 0Zm-1.67 1.769c.421 1.865.228 3.5-.029 5.388a.257.257 0 0 1-.514 0c-.21-1.858-.398-3.549 0-5.389a.272.272 0 0 1 .543 0Zm-1.655-.273c.388 1.897.26 3.508-.01 5.412-.026.28-.514.283-.54 0-.244-1.878-.347-3.54-.01-5.412a.283.283 0 0 1 .56 0Zm-1.668.911c.4 1.268.257 2.292-.026 3.572a.257.257 0 0 1-.514 0c-.241-1.262-.354-2.312-.023-3.572a.283.283 0 0 1 .563 0Z"/></svg></a>
+        <a class="header-social" href="https://www.instagram.com/kosipl/" target="_blank" rel="noopener noreferrer" aria-label="Kosi on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a>
+        <a class="header-social" href="https://www.tiktok.com/@kosipl" target="_blank" rel="noopener noreferrer" aria-label="Kosi on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+        <a class="header-social" href="https://www.youtube.com/@iisokk" target="_blank" rel="noopener noreferrer" aria-label="Kosi on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a class="header-social" href="https://iisokk.bandcamp.com/" target="_blank" rel="noopener noreferrer" aria-label="Kosi on Bandcamp"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/></svg></a>
+      </div>
+      <a class="header-book" href="#booking">Book</a>
+    </div>
   </div>
 
   <sc-if value="{{ menu }}" hint-placeholder-val="{{ false }}">
     <div class="menu-panel {{ menuClass }}" style="position:fixed;inset:0;z-index:90;background:#F7F4EE;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(24px,5vw,64px);">
-      <div class="menu-meta" style="display:flex;justify-content:space-between;align-items:flex-start;">
+      <div class="menu-meta" style="display:flex;justify-content:space-between;align-items:center;">
+        <button type="button" class="menu-close" onClick="{{ closeMenu }}" aria-label="Close menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 4 20 20M20 4 4 20"/></svg>
+        </button>
         <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;">ITSKOSI.COM</span>
-        <button onClick="{{ closeMenu }}" style="background:none;border:1px solid #2B2622;color:#2B2622;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:9px 16px;cursor:pointer;">CLOSE</button>
       </div>
       <nav class="menu-nav" style="display:flex;flex-direction:column;gap:clamp(1px,.45vh,6px);">
         <div class="menu-music-group">
           <span class="menu-primary" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Music</span>
           <a class="menu-sublink" href="#mixes" onClick="{{ closeMenuNav }}">↳ THE MIXES · FEATURED</a>
-          <a class="menu-sublink" href="music/" onClick="{{ openMusic }}">↳ THE RECORD SHOP · ALL</a>
+          <a class="menu-sublink" href="music/" onClick="{{ openMusic }}">↳ KOSI’S RECORD SHOP · ALL</a>
         </div>
-        <a class="menu-primary" href="#shows" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Residency &amp; Shows</a>
-        <a class="menu-primary" href="#watch" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">The Feed</a>
-        <a class="menu-primary" href="#press" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Press</a>
+        <a class="menu-primary" href="#shows" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Shows</a>
         <a class="menu-primary" href="#about" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">About</a>
         <a class="menu-primary" href="#booking" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Booking</a>
       </nav>
@@ -208,7 +279,7 @@
   </sc-if>
 
   <sc-if value="{{ transitionOut }}" hint-placeholder-val="{{ false }}">
-    <div class="record-transition" aria-hidden="true"><span>THE RECORD SHOP</span></div>
+    <div class="record-transition" aria-hidden="true"><span>KOSI’S RECORD SHOP</span></div>
   </sc-if>
 
   <sc-if value="{{ pickerOpen }}" hint-placeholder-val="{{ false }}">
@@ -244,9 +315,8 @@
     </div>
   </sc-if>
 
-  <div data-side-label style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:70;writing-mode:vertical-rl;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.42em;color:rgba(43,38,34,.45);padding:8px 10px;will-change:opacity;">ISOK LLC · OPEN FORMAT</div>
 
-  <div data-track style="position:relative;height:calc(5 * (var(--reveal) + var(--hold)) + var(--hold) + 130vh + 100vh);">
+  <div data-track style="position:relative;height:calc(3 * (var(--reveal) + var(--hold)) + var(--hold) + 80vh + 100vh);">
     <div style="position:sticky;top:0;height:100vh;overflow:hidden;">
       <div data-stage style="position:absolute;inset:0;">
   <!-- CHAPTER 1 · HERO -->
@@ -407,6 +477,7 @@
       </div>
     </section>
       </sc-if>
+      <sc-if value="{{ showPress }}" hint-placeholder-val="{{ true }}">
       <section id="press" data-screen-label="Press and Moments" style="position:relative;background:#F7F4EE;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
       <div data-inner style="width:100%;">
       <div style="max-width:1240px;margin:0 auto;width:100%;">
@@ -424,16 +495,17 @@
       </div>
     </div>
     </section>
+      </sc-if>
       </div>
     </section>
     <div data-bleed style="position:absolute;top:100%;left:0;right:0;height:26vh;background:#F7F4EE;"></div>
     <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
   </div>
+      </div>
+    </div>
+  </div>
 
-  <!-- CHAPTER 4 · ABOUT -->
-  <div data-layer="3" style="position:absolute;inset:0;height:100vh;z-index:4;visibility:hidden;clip-path:circle(0% at 50% 110%);">
-    <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#EADFCB;;display:flex;flex-direction:column;justify-content:safe center">
-      <div data-fitbox style="width:100%;">
+  <!-- ABOUT — normal document flow, no chapter reveal -->
       <section id="about" data-screen-label="About" style="position:relative;min-height:100vh;overflow:hidden;background:#2B2622;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
       <picture class="about-media">
         <source media="(max-width:700px)" srcset="assets/kosi-gasworks-mobile.jpeg">
@@ -452,21 +524,13 @@
       </div>
     </div>
     </section>
-      </div>
-    </section>
-    <div data-bleed style="position:absolute;top:100%;left:0;right:0;height:26vh;background:#2B2622;"></div>
-    <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
-  </div>
 
-  <!-- CHAPTER 5 · BOOKING + FOOTER -->
-  <div data-layer="4" style="position:absolute;inset:0;height:100vh;z-index:5;visibility:hidden;clip-path:circle(0% at 50% 110%);">
-    <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#F7F4EE;">
-      <div data-fitbox style="width:100%;">
+  <!-- BOOKING + FOOTER — normal document flow, no chapter reveal -->
       <section id="booking" data-screen-label="Booking" style="position:relative;background:#F7F4EE;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
       <div data-inner style="width:100%;">
       <div style="max-width:1000px;margin:0 auto;width:100%;">
         <h2 class="chapter-title" data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 16px;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Let's make<br>it loud</h2>
-        <p data-rise="y" data-rise-delay="110" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(28px,3.4vw,44px);font-size:17px;line-height:1.6;color:#6B6259;max-width:520px;">Tell me what the room is and I'll come back with availability and a quote. Every inquiry gets a reply within 24 hours.</p>
+        <p data-rise="y" data-rise-delay="110" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 auto clamp(28px,3.4vw,44px);font-size:17px;line-height:1.6;color:#6B6259;max-width:520px;text-align:center;">Tell me what the room is and I'll come back with availability and a quote. Every inquiry gets a reply within 24 hours.</p>
         <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
           <form action="https://formsubmit.co/ajax/6870be49db96c158057a0ae0fe96b5ae" method="POST" onSubmit="{{ submit }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(18px,2.6vw,30px);">
             <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
@@ -520,10 +584,8 @@
           <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">PAGES</span>
           <span style="font-size:16px;">Music</span>
           <a href="#mixes" style="font-size:14px;margin-left:12px;color:#7A6E60;">↳ The Mixes · Featured</a>
-          <a href="music/" onClick="{{ openMusic }}" style="font-size:14px;margin-left:12px;color:#7A6E60;">↳ The Record Shop · All</a>
-          <a href="#shows" style="font-size:16px;">Residency &amp; Shows</a>
-          <a href="#watch" style="font-size:16px;">The Feed</a>
-          <a href="#press" style="font-size:16px;">Press</a>
+          <a href="music/" onClick="{{ openMusic }}" style="font-size:14px;margin-left:12px;color:#7A6E60;">↳ Kosi’s Record Shop · All</a>
+          <a href="#shows" style="font-size:16px;">Shows</a>
           <a href="#about" style="font-size:16px;">About</a>
         </div>
         <div style="display:flex;flex-direction:column;gap:12px;">
@@ -553,17 +615,9 @@
       </div>
     </div>
     </footer>
-      </div>
-    </section>
-    <div data-bleed style="position:absolute;top:100%;left:0;right:0;height:26vh;background:#E6E1D7;"></div>
-    <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
-  </div>
-      </div>
-    </div>
-  </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;revealLength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:112,&quot;min&quot;:70,&quot;max&quot;:160,&quot;step&quot;:2,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll transitions&quot;},&quot;holdLength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:44,&quot;min&quot;:0,&quot;max&quot;:110,&quot;step&quot;:2,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll transitions&quot;},&quot;marquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showWatch&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;revealLength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:112,&quot;min&quot;:70,&quot;max&quot;:160,&quot;step&quot;:2,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll transitions&quot;},&quot;holdLength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:44,&quot;min&quot;:0,&quot;max&quot;:110,&quot;step&quot;:2,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll transitions&quot;},&quot;marquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showWatch&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showPress&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
 class Component extends DCLogic {
   state = { menu: false, menuClosing: false, transitionOut: false, sent: false, submitting: false, submitError: false, activeMix: 0, activeWatch: 0, watchOpen: false, watchIndex: 0, pickerOpen: false, pickerIndex: 0, pickerAll: false };
 
@@ -712,6 +766,8 @@ class Component extends DCLogic {
     const sectionParam = new URLSearchParams(location.search).get('section');
     const initialHash = sectionParam || decodeURIComponent((location.hash || '').replace(/^#/, ''));
     if (sectionParam) history.replaceState(null, '', location.pathname + '#' + encodeURIComponent(sectionParam));
+    this._setupHeaderMenu();
+    this._setupFlowReveals();
     this._prepareHeroIntro(initialHash);
     const enterDeepLink = () => {
       this._layout();
@@ -719,10 +775,17 @@ class Component extends DCLogic {
       this._frame();
     };
     enterDeepLink();
+    // _frame() has now set the header's own state, so the pre-paint guard class
+    // can go — leaving it on would pin the bar hidden forever.
+    document.documentElement.classList.remove('kosi-deep-link');
     if (initialHash && initialHash !== 'top') {
       requestAnimationFrame(() => requestAnimationFrame(enterDeepLink));
-      if (document.fonts && document.fonts.ready) document.fonts.ready.then(enterDeepLink);
     }
+    // Webfonts reflow the chapters after the 400ms re-measure below, and the
+    // track's height is set explicitly so the ResizeObserver never fires for it.
+    // Without this the mount-time offsets — measured against unstyled text —
+    // would stand for the life of the page and every #jump would miss.
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(enterDeepLink);
     this._layoutTimer0 = setTimeout(() => { this._layout(); this._frame(); }, 0);
     this._layoutTimer400 = setTimeout(() => { this._layout(); this._frame(); }, 400);
   }
@@ -737,6 +800,7 @@ class Component extends DCLogic {
     if (this._retryId) clearInterval(this._retryId);
     if (this._menuTimer) clearTimeout(this._menuTimer);
     if (this._musicTimer) clearTimeout(this._musicTimer);
+    this._teardownHeaderMenu();
     if (this._layoutTimer0) clearTimeout(this._layoutTimer0);
     if (this._layoutTimer400) clearTimeout(this._layoutTimer400);
     document.body.style.overflow = '';
@@ -746,6 +810,124 @@ class Component extends DCLogic {
     removeEventListener('load', this._onResize);
     document.removeEventListener('click', this._onClick);
     document.removeEventListener('keydown', this._onGlobalKey);
+  }
+
+  // ---- flow reveals --------------------------------------------------------
+  // About and Booking sit past the pinned track, so _reveal()'s scrub never
+  // reaches them. Driven per frame rather than by an IntersectionObserver for
+  // the same reason _reveal() re-asserts every frame: a re-render restores the
+  // authored opacity:0, and a one-shot observer would never fire again.
+  _setupFlowReveals() {
+    this._flowRisers = Array.from(document.querySelectorAll('[data-rise]'))
+      .filter(el => !el.closest('[data-layer]'));
+  }
+
+  _flowReveal() {
+    if (!this._flowRisers || !this._flowRisers.length) return;
+    const vh = innerHeight;
+    this._flowRisers.forEach(el => {
+      const r = el.getBoundingClientRect();
+      const on = r.top < vh * 0.88 && r.bottom > 0;
+      const op = on ? (el.dataset.riseOp || '1') : '0';
+      if (el.style.opacity === op) return;
+      const d = parseInt(el.dataset.riseDelay || '0', 10);
+      el.style.transitionDelay = on && d ? d + 'ms' : '0ms';
+      el.style.opacity = op;
+      el.style.transform = on ? 'none' : (el.dataset.rise === 'fade' ? 'translateY(30px)' : 'translateY(38px)');
+    });
+  }
+
+  // ---- header music disclosure ---------------------------------------------
+  _setupHeaderMenu() {
+    const wrap = document.querySelector('[data-music-menu]');
+    if (!wrap) return;
+    const trigger = wrap.querySelector('.header-music-trigger');
+    const panel = wrap.querySelector('.header-music-panel');
+    if (!trigger || !panel) return;
+
+    const clearHover = () => {
+      if (this._musicOpenTimer) clearTimeout(this._musicOpenTimer);
+      if (this._musicCloseTimer) clearTimeout(this._musicCloseTimer);
+      this._musicOpenTimer = this._musicCloseTimer = null;
+    };
+
+    const open = () => {
+      if (this._musicOpen) return;
+      this._musicOpen = true;
+      if (this._musicHideTimer) clearTimeout(this._musicHideTimer);
+      panel.hidden = false;
+      trigger.setAttribute('aria-expanded', 'true');
+      // One frame with the panel laid out but not yet flagged open, so the
+      // transition has a from-state to animate out of.
+      requestAnimationFrame(() => { if (this._musicOpen) wrap.setAttribute('data-open', 'true'); });
+    };
+
+    const close = (returnFocus) => {
+      if (!this._musicOpen) return;
+      this._musicOpen = false;
+      wrap.removeAttribute('data-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      if (this._musicHideTimer) clearTimeout(this._musicHideTimer);
+      this._musicHideTimer = setTimeout(() => { if (!this._musicOpen) panel.hidden = true; }, 220);
+      if (returnFocus) trigger.focus();
+    };
+    this._closeHeaderMenu = close;
+
+    // Hover is a mouse affordance only; touch goes through click.
+    wrap.addEventListener('pointerenter', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      clearHover();
+      this._musicOpenTimer = setTimeout(open, 80);
+    });
+    wrap.addEventListener('pointerleave', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      clearHover();
+      this._musicCloseTimer = setTimeout(() => close(false), 180);
+    });
+
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      clearHover();
+      if (this._musicOpen) close(false); else open();
+    });
+
+    const items = () => Array.from(panel.querySelectorAll('a'));
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        open();
+        requestAnimationFrame(() => { const first = items()[0]; if (first) first.focus(); });
+      } else if (e.key === 'Escape') {
+        close(true);
+      }
+    });
+    panel.addEventListener('keydown', (e) => {
+      const list = items();
+      const i = list.indexOf(document.activeElement);
+      if (e.key === 'Escape') { e.preventDefault(); close(true); }
+      else if (e.key === 'ArrowDown') { e.preventDefault(); (list[i + 1] || list[0]).focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); (list[i - 1] || list[list.length - 1]).focus(); }
+    });
+    // Following a link closes it; #mixes is handled by the usual jump machinery
+    // and music/ is a real navigation, so neither is intercepted here.
+    panel.addEventListener('click', () => close(false));
+
+    this._onMusicPointerDown = (e) => { if (this._musicOpen && !wrap.contains(e.target)) close(false); };
+    this._onMusicKey = (e) => { if (e.key === 'Escape' && this._musicOpen) close(false); };
+    this._onMusicFocusOut = (e) => { if (this._musicOpen && !wrap.contains(e.relatedTarget)) close(false); };
+    document.addEventListener('pointerdown', this._onMusicPointerDown, true);
+    document.addEventListener('keydown', this._onMusicKey);
+    wrap.addEventListener('focusout', this._onMusicFocusOut);
+  }
+
+  _teardownHeaderMenu() {
+    if (this._musicOpenTimer) clearTimeout(this._musicOpenTimer);
+    if (this._musicCloseTimer) clearTimeout(this._musicCloseTimer);
+    if (this._musicHideTimer) clearTimeout(this._musicHideTimer);
+    if (this._onMusicPointerDown) document.removeEventListener('pointerdown', this._onMusicPointerDown, true);
+    if (this._onMusicKey) document.removeEventListener('keydown', this._onMusicKey);
+    this._onMusicPointerDown = this._onMusicKey = this._onMusicFocusOut = this._closeHeaderMenu = null;
   }
 
   // ---- hero intro ----------------------------------------------------------
@@ -845,7 +1027,12 @@ class Component extends DCLogic {
       { transform: 'scale(1.14)' },
       { transform: 'scale(1)' }
     ], { duration: ms(1400), delay: ms(1200), easing: 'cubic-bezier(.16,.84,.44,1)', fill: 'both' }));
+    const burger = document.querySelector('.header-burger');
     if (header) this._introAnimations.push(header.animate([
+      { opacity: 0 },
+      { opacity: 1 }
+    ], { duration: ms(600), delay: ms(1950), easing: 'ease', fill: 'both' }));
+    if (burger) this._introAnimations.push(burger.animate([
       { opacity: 0 },
       { opacity: 1 }
     ], { duration: ms(600), delay: ms(1950), easing: 'ease', fill: 'both' }));
@@ -1223,7 +1410,8 @@ class Component extends DCLogic {
     const holdRatio = this._mobileLite ? 18 : (this.props.holdLength ?? 44);
     const hold = holdRatio / 100 * vh;
     this._layers = Array.from(document.querySelectorAll('[data-layer]'));
-    this._sideLabel = document.querySelector('[data-side-label]');
+    this._headerEl = document.querySelector('.floating-header');
+    this._burgerEl = document.querySelector('.header-burger');
     this._parts = this._layers.map(L => ({
       dim: L.querySelector('[data-dim]'),
       box: L.querySelector('[data-fitbox]'),
@@ -1275,6 +1463,7 @@ class Component extends DCLogic {
   }
 
   _frame() {
+    this._flowReveal();
     if (!this._layers) return;
     if (!(this._trans > 0)) return this._parkAll();
     const y = scrollY, trans = this._trans, hold = this._hold;
@@ -1285,11 +1474,15 @@ class Component extends DCLogic {
       const raw = (y - from) / trans;
       return raw < 0 ? 0 : raw > 1 ? 1 : raw;
     };
-    if (this._sideLabel) {
-      const intoMixes = enter(2);
-      const fade = Math.min(1, Math.max(0, (intoMixes - 0.28) / 0.42));
-      this._sideLabel.style.opacity = (1 - fade).toFixed(4);
-      this._sideLabel.style.visibility = fade >= 1 ? 'hidden' : 'visible';
+    // The bar belongs to the hero only. As chapter 1 reveals over it the
+    // wordmark, links, icons and CTA fade out and go visibility:hidden — which
+    // also takes them out of the tab order — leaving just the hamburger.
+    if (this._headerEl) {
+      const gone = Math.min(1, Math.max(0, enter(1) / 0.35));
+      this._headerEl.style.setProperty('--hfo', (1 - gone).toFixed(4));
+      this._headerEl.style.setProperty('--hfv', gone >= 1 ? 'hidden' : 'visible');
+      if (this._burgerEl) this._burgerEl.toggleAttribute('data-solo', gone >= 1);
+      if (gone >= 1 && this._musicOpen && this._closeHeaderMenu) this._closeHeaderMenu(false);
     }
     this._layers.forEach((L, i) => {
       const pIn = enter(i);
@@ -1359,7 +1552,12 @@ class Component extends DCLogic {
     if (!this._layers) return;
     if (id === 'top') { scrollTo({ top: 0, behavior }); return; }
     const idx = this._layers.findIndex(L => L.querySelector('#' + id));
-    if (idx < 0) return;
+    if (idx < 0) {
+      // Past the track the page is ordinary flow, so an ordinary scroll lands it.
+      const flow = document.getElementById(id);
+      if (flow) scrollTo({ top: Math.round(flow.getBoundingClientRect().top + scrollY), behavior });
+      return;
+    }
     // A merged chapter's later blocks are only on screen part-way through its
     // read scrub, so add the target's offset inside the fit box. The rect delta
     // is transform-invariant, so the live translate does not need clearing.
@@ -1435,6 +1633,7 @@ class Component extends DCLogic {
     const picked = this.state.pickerAll ? null : this._mixes[this.state.pickerIndex];
     return {
       menu: this.state.menu,
+      menuExpanded: this.state.menu ? 'true' : 'false',
       menuClass: this.state.menuClosing ? 'menu-closing' : 'menu-opening',
       transitionOut: this.state.transitionOut,
       sent: this.state.sent,
@@ -1444,7 +1643,8 @@ class Component extends DCLogic {
       submitError: this.state.submitError,
       marquee,
       staticCred: !marquee,
-      showWatch: this.props.showWatch ?? true,
+      showWatch: this.props.showWatch ?? false,
+      showPress: this.props.showPress ?? false,
       mixCards,
       activeMixTitle: active.title,
       activeMixKind: active.kind,
