@@ -1,44 +1,1248 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kosi — Open-Format DJ &amp; MC</title>
+<meta name="description" content="Seattle-based open-format DJ and MC Kosi blends Hip-Hop, R&amp;B, and Dancehall for local residencies and international stages.">
+<meta name="author" content="Kosi">
+<meta name="theme-color" content="#F7F4EE">
+<link rel="canonical" href="https://itskosi.com/">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="apple-touch-icon" href="./favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="It's Kosi">
+<meta property="og:title" content="Kosi — Open-Format DJ &amp; MC">
+<meta property="og:description" content="Seattle-based open-format DJ and MC Kosi blends Hip-Hop, R&amp;B, and Dancehall for local residencies and international stages.">
+<meta property="og:url" content="https://itskosi.com/">
+<meta property="og:image" content="https://itskosi.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kosi — Open-Format DJ &amp; MC">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kosi — Open-Format DJ &amp; MC">
+<meta name="twitter:description" content="Seattle-based open-format DJ and MC performing across the U.S. and internationally.">
+<meta name="twitter:image" content="https://itskosi.com/og-image.png">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,100..900&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html{overflow-x:clip;--reveal:112vh;--hold:44vh;}
+  html,body{margin:0;padding:0;background:#F7F4EE;color:#2B2622;font-family:'Instrument Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  *{box-sizing:border-box;}
+  a{color:#2B2622;text-decoration:none;}
+  a:hover{color:#7A6E60;}
+  input,textarea,button{font-family:inherit;}
+  .mix-card{position:absolute;left:50%;top:14px;width:clamp(190px,24vw,310px);padding:0;border:0;background:none;cursor:pointer;transform-origin:50% 88%;transition:transform .72s cubic-bezier(.18,.86,.22,1),opacity .46s ease,filter .46s ease;}
+  .mix-card-sleeve{position:relative;display:block;transition:transform .34s cubic-bezier(.18,.86,.22,1),box-shadow .34s ease;}
+  .mix-card img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border:1px solid rgba(43,38,34,.22);pointer-events:none;user-select:none;-webkit-user-drag:none;}
+  .mix-card-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(43,38,34,.20);opacity:0;transition:opacity .24s ease;pointer-events:none;}
+  .mix-card-overlay span{background:#2B2622;color:#F7F4EE;padding:11px 15px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;white-space:nowrap;}
+  .mix-card[data-active="true"]{filter:saturate(1.02);}
+  .mix-card:not([data-active="true"]){filter:saturate(.84) brightness(.96);}
+  .mix-card:hover{filter:saturate(1.08) brightness(1.02);}
+  .mix-card:hover .mix-card-sleeve,.mix-card:focus-visible .mix-card-sleeve{transform:translateY(-16px) scale(1.025);box-shadow:0 22px 42px rgba(43,38,34,.18);}
+  .mix-card:hover .mix-card-overlay,.mix-card:focus-visible .mix-card-overlay{opacity:1;}
+  .mix-card:focus-visible,.mix-control:focus-visible,.listen-choice:focus-visible{outline:2px solid #2B2622;outline-offset:5px;}
+  .mix-control{width:48px;height:48px;border:1px solid rgba(43,38,34,.42);background:rgba(247,244,238,.72);color:#2B2622;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:17px;transition:background .2s ease,color .2s ease;}
+  .mix-control:hover{background:#2B2622;color:#F7F4EE;}
+  .watch-deck{position:relative;height:clamp(470px,52vw,620px);overflow:hidden;touch-action:pan-y;user-select:none;}
+  .watch-card{position:absolute;left:50%;top:12px;width:clamp(190px,24vw,310px);padding:0;border:0;background:none;cursor:pointer;transform-origin:50% 88%;transition:transform .72s cubic-bezier(.18,.86,.22,1),opacity .44s ease,filter .4s ease;}
+  .watch-card-sleeve{position:relative;display:block;aspect-ratio:9/16;overflow:hidden;background:#C9C0B1;border:1px solid rgba(43,38,34,.24);transition:transform .28s cubic-bezier(.18,.86,.22,1),box-shadow .28s ease;}
+  .watch-card iframe{display:block;width:100%;height:100%;border:0;background:#C9C0B1;pointer-events:none;}
+  .watch-card[data-active="true"]{filter:saturate(1);}
+  .watch-card:not([data-active="true"]){filter:saturate(.82) brightness(.94);}
+  .watch-card-platform{position:absolute;left:10px;top:9px;background:#2B2622;color:#F7F4EE;padding:6px 8px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;}
+  .watch-card-cue{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(43,38,34,.24);opacity:0;transition:opacity .22s ease;}
+  .watch-card-cue span{background:#2B2622;color:#F7F4EE;padding:9px 12px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.16em;}
+  .watch-card:hover{filter:saturate(1.04) brightness(1);}
+  .watch-card:hover .watch-card-sleeve,.watch-card:focus-visible .watch-card-sleeve{transform:translateY(-16px) scale(1.02);box-shadow:0 22px 42px rgba(43,38,34,.2);}
+  .watch-card:hover .watch-card-cue,.watch-card:focus-visible .watch-card-cue{opacity:1;}
+  .watch-card:focus-visible{outline:2px solid #2B2622;outline-offset:5px;}
+  .listen-choice{border:1px solid rgba(43,38,34,.34);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.18em;color:#2B2622;transition:background .2s ease,color .2s ease;}
+  .listen-choice:hover{background:#2B2622;color:#F7F4EE;}
+  .menu-panel{animation:menuReveal .74s cubic-bezier(.16,.84,.44,1) both;touch-action:none;overscroll-behavior:contain;}
+  .menu-meta{animation:menuMetaIn .48s .18s ease both;}
+  .menu-nav a{opacity:0;animation:menuItemIn .62s cubic-bezier(.16,.84,.44,1) both;}
+  .menu-nav a:nth-child(1){animation-delay:.12s;}
+  .menu-nav a:nth-child(2){animation-delay:.16s;}
+  .menu-nav a:nth-child(3){animation-delay:.20s;}
+  .menu-nav a:nth-child(4){animation-delay:.24s;}
+  .menu-nav a:nth-child(5){animation-delay:.28s;}
+  .menu-nav a:nth-child(6){animation-delay:.32s;}
+  .picker-backdrop{animation:pickerFadeIn .28s ease both;touch-action:none;overscroll-behavior:contain;}
+  .picker-panel{animation:pickerPanelIn .42s cubic-bezier(.16,.84,.44,1) both;}
+  .social-player-dialog{width:min(520px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#F7F4EE;border:1px solid rgba(43,38,34,.28);padding:clamp(20px,4vw,36px);box-shadow:0 22px 70px rgba(43,38,34,.22);animation:pickerPanelIn .42s cubic-bezier(.16,.84,.44,1) both;}
+  .social-player-viewport{height:min(64vh,640px);aspect-ratio:9/16;max-width:100%;margin:22px auto 18px;background:#CFC7B9;}
+  .social-player-viewport iframe{display:block;width:100%;height:100%;border:0;background:#CFC7B9;}
+  .scroll-cue{position:absolute;left:50%;bottom:clamp(18px,3.5vw,42px);z-index:4;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:9px;color:#F7F4EE!important;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.22em;text-shadow:0 1px 12px rgba(43,38,34,.48);animation:scrollCueIn .8s 1.45s ease both;}
+  .scroll-cue:hover{color:#F7F4EE!important;}
+  .scroll-cue-line{position:relative;width:1px;height:38px;overflow:hidden;background:rgba(247,244,238,.4);}
+  .scroll-cue-line::after{content:"";position:absolute;left:0;top:0;width:1px;height:16px;background:#F7F4EE;animation:scrollCueTravel 1.65s .25s cubic-bezier(.55,0,.45,1) infinite;}
+  [data-layer]{overflow:hidden;will-change:clip-path;}
+  [data-layer]:not([data-layer="0"]){visibility:hidden;clip-path:circle(0% at 50% 110%);}
+  [data-bleed]{display:none!important;}
+  [data-dim]{height:100%!important;}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.055;mix-blend-mode:multiply;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22/></filter><rect width=%22160%22 height=%22160%22 filter=%22url(%23n)%22/></svg>');}
+  @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  @keyframes heroZoom{0%{transform:scale(1.14)}100%{transform:scale(1)}}
+  @keyframes riseWord{0%{opacity:0;transform:translateY(96px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
+  @keyframes menuReveal{0%{opacity:.4;clip-path:circle(0% at 96% 4%)}100%{opacity:1;clip-path:circle(150% at 96% 4%)}}
+  @keyframes menuMetaIn{0%{opacity:0}100%{opacity:1}}
+  @keyframes menuItemIn{0%{opacity:0;transform:translateY(28px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes pickerFadeIn{0%{opacity:0}100%{opacity:1}}
+  @keyframes pickerPanelIn{0%{opacity:0;transform:translateY(22px) scale(.985)}100%{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes scrollCueIn{0%{opacity:0;transform:translate(-50%,18px)}100%{opacity:1;transform:translate(-50%,0)}}
+  @keyframes scrollCueTravel{0%{transform:translateY(-120%);opacity:0}18%{opacity:1}78%{opacity:1}100%{transform:translateY(250%);opacity:0}}
+  @media (max-width:700px){.mix-card{width:clamp(180px,58vw,250px)}.mix-control{width:42px;height:42px}.mix-deck{height:330px!important;}.watch-card{width:clamp(170px,52vw,225px)}.watch-deck{height:430px}}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important;}.scroll-cue-line::after{animation:none!important;transform:translateY(68%);opacity:1;}}
+</style>
+</helmet>
 
-    <!-- Primary meta -->
-    <title>It's Kosi — Open-Format DJ &amp; Content Creator</title>
-    <meta name="description" content="Kosi (ISOK) is a Seattle-based, frequently-traveling open-format DJ & content creator — Hip-Hop, R&B, Afrobeats, Dancehall, House and edits in one seamless set. Booked across NCAA, ESPN, Amazon, Microsoft, NYFW and beyond. Available for bookings worldwide." />
-    <meta name="author" content="Kosi (ISOK)" />
-    <meta name="theme-color" content="#F4F1EA" />
-    <link rel="canonical" href="https://itskosi.com/" />
+<div>
 
-    <!-- Icons -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+  <div style="position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,4vw,56px);mix-blend-mode:difference;animation:fadeIn 1s .85s both;">
+    <a href="#top" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:20px;letter-spacing:.04em;color:#F7F4EE;">KOSI</a>
+    <button onClick="{{ openMenu }}" style="background:none;border:1px solid #F7F4EE;color:#F7F4EE;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:9px 16px;cursor:pointer;">MENU</button>
+  </div>
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="It's Kosi" />
-    <meta property="og:title" content="It's Kosi — Open-Format DJ &amp; Content Creator" />
-    <meta property="og:description" content="Genre has no curfew. Seattle-based open-format DJ &amp; content creator, booked worldwide — NCAA, ESPN, Amazon, Microsoft, NYFW. Available for bookings." />
-    <meta property="og:url" content="https://itskosi.com/" />
-    <meta property="og:image" content="https://itskosi.com/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="It's Kosi — Open-Format DJ &amp; Content Creator" />
+  <sc-if value="{{ menu }}" hint-placeholder-val="{{ false }}">
+    <div class="menu-panel" onWheel="{{ holdOverlay }}" onTouchMove="{{ holdOverlay }}" style="position:fixed;inset:0;z-index:90;background:#F7F4EE;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(24px,5vw,64px);">
+      <div class="menu-meta" style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;">ITSKOSI.COM</span>
+        <button onClick="{{ closeMenu }}" style="background:none;border:1px solid #2B2622;color:#2B2622;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:9px 16px;cursor:pointer;">CLOSE</button>
+      </div>
+      <nav class="menu-nav" style="display:flex;flex-direction:column;gap:2px;">
+        <a href="#mixes" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:clamp(44px,8vw,104px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">The Mixes</a>
+        <a href="#shows" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:clamp(44px,8vw,104px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Residency &amp; Shows</a>
+        <a href="#watch" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:clamp(44px,8vw,104px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">The Feed</a>
+        <a href="#press" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:clamp(44px,8vw,104px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Press</a>
+        <a href="#about" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:clamp(44px,8vw,104px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">About</a>
+        <a href="#booking" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:clamp(44px,8vw,104px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Booking</a>
+      </nav>
+      <div class="menu-meta" style="display:flex;gap:28px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;color:#7A6E60;flex-wrap:wrap;">
+        <a href="https://soundcloud.com/iisokk" target="_blank" rel="noopener noreferrer">SOUNDCLOUD</a>
+        <a href="https://www.instagram.com/kosipl/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+        <a href="https://www.tiktok.com/@kosipl" target="_blank" rel="noopener noreferrer">TIKTOK</a>
+        <a href="https://www.youtube.com/@iisokk" target="_blank" rel="noopener noreferrer">YOUTUBE</a>
+        <a href="https://iisokk.bandcamp.com/" target="_blank" rel="noopener noreferrer">BANDCAMP</a>
+      </div>
+    </div>
+  </sc-if>
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="It's Kosi — Open-Format DJ &amp; Content Creator" />
-    <meta name="twitter:description" content="Genre has no curfew. Seattle-based open-format DJ &amp; content creator, booked worldwide. Available for bookings." />
-    <meta name="twitter:image" content="https://itskosi.com/og-image.png" />
+  <sc-if value="{{ pickerOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="picker-backdrop" onClick="{{ closePicker }}" onWheel="{{ holdOverlay }}" onTouchMove="{{ holdOverlay }}" style="position:fixed;inset:0;z-index:110;background:rgba(43,38,34,.28);backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;padding:22px;">
+      <div class="picker-panel" onClick="{{ stopPicker }}" role="dialog" aria-modal="true" aria-labelledby="listen-title" style="width:min(520px,100%);background:#F7F4EE;border:1px solid rgba(43,38,34,.28);padding:clamp(24px,5vw,48px);box-shadow:0 22px 70px rgba(43,38,34,.18);">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:clamp(34px,5vw,52px);">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.24em;color:#7A6E60;">CHOOSE A PLATFORM</span>
+          <button data-picker-close="true" type="button" onClick="{{ closePicker }}" style="background:none;border:none;border-bottom:1px solid rgba(43,38,34,.45);padding:0 0 3px;color:#2B2622;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;cursor:pointer;">CLOSE</button>
+        </div>
+        <h2 id="listen-title" style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 74;font-weight:850;font-size:clamp(34px,7vw,62px);line-height:.92;letter-spacing:-.01em;text-transform:uppercase;color:#2B2622;">{{ pickerTitle }}</h2>
+        <p style="margin:14px 0 30px;font-size:16px;line-height:1.5;color:#6B6259;">{{ pickerKind }}</p>
+        <div style="display:grid;gap:12px;">
+          <a class="listen-choice" href="{{ pickerYoutube }}" target="_blank" rel="noopener noreferrer" onClick="{{ choosePlatform }}"><span>YOUTUBE</span><span aria-hidden="true">WATCH ↗</span></a>
+          <a class="listen-choice" href="{{ pickerSoundcloud }}" target="_blank" rel="noopener noreferrer" onClick="{{ choosePlatform }}"><span>SOUNDCLOUD</span><span aria-hidden="true">LISTEN ↗</span></a>
+        </div>
+      </div>
+    </div>
+  </sc-if>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Expanded:wght@600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <sc-if value="{{ watchOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="picker-backdrop" onClick="{{ closeWatch }}" onWheel="{{ holdOverlay }}" onTouchMove="{{ holdOverlay }}" style="position:fixed;inset:0;z-index:115;background:rgba(43,38,34,.34);backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;padding:16px;">
+      <div class="social-player-dialog" onClick="{{ stopPicker }}" role="dialog" aria-modal="true" aria-labelledby="social-watch-title">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:22px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">{{ watchOverlayPlatform }} · THE FEED</span>
+          <button data-watch-close="true" type="button" onClick="{{ closeWatch }}" style="background:none;border:none;border-bottom:1px solid rgba(43,38,34,.45);padding:0 0 3px;color:#2B2622;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;cursor:pointer;">CLOSE</button>
+        </div>
+        <h2 id="social-watch-title" style="margin:22px 0 0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 78;font-weight:820;font-size:clamp(26px,5vw,42px);line-height:1;text-transform:uppercase;color:#2B2622;">{{ watchOverlayTitle }}</h2>
+        <div class="social-player-viewport">
+          <iframe src="{{ watchOverlayEmbed }}" title="{{ watchOverlayTitle }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <a href="{{ watchOverlayUrl }}" target="_blank" rel="noopener noreferrer" style="display:flex;justify-content:space-between;gap:20px;border-top:1px solid rgba(43,38,34,.24);padding-top:14px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;"><span>VIEW ORIGINAL</span><span>OPEN ↗</span></a>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ residencyOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="picker-backdrop" onClick="{{ closeResidency }}" onWheel="{{ holdOverlay }}" onTouchMove="{{ holdOverlay }}" style="position:fixed;inset:0;z-index:114;background:rgba(43,38,34,.32);backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;padding:22px;">
+      <div class="picker-panel" onClick="{{ stopPicker }}" role="dialog" aria-modal="true" aria-labelledby="residency-title" style="width:min(650px,100%);background:#F7F4EE;border:1px solid rgba(43,38,34,.28);padding:clamp(26px,5vw,52px);box-shadow:0 22px 70px rgba(43,38,34,.2);">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:clamp(42px,7vw,70px);">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.24em;color:#7A6E60;">WEEKLY RESIDENCY · SEATTLE</span>
+          <button data-residency-close="true" type="button" onClick="{{ closeResidency }}" style="background:none;border:none;border-bottom:1px solid rgba(43,38,34,.45);padding:0 0 3px;color:#2B2622;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;cursor:pointer;">CLOSE</button>
+        </div>
+        <h2 id="residency-title" style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 72;font-weight:850;font-size:clamp(42px,8vw,76px);line-height:.9;letter-spacing:-.015em;text-transform:uppercase;color:#2B2622;">Big Marios Pizza<br>Capitol Hill</h2>
+        <div style="margin-top:clamp(36px,6vw,58px);border-top:1px solid rgba(43,38,34,.24);">
+          <div style="display:grid;grid-template-columns:minmax(90px,130px) minmax(0,1fr);gap:18px;padding:20px 0;border-bottom:1px solid rgba(43,38,34,.18);">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;color:#7A6E60;">ADDRESS</span>
+            <span style="font-size:16px;line-height:1.45;color:#2B2622;">1009 E Pike St, Seattle, WA 98122</span>
+          </div>
+          <div style="display:grid;grid-template-columns:minmax(90px,130px) minmax(0,1fr);gap:18px;padding:20px 0;border-bottom:1px solid rgba(43,38,34,.18);">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;color:#7A6E60;">WHEN</span>
+            <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 82;font-weight:750;font-size:clamp(22px,4vw,34px);line-height:1;text-transform:uppercase;color:#2B2622;">10 PM — 2 AM<br><span style="font-size:.56em;letter-spacing:.02em;color:#6B6259;">Every Saturday</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <div style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:70;writing-mode:vertical-rl;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.42em;color:rgba(43,38,34,.45);padding:8px 10px;animation:fadeIn 1.2s 1.15s both;">ISOK LLC · OPEN FORMAT</div>
+
+  <div data-track style="position:relative;height:calc(5 * (var(--reveal) + var(--hold)) + var(--hold) + 130vh + 100vh);">
+    <div style="position:sticky;top:0;height:100vh;overflow:hidden;">
+      <div data-stage style="position:absolute;inset:0;">
+  <!-- CHAPTER 1 · HERO -->
+  <div data-layer="0" style="position:absolute;left:0;right:0;top:0;height:100vh;z-index:1;transform:none;">
+    <section id="top" data-screen-label="Hero" style="position:relative;height:100vh;overflow:hidden;background:#E6E1D7;display:flex;align-items:center;justify-content:center;">
+      <img src="assets/kosi-wide.jpeg" alt="Kosi playing an outdoor set at Gas Works Park" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 46%;animation:heroZoom 2.8s cubic-bezier(.16,.84,.44,1) both;">
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(43,38,34,.18) 0%,rgba(43,38,34,0) 34%,rgba(43,38,34,.34) 100%);animation:fadeIn 1.8s both;"></div>
+      <h1 style="position:relative;z-index:2;animation:riseWord 1.5s .3s cubic-bezier(.16,.84,.44,1) both;margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 78;font-weight:900;font-size:clamp(96px,26vw,440px);line-height:.8;letter-spacing:-.02em;color:#F7F4EE;">KOSI</h1>
+      <a class="scroll-cue" href="#bio" aria-label="Scroll to Kosi's introduction">
+        <span>SCROLL TO EXPLORE</span>
+        <span class="scroll-cue-line" aria-hidden="true"></span>
+      </a>
+    </section>
+    <div data-bleed style="position:absolute;top:100%;left:0;right:0;height:26vh;background:#E6E1D7;"></div>
+    <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
+  </div>
+
+  <!-- CHAPTER 2 · BIO -->
+  <div data-layer="1" style="position:absolute;inset:0;height:100vh;z-index:2;visibility:hidden;clip-path:circle(0% at 50% 110%);">
+    <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#F7F4EE;;display:flex;flex-direction:column;justify-content:safe center">
+      <div data-fitbox style="width:100%;">
+      <section id="bio" data-screen-label="Bio" style="position:relative;background:#F7F4EE;display:flex;align-items:safe center;justify-content:safe center;padding:clamp(90px,12vw,150px) clamp(20px,5vw,72px);">
+      <div data-inner style="width:100%;">
+      <p data-rise="y" data-rise-delay="120" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);max-width:1040px;margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 92;font-weight:500;font-size:clamp(22px,3vw,42px);line-height:1.24;letter-spacing:-.01em;text-wrap:pretty;color:#2B2622;">Open-format DJ &amp; MC blending Hip-Hop, R&amp;B, and Dancehall for rooms from local residencies to international stages.</p>
+    </div>
+    </section>
+      </div>
+    </section>
+    <div data-bleed style="position:absolute;top:100%;left:0;right:0;height:26vh;background:#F7F4EE;"></div>
+    <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
+  </div>
+
+  <!-- CHAPTER 3 · LISTEN — MIXES + SHOWS -->
+  <div data-layer="2" style="position:absolute;inset:0;height:100vh;z-index:3;visibility:hidden;clip-path:circle(0% at 50% 110%);">
+    <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#E6E1D7;">
+      <div data-fitbox style="width:100%;">
+      <section id="mixes" data-screen-label="The Mixes" style="position:relative;background:#E6E1D7;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
+      <div data-inner style="width:100%;">
+      <div style="max-width:1360px;margin:0 auto;width:100%;position:relative;">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:18px;">
+          <span>01 — RECENT RELEASES</span>
+          <span>YOUTUBE · SOUNDCLOUD</span>
+        </div>
+        <div style="position:relative;overflow-x:clip;">
+          <h2 data-rise="fade" data-rise-op="0.55" style="margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 66;font-weight:900;font-size:clamp(72px,17vw,270px);line-height:.82;letter-spacing:-.025em;color:#2B2622;opacity:0;pointer-events:none;user-select:none;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.16,.84,.44,1);">THE MIXES</h2>
+          <div data-rise="y" data-rise-delay="180" style="opacity:0;transform:translateY(52px);transition:opacity .95s cubic-bezier(.16,.84,.44,1),transform .95s cubic-bezier(.16,.84,.44,1);position:relative;margin-top:clamp(-62px,-7vw,-34px);">
+            <div class="mix-deck" data-mix-deck="true" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Kosi mixes, mashups, and edits" onKeyDown="{{ mixKey }}" onPointerDown="{{ mixDragStart }}" onPointerMove="{{ mixDragMove }}" onPointerUp="{{ mixDragEnd }}" onPointerCancel="{{ mixDragCancel }}" style="position:relative;height:clamp(300px,34vw,450px);touch-action:pan-y;user-select:none;">
+              <div data-mix-rail="true" style="position:absolute;inset:0;transition:transform .38s cubic-bezier(.18,.86,.22,1);">
+                <sc-for list="{{ mixCards }}" as="card" hint-placeholder-count="8">
+                  <button type="button" class="mix-card" data-active="{{ card.active }}" onClick="{{ card.select }}" aria-label="{{ card.label }}" style="transform:{{ card.transform }};opacity:{{ card.opacity }};z-index:{{ card.z }};pointer-events:{{ card.pointer }};">
+                    <span class="mix-card-sleeve">
+                      <img src="{{ card.image }}" alt="{{ card.alt }}" draggable="false">
+                      <span class="mix-card-overlay"><span>{{ card.cue }}</span></span>
+                    </span>
+                  </button>
+                </sc-for>
+              </div>
+              <button type="button" class="mix-control" onClick="{{ mixPrev }}" aria-label="Previous release" style="position:absolute;left:0;top:50%;transform:translateY(-50%);z-index:40;">←</button>
+              <button type="button" class="mix-control" onClick="{{ mixNext }}" aria-label="Next release" style="position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:40;">→</button>
+            </div>
+            <div aria-live="polite" style="max-width:760px;margin:0 auto;border-top:1px solid rgba(43,38,34,.22);padding-top:20px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;">
+              <div style="display:flex;flex-direction:column;gap:6px;min-width:0;">
+                <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 82;font-weight:800;font-size:clamp(20px,2.5vw,30px);line-height:1;text-transform:uppercase;color:#2B2622;">{{ activeMixTitle }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:#7A6E60;">{{ activeMixKind }}</span>
+              </div>
+              <div style="text-align:right;display:flex;flex-direction:column;gap:6px;align-items:flex-end;">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:#7A6E60;">{{ activeMixCount }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:#7A6E60;">DRAG / SWIPE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:safe center;padding-top:clamp(26px,3vw,42px);">
+          <button type="button" onClick="{{ openAll }}" style="background:#2B2622;color:#F7F4EE;border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:17px 34px;cursor:pointer;">HEAR EVERYTHING</button>
+        </div>
+      </div>
+    </div>
+    </section>
+      <section id="shows" data-screen-label="Residency and Shows" style="position:relative;background:#F7F4EE;">
+      <div data-inner style="width:100%;">
+      <sc-if value="{{ marquee }}" hint-placeholder-val="{{ true }}">
+        <div data-screen-label="Credibility" style="background:#EADFCB;border-bottom:1px solid rgba(43,38,34,.16);padding:clamp(18px,2.6vw,30px) 0;overflow:hidden;">
+          <div style="display:flex;width:max-content;animation:marquee 38s linear infinite;">
+            <div style="display:flex;align-items:center;gap:44px;padding-right:44px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 74;font-weight:800;font-size:clamp(26px,4vw,56px);line-height:1;text-transform:uppercase;letter-spacing:.01em;color:#2B2622;white-space:nowrap;">
+              <span>FIFA</span><span style="opacity:.4;">·</span><span>Complex</span><span style="opacity:.4;">·</span><span>Amazon</span><span style="opacity:.4;">·</span><span>Microsoft</span><span style="opacity:.4;">·</span><span>ESPN</span><span style="opacity:.4;">·</span><span>Polymarket</span><span style="opacity:.4;">·</span><span>NYFW</span><span style="opacity:.4;">·</span><span>Capitol Hill Block Party</span><span style="opacity:.4;">·</span><span>Opened for Shordie Shordie</span><span style="opacity:.4;">·</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:44px;padding-right:44px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 74;font-weight:800;font-size:clamp(26px,4vw,56px);line-height:1;text-transform:uppercase;letter-spacing:.01em;color:#2B2622;white-space:nowrap;">
+              <span>FIFA</span><span style="opacity:.4;">·</span><span>Complex</span><span style="opacity:.4;">·</span><span>Amazon</span><span style="opacity:.4;">·</span><span>Microsoft</span><span style="opacity:.4;">·</span><span>ESPN</span><span style="opacity:.4;">·</span><span>Polymarket</span><span style="opacity:.4;">·</span><span>NYFW</span><span style="opacity:.4;">·</span><span>Capitol Hill Block Party</span><span style="opacity:.4;">·</span><span>Opened for Shordie Shordie</span><span style="opacity:.4;">·</span>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ staticCred }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#EADFCB;border-bottom:1px solid rgba(43,38,34,.16);padding:clamp(28px,4vw,48px) clamp(20px,5vw,72px);text-align:center;">
+          <p style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 74;font-weight:800;font-size:clamp(22px,3vw,44px);line-height:1.1;text-transform:uppercase;color:#2B2622;">FIFA · Complex · Amazon · Microsoft · ESPN · Polymarket · NYFW · Capitol Hill Block Party · Opened for Shordie Shordie</p>
+        </div>
+      </sc-if>
+      <div style="padding:clamp(48px,6vw,86px) clamp(20px,5vw,72px) clamp(60px,7vw,100px);">
+        <div style="max-width:1240px;margin:0 auto;">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:22px;">
+            <span>02 — RESIDENCY &amp; SHOWS</span>
+            <span>SEATTLE + INTERNATIONAL</span>
+          </div>
+          <h2 data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(30px,4vw,52px);font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Where to<br>catch me</h2>
+          <div data-rise="y" data-rise-delay="60" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);display:grid;grid-template-columns:minmax(110px,150px) minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:start;padding:18px 0;border-top:1px solid rgba(43,38,34,.22);">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.2em;color:#7A6E60;">PLAYED ACROSS</span>
+            <div style="display:flex;flex-wrap:wrap;gap:10px 16px;font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.35;letter-spacing:.12em;text-transform:uppercase;color:#2B2622;">
+              <span>Seattle</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>London</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>Norway</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>Switzerland</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>Mexico</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>New York City</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>San Francisco</span>
+            </div>
+          </div>
+          <div data-rise="y" data-rise-delay="90" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);border-top:1px solid rgba(43,38,34,.22);border-bottom:1px solid rgba(43,38,34,.22);padding:clamp(20px,2.6vw,32px) 0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;">
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;">WEEKLY RESIDENCY</span>
+              <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 76;font-weight:800;font-size:clamp(28px,4.2vw,56px);line-height:.96;text-transform:uppercase;color:#2B2622;">Big Marios Pizza</span>
+              <span style="font-size:16px;color:#6B6259;">Every week in Seattle — open format, no cover.</span>
+            </div>
+            <button type="button" onClick="{{ openResidency }}" style="border:0;background:#2B2622;color:#F7F4EE;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;padding:15px 28px;white-space:nowrap;cursor:pointer;">DETAILS</button>
+          </div>
+          <div data-rise="y" data-rise-delay="150" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);display:grid;grid-template-columns:minmax(96px,140px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(43,38,34,.16);">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">UP NEXT</span>
+            <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 86;font-weight:700;font-size:clamp(19px,2.2vw,26px);text-transform:uppercase;color:#2B2622;">New dates announcing soon</span>
+            <a href="#booking" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;border-bottom:1px solid rgba(43,38,34,.4);padding-bottom:2px;">BOOK KOSI</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+      </div>
+    </section>
+    <div data-bleed style="position:absolute;top:100%;left:0;right:0;height:26vh;background:#F7F4EE;"></div>
+    <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
+  </div>
+
+  <!-- CHAPTER 4 · THE FEED + PRESS -->
+  <div data-layer="3" style="position:absolute;inset:0;height:100vh;z-index:4;visibility:hidden;clip-path:circle(0% at 50% 110%);">
+    <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#E6E1D7;">
+      <div data-fitbox style="width:100%;">
+      <sc-if value="{{ showWatch }}" hint-placeholder-val="{{ true }}">
+        <section id="watch" data-screen-label="The Feed" style="position:relative;background:#E6E1D7;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
+      <div data-inner style="width:100%;">
+        <div style="max-width:1240px;margin:0 auto;width:100%;">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:20px;">
+            <span>03 — THE FEED</span>
+            <span>INSTAGRAM · TIKTOK</span>
+          </div>
+          <div style="position:relative;overflow:hidden;">
+            <h2 data-rise="fade" data-rise-op="0.55" style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.16,.84,.44,1);margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 66;font-weight:900;font-size:clamp(72px,16vw,230px);line-height:.82;letter-spacing:-.025em;text-transform:uppercase;color:#2B2622;pointer-events:none;user-select:none;">The Feed</h2>
+          <div data-rise="y" data-rise-delay="120" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);position:relative;margin-top:clamp(-54px,-6vw,-28px);">
+            <div class="watch-deck" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Kosi vertical social videos" onKeyDown="{{ watchKey }}" onPointerDown="{{ watchDragStart }}" onPointerMove="{{ watchDragMove }}" onPointerUp="{{ watchDragEnd }}" onPointerCancel="{{ watchDragCancel }}">
+              <div data-watch-rail="true" style="position:absolute;inset:0;transition:transform .36s cubic-bezier(.18,.86,.22,1);">
+                <sc-for list="{{ watchCards }}" as="clip" hint-placeholder-count="9">
+                  <button type="button" class="watch-card" data-active="{{ clip.active }}" onClick="{{ clip.select }}" aria-label="{{ clip.label }}" style="transform:{{ clip.transform }};opacity:{{ clip.opacity }};z-index:{{ clip.z }};pointer-events:{{ clip.pointer }};">
+                    <span class="watch-card-sleeve">
+                      <iframe src="{{ clip.embed }}" title="{{ clip.title }} preview" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
+                      <span class="watch-card-platform">{{ clip.platform }}</span>
+                      <span class="watch-card-cue"><span>{{ clip.cue }}</span></span>
+                    </span>
+                  </button>
+                </sc-for>
+              </div>
+              <button type="button" class="mix-control" onClick="{{ watchPrev }}" aria-label="Previous video" style="position:absolute;left:0;top:50%;transform:translateY(-50%);z-index:40;">←</button>
+              <button type="button" class="mix-control" onClick="{{ watchNext }}" aria-label="Next video" style="position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:40;">→</button>
+            </div>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;padding:18px 0 10px;border-bottom:1px solid rgba(43,38,34,.22);">
+              <div style="min-width:0;">
+                <div style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 82;font-weight:780;font-size:clamp(20px,2.6vw,32px);line-height:1.05;text-transform:uppercase;color:#2B2622;">{{ watchTitle }}</div>
+                <div style="margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;color:#7A6E60;">{{ watchPlatform }} · {{ watchCount }}</div>
+              </div>
+              <button type="button" onClick="{{ openActiveWatch }}" style="background:none;border:0;border-bottom:1px solid rgba(43,38,34,.45);padding:0 0 3px;color:#2B2622;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;white-space:nowrap;cursor:pointer;">WATCH HERE</button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+      </sc-if>
+      <section id="press" data-screen-label="Press and Moments" style="position:relative;background:#F7F4EE;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
+      <div data-inner style="width:100%;">
+      <div style="max-width:1240px;margin:0 auto;width:100%;">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:22px;">
+          <span>04 — PRESS &amp; MOMENTS</span>
+          <span>ONGOING</span>
+        </div>
+        <h2 data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(28px,3.4vw,46px);font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Press</h2>
+        <div data-rise="y" data-rise-delay="120" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);border-top:1px solid rgba(43,38,34,.22);">
+          <div style="display:grid;grid-template-columns:minmax(96px,150px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(43,38,34,.16);">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">[ DATE ]</span>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 86;font-weight:700;font-size:clamp(19px,2.2vw,26px);text-transform:uppercase;color:#2B2622;">Billboard</span>
+              <span style="font-size:16px;line-height:1.5;color:#6B6259;">Quoted in a feature on the decline of slow dancing.</span>
+            </div>
+            <a href="#press" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;border-bottom:1px solid rgba(43,38,34,.4);padding-bottom:2px;">READ</a>
+          </div>
+          <div style="display:grid;grid-template-columns:minmax(96px,150px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(43,38,34,.16);">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">[ DATE ]</span>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 86;font-weight:700;font-size:clamp(19px,2.2vw,26px);text-transform:uppercase;color:#2B2622;">Jill Scott</span>
+              <span style="font-size:16px;line-height:1.5;color:#6B6259;">Quote-tweeted a set clip.</span>
+            </div>
+            <a href="#press" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;border-bottom:1px solid rgba(43,38,34,.4);padding-bottom:2px;">VIEW</a>
+          </div>
+          <div style="display:grid;grid-template-columns:minmax(96px,150px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(43,38,34,.16);">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">[ DATE ]</span>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 86;font-weight:700;font-size:clamp(19px,2.2vw,26px);text-transform:uppercase;color:#2B2622;">Leon Thomas</span>
+              <span style="font-size:16px;line-height:1.5;color:#6B6259;">Engaged with a mashup online.</span>
+            </div>
+            <a href="#press" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;border-bottom:1px solid rgba(43,38,34,.4);padding-bottom:2px;">VIEW</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+      </div>
+    </section>
+    <div data-bleed style="position:absolute;top:100%;left:0;right:0;height:26vh;background:#F7F4EE;"></div>
+    <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
+  </div>
+
+  <!-- CHAPTER 5 · ABOUT -->
+  <div data-layer="4" style="position:absolute;inset:0;height:100vh;z-index:5;visibility:hidden;clip-path:circle(0% at 50% 110%);">
+    <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#EADFCB;;display:flex;flex-direction:column;justify-content:safe center">
+      <div data-fitbox style="width:100%;">
+      <section id="about" data-screen-label="About" style="position:relative;background:#EADFCB;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
+      <div data-inner style="width:100%;">
+      <div style="max-width:1240px;margin:0 auto;width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,4vw,64px);align-items:center;">
+        <div data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:20px;">05 — ABOUT</div>
+          <h2 style="margin:0 0 24px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(48px,8vw,124px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">About<br>Kosi</h2>
+          <div style="display:flex;flex-direction:column;gap:16px;max-width:520px;">
+            <p style="margin:0;font-size:17px;line-height:1.6;color:#4A423A;text-wrap:pretty;">Producing since 2017 and DJing since 2022, Kosi works open format — Hip-Hop, R&amp;B, and Dancehall held together by reading the room rather than a fixed setlist.</p>
+            <p style="margin:0;font-size:17px;line-height:1.6;color:#4A423A;text-wrap:pretty;">Seattle is home base, with regular travel for dates across the U.S. and abroad. The rooms range from a 200-capacity club to a 2,000-plus outdoor crowd, with every set shaped to the room, the audience, and the moment.</p>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:safe center;">
+          <img src="assets/kosi-gasworks.jpeg" alt="Kosi at the decks, golden hour" data-rise="y" data-rise-delay="160" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);width:100%;max-width:400px;aspect-ratio:4/5;object-fit:cover;object-position:50% 35%;border-radius:50% 50% 0 0 / 46% 46% 0 0;">
+        </div>
+      </div>
+    </div>
+    </section>
+      </div>
+    </section>
+    <div data-bleed style="position:absolute;top:100%;left:0;right:0;height:26vh;background:#EADFCB;"></div>
+    <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
+  </div>
+
+  <!-- CHAPTER 6 · BOOKING + FOOTER -->
+  <div data-layer="5" style="position:absolute;inset:0;height:100vh;z-index:6;visibility:hidden;clip-path:circle(0% at 50% 110%);">
+    <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#F7F4EE;">
+      <div data-fitbox style="width:100%;">
+      <section id="booking" data-screen-label="Booking" style="position:relative;background:#F7F4EE;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
+      <div data-inner style="width:100%;">
+      <div style="max-width:1000px;margin:0 auto;width:100%;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:20px;">06 — BOOKING</div>
+        <h2 data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 16px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Let's make<br>it loud</h2>
+        <p data-rise="y" data-rise-delay="110" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(28px,3.4vw,44px);font-size:17px;line-height:1.6;color:#6B6259;max-width:520px;">Tell me what the room is and I'll come back with availability and a quote. Every inquiry gets a reply within 24 hours.</p>
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <form action="https://formsubmit.co/ajax/6870be49db96c158057a0ae0fe96b5ae" method="POST" onSubmit="{{ submit }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(18px,2.6vw,30px);">
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
+            <label style="display:flex;flex-direction:column;gap:9px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">NAME</span>
+              <input type="text" name="name" autocomplete="name" required="required" style="background:none;border:none;border-bottom:1px solid rgba(43,38,34,.4);padding:10px 0;font-size:17px;color:#2B2622;outline:none;">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:9px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">EMAIL</span>
+              <input type="email" name="email" autocomplete="email" required="required" style="background:none;border:none;border-bottom:1px solid rgba(43,38,34,.4);padding:10px 0;font-size:17px;color:#2B2622;outline:none;">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:9px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">EVENT TYPE</span>
+              <input type="text" name="event_type" placeholder="Club night, wedding, brand event…" required="required" style="background:none;border:none;border-bottom:1px solid rgba(43,38,34,.4);padding:10px 0;font-size:17px;color:#2B2622;outline:none;">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:9px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">DATE</span>
+              <input type="text" name="event_date" placeholder="MM / DD / YYYY" required="required" style="background:none;border:none;border-bottom:1px solid rgba(43,38,34,.4);padding:10px 0;font-size:17px;color:#2B2622;outline:none;">
+            </label>
+            <label style="grid-column:1/-1;display:flex;flex-direction:column;gap:9px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">TELL ME ABOUT IT</span>
+              <textarea name="message" rows="3" required="required" style="background:none;border:none;border-bottom:1px solid rgba(43,38,34,.4);padding:10px 0;font-size:17px;color:#2B2622;outline:none;resize:vertical;"></textarea>
+            </label>
+            <div style="grid-column:1/-1;">
+              <sc-if value="{{ notSubmitting }}" hint-placeholder-val="{{ true }}">
+                <button type="submit" style="background:#2B2622;color:#F7F4EE;border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:19px 42px;cursor:pointer;">SEND INQUIRY</button>
+              </sc-if>
+              <sc-if value="{{ submitting }}" hint-placeholder-val="{{ false }}">
+                <button type="button" disabled="disabled" aria-live="polite" style="background:#6B6259;color:#F7F4EE;border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:19px 42px;cursor:wait;">SENDING…</button>
+              </sc-if>
+            </div>
+            <sc-if value="{{ submitError }}" hint-placeholder-val="{{ false }}">
+              <p role="alert" style="grid-column:1/-1;margin:0;font-size:16px;line-height:1.5;color:#7A342A;">That inquiry didn't send. Please check your connection and try again.</p>
+            </sc-if>
+          </form>
+        </sc-if>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="border:1px solid rgba(43,38,34,.3);padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:12px;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">INQUIRY SENT</span>
+            <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 80;font-weight:800;font-size:clamp(26px,3.4vw,44px);line-height:1;text-transform:uppercase;color:#2B2622;">Talk soon.</span>
+            <span style="font-size:17px;color:#6B6259;">You'll hear back within 24 hours.</span>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+    </section>
+      <footer data-screen-label="Footer" style="position:relative;background:#E6E1D7;display:flex;flex-direction:column;justify-content:safe flex-end;padding:clamp(80px,10vw,130px) clamp(20px,5vw,72px) 0;">
+      <div data-inner style="width:100%;">
+      <div style="max-width:1360px;margin:0 auto;width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:clamp(24px,3.4vw,48px);padding-bottom:clamp(40px,5vw,72px);">
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">PAGES</span>
+          <a href="#mixes" style="font-size:16px;">The Mixes</a>
+          <a href="#shows" style="font-size:16px;">Residency &amp; Shows</a>
+          <a href="#watch" style="font-size:16px;">The Feed</a>
+          <a href="#press" style="font-size:16px;">Press</a>
+          <a href="#about" style="font-size:16px;">About</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">LISTEN</span>
+          <a href="https://soundcloud.com/iisokk" target="_blank" rel="noopener noreferrer" style="font-size:16px;">SoundCloud</a>
+          <a href="https://iisokk.bandcamp.com/" target="_blank" rel="noopener noreferrer" style="font-size:16px;">Bandcamp</a>
+          <a href="https://www.youtube.com/@iisokk" target="_blank" rel="noopener noreferrer" style="font-size:16px;">YouTube</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">FOLLOW</span>
+          <a href="https://www.instagram.com/kosipl/" target="_blank" rel="noopener noreferrer" style="font-size:16px;">Instagram</a>
+          <a href="https://www.tiktok.com/@kosipl" target="_blank" rel="noopener noreferrer" style="font-size:16px;">TikTok</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">BOOKING</span>
+          <a href="#booking" style="font-size:16px;">Inquiry form</a>
+          <a href="mailto:contact@itskosi.com" style="font-size:16px;">contact@itskosi.com</a>
+          <span style="font-size:16px;color:#6B6259;">ISOK LLC · Seattle, WA</span>
+        </div>
+      </div>
+      <div style="max-width:1360px;margin:0 auto;width:100%;border-top:1px solid rgba(43,38,34,.16);padding-top:clamp(18px,2.4vw,28px);">
+        <div data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 74;font-weight:900;font-size:clamp(90px,25vw,400px);line-height:.78;letter-spacing:-.02em;text-align:center;color:transparent;-webkit-text-stroke:1.5px rgba(43,38,34,.55);">KOSI</div>
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;color:#7A6E60;padding:14px 0 24px;">
+          <span>ITSKOSI.COM</span>
+          <span>© 2026 ISOK LLC</span>
+        </div>
+      </div>
+    </div>
+    </footer>
+      </div>
+    </section>
+    <div data-bleed style="position:absolute;top:100%;left:0;right:0;height:26vh;background:#E6E1D7;"></div>
+    <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;revealLength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:112,&quot;min&quot;:70,&quot;max&quot;:160,&quot;step&quot;:2,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll transitions&quot;},&quot;holdLength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:44,&quot;min&quot;:0,&quot;max&quot;:110,&quot;step&quot;:2,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll transitions&quot;},&quot;marquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showWatch&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  state = { menu: false, sent: false, submitting: false, submitError: false, activeMix: 0, activeWatch: 0, watchOpen: false, watchIndex: 0, pickerOpen: false, pickerIndex: 0, pickerAll: false, residencyOpen: false };
+
+  _mixes = [
+    {
+      title: 'Unmixed Company Vol. 3', kind: 'DJ MIX',
+      image: 'https://i1.sndcdn.com/artworks-Xnxdbn8t7XFpYDo4-SuJ43A-t500x500.jpg',
+      soundcloud: 'https://soundcloud.com/iisokk/rnb-unmixed-company-3',
+      youtube: 'https://www.youtube.com/watch?v=GJhxoQXANPw'
+    },
+    {
+      title: 'Club Cubicle 001', kind: 'DJ MIX',
+      image: 'https://i1.sndcdn.com/artworks-c9zCNJey0i9EzE5Q-StJTRA-t500x500.jpg',
+      soundcloud: 'https://on.soundcloud.com/qoTXQB6MUC7Jba3uh8',
+      youtube: 'https://www.youtube.com/watch?v=IB7wBu8f08I'
+    },
+    {
+      title: 'Unmixed Company Vol. 2', kind: 'DJ MIX',
+      image: 'https://i1.sndcdn.com/artworks-WRTpmcwm4DyJhvWm-ArI7CQ-t500x500.jpg',
+      soundcloud: 'https://soundcloud.com/iisokk/unmixed-company-vol-2-hiphop-dancehall-afrobeats-dj-isok-set',
+      youtube: 'https://www.youtube.com/watch?v=WSPQQTo5EeY'
+    },
+    {
+      title: 'Risk Your Heart', kind: 'MASHUPS / EDITS',
+      image: 'https://ugc.production.linktr.ee/3e7f7bd5-9120-4a03-a321-fe278fc06f3c_artworks-wS2HnP34mVtVLtxt-vrkvlA-t500x500.jpeg',
+      soundcloud: 'https://on.soundcloud.com/dPzcgWNxfM1JD1PEpA',
+      youtube: 'https://www.youtube.com/watch?v=7lc4CzeOu28'
+    },
+    {
+      title: 'Yes He Loves Me a Million', kind: 'MASHUPS / EDITS',
+      image: 'https://ugc.production.linktr.ee/759edeb0-5f30-4f2f-bc48-3e64c00816fc_artworks-KM6ARDNROBGI69TZ-KskD6g-t500x500.jpeg',
+      soundcloud: 'https://soundcloud.com/iisokk/yes-he-loves-me-a-million',
+      youtube: 'https://www.youtube.com/watch?v=4zXDlcTIzv8'
+    },
+    {
+      title: 'Oh Que Sera', kind: 'MASHUPS / EDITS',
+      image: 'https://ugc.production.linktr.ee/b47fbb4b-74c3-43fa-b8fd-4d289d9fb446_Oh-Que-Sera-Bounce.png',
+      soundcloud: 'https://soundcloud.com/iisokk/oh-que-sera-isok-bounce-edit',
+      youtube: 'https://www.youtube.com/watch?v=ovA2nCG58eA'
+    },
+    {
+      title: 'Back of It All', kind: 'MASHUPS / EDITS',
+      image: 'https://ugc.production.linktr.ee/6f35992b-89d7-4ee9-9dd3-fa7744814061_artworks-PX5ZWaSRAN40ZqnF-NhV5Tg-t500x500.jpeg',
+      soundcloud: 'https://soundcloud.com/iisokk/back-of-it-all-kosi-mix-risk',
+      youtube: 'https://www.youtube.com/watch?v=Tk7-ehBAgos'
+    },
+    {
+      title: 'Remember Ya Back', kind: 'MASHUPS / EDITS',
+      image: 'https://ugc.production.linktr.ee/bb998fb9-aade-4cbe-ab0e-8119e22b49e6_REMEMBER-YA-BACK.png',
+      soundcloud: 'https://soundcloud.com/iisokk/remember-ya-back-arch-ya-back',
+      youtube: 'https://www.youtube.com/watch?v=Nsf1l3CApg4'
+    }
+  ];
+
+  _watchClips = [
+    {
+      title: 'Instagram Clip 01', platform: 'INSTAGRAM',
+      url: 'https://www.instagram.com/p/DbwkA9AzVGA/',
+      embed: 'https://www.instagram.com/p/DbwkA9AzVGA/embed/'
+    },
+    {
+      title: 'Instagram Clip 02', platform: 'INSTAGRAM',
+      url: 'https://www.instagram.com/p/DcCfd1ZTJ6y/',
+      embed: 'https://www.instagram.com/p/DcCfd1ZTJ6y/embed/'
+    },
+    {
+      title: 'Instagram Reel 03', platform: 'INSTAGRAM',
+      url: 'https://www.instagram.com/reel/DbEFr9XzlYi/',
+      embed: 'https://www.instagram.com/reel/DbEFr9XzlYi/embed/'
+    },
+    {
+      title: 'Make It Rain Quietly on the Creek', platform: 'TIKTOK',
+      url: 'https://www.tiktok.com/@kosipl/video/7664781801998568735',
+      embed: 'https://www.tiktok.com/player/v1/7664781801998568735?autoplay=0&loop=0&music_info=1&description=1'
+    },
+    {
+      title: 'Love x He Loves Me x Love Me x Love Tonight', platform: 'TIKTOK',
+      url: 'https://www.tiktok.com/@kosipl/video/7656195283000331551',
+      embed: 'https://www.tiktok.com/player/v1/7656195283000331551?autoplay=0&loop=0&music_info=1&description=1'
+    },
+    {
+      title: 'Salsa Bounce', platform: 'TIKTOK',
+      url: 'https://www.tiktok.com/@kosipl/video/7611182994077781278',
+      embed: 'https://www.tiktok.com/player/v1/7611182994077781278?autoplay=0&loop=0&music_info=1&description=1'
+    },
+    {
+      title: 'Beyonce x Rihanna Mashup', platform: 'TIKTOK',
+      url: 'https://www.tiktok.com/@kosipl/video/7677496652944411934',
+      embed: 'https://www.tiktok.com/player/v1/7677496652944411934?autoplay=0&loop=0&music_info=1&description=1'
+    },
+    {
+      title: 'Yes He Loves Me a Million', platform: 'TIKTOK',
+      url: 'https://www.tiktok.com/@kosipl/video/7672958082934115615',
+      embed: 'https://www.tiktok.com/player/v1/7672958082934115615?autoplay=0&loop=0&music_info=1&description=1'
+    },
+    {
+      title: 'Wale x Rihanna Mashup', platform: 'TIKTOK',
+      url: 'https://www.tiktok.com/@kosipl/video/7675112510646750495',
+      embed: 'https://www.tiktok.com/player/v1/7675112510646750495?autoplay=0&loop=0&music_info=1&description=1'
+    }
+  ];
+
+  componentDidMount() {
+    // Called straight from the scroll event: _frame only writes styles and
+    // never reads layout, so there is nothing to batch and nothing to defer.
+    this._onScroll = () => this._frame();
+    this._onResize = () => { this._layout(); this._frame(); };
+    this._onClick = (e) => this._jump(e);
+    this._onGlobalKey = (e) => {
+      const overlayOpen = this.state.pickerOpen || this.state.watchOpen || this.state.residencyOpen || this.state.menu;
+      if (e.key === 'Escape' && this.state.watchOpen) return this._closeWatch();
+      if (e.key === 'Escape' && this.state.pickerOpen) return this._closePicker();
+      if (e.key === 'Escape' && this.state.residencyOpen) return this._closeResidency();
+      if (e.key === 'Escape' && this.state.menu) return this._closeMenu(true);
+      if (overlayOpen && ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(e.key)) e.preventDefault();
+    };
+    addEventListener('scroll', this._onScroll, { passive: true });
+    addEventListener('resize', this._onResize, { passive: true });
+    addEventListener('load', this._onResize);
+    document.addEventListener('click', this._onClick);
+    document.addEventListener('keydown', this._onGlobalKey);
+    document.addEventListener('visibilitychange', this._onResize);
+    if (typeof ResizeObserver === 'function') {
+      this._ro = new ResizeObserver(this._onResize);
+      this._ro.observe(document.documentElement);
+    }
+    this._layout();
+    this._frame();
+    setTimeout(this._onResize, 0);
+    setTimeout(this._onResize, 400);
+  }
+  componentDidUpdate() {
+    this._layout();
+    this._frame();
+  }
+  componentWillUnmount() {
+    if (this._ro) this._ro.disconnect();
+    if (this._retryId) clearInterval(this._retryId);
+    document.removeEventListener('visibilitychange', this._onResize);
+    removeEventListener('scroll', this._onScroll);
+    removeEventListener('resize', this._onResize);
+    removeEventListener('load', this._onResize);
+    document.removeEventListener('click', this._onClick);
+    document.removeEventListener('keydown', this._onGlobalKey);
+  }
+
+  // ---- mixes ---------------------------------------------------------------
+  _stepMix(dir) {
+    const total = this._mixes.length;
+    this.setState({ activeMix: (this.state.activeMix + dir + total) % total });
+  }
+
+  _selectMix(index, e) {
+    if (this._suppressMixClick) return;
+    if (index === this.state.activeMix) return this._openPicker(index, e);
+    this.setState({ activeMix: index });
+  }
+
+  _mixKey(e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); this._stepMix(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); this._stepMix(1); }
+    if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) {
+      e.preventDefault();
+      this._openPicker(this.state.activeMix, e);
+    }
+  }
+
+  _mixDragStart(e) {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    this._mixDragX = e.clientX;
+    this._mixDragDX = 0;
+    this._mixDragging = true;
+    this._mixDragged = false;
+    this._mixPointerCaptured = false;
+    const rail = document.querySelector('[data-mix-rail]');
+    if (rail) rail.style.transition = 'none';
+  }
+
+  _mixDragMove(e) {
+    if (!this._mixDragging) return;
+    const dx = e.clientX - this._mixDragX;
+    this._mixDragDX = dx;
+    if (Math.abs(dx) > 8) {
+      this._mixDragged = true;
+      if (!this._mixPointerCaptured && e.currentTarget.setPointerCapture) {
+        e.currentTarget.setPointerCapture(e.pointerId);
+        this._mixPointerCaptured = true;
+      }
+    }
+    const rail = document.querySelector('[data-mix-rail]');
+    if (rail) rail.style.transform = 'translateX(' + Math.max(-72, Math.min(72, dx * 0.34)) + 'px)';
+  }
+
+  _mixDragEnd() {
+    if (!this._mixDragging) return;
+    this._mixDragging = false;
+    const dx = this._mixDragDX || 0;
+    const rail = document.querySelector('[data-mix-rail]');
+    if (rail) {
+      rail.style.transition = 'transform .38s cubic-bezier(.18,.86,.22,1)';
+      rail.style.transform = 'none';
+    }
+    if (Math.abs(dx) > 44) this._stepMix(dx < 0 ? 1 : -1);
+    this._suppressMixClick = this._mixDragged;
+    setTimeout(() => { this._suppressMixClick = false; }, 0);
+  }
+
+  // ---- watch reel ---------------------------------------------------------
+  _stepWatch(dir) {
+    const total = this._watchClips.length;
+    const current = ((this.state.activeWatch % total) + total) % total;
+    this.setState({ activeWatch: (current + dir + total) % total });
+  }
+
+  _selectWatch(index, e) {
+    if (this._suppressWatchClick) return;
+    const total = this._watchClips.length;
+    const current = ((this.state.activeWatch % total) + total) % total;
+    if (index === current) return this._openWatch(index, e);
+    this.setState({ activeWatch: index });
+  }
+
+  _watchKey(e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); this._stepWatch(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); this._stepWatch(1); }
+    if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) {
+      e.preventDefault();
+      const total = this._watchClips.length;
+      const current = ((this.state.activeWatch % total) + total) % total;
+      this._openWatch(current, e);
+    }
+  }
+
+  _openWatch(index, e) {
+    this._watchTrigger = e && e.currentTarget;
+    this._watchScrollY = scrollY;
+    this.setState({ watchOpen: true, watchIndex: index });
+    setTimeout(() => {
+      const close = document.querySelector('[data-watch-close]');
+      if (close) close.focus();
+    }, 0);
+  }
+
+  _closeWatch() {
+    this.setState({ watchOpen: false }, () => {
+      requestAnimationFrame(() => {
+        scrollTo(0, this._watchScrollY ?? scrollY);
+        this._frame();
+        if (this._watchTrigger && this._watchTrigger.focus) this._watchTrigger.focus();
+      });
+    });
+  }
+
+  _watchDragStart(e) {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    this._watchDragX = e.clientX;
+    this._watchDragDX = 0;
+    this._watchDragging = true;
+    this._watchDragged = false;
+    this._watchPointerCaptured = false;
+    const rail = document.querySelector('[data-watch-rail]');
+    if (rail) rail.style.transition = 'none';
+  }
+
+  _watchDragMove(e) {
+    if (!this._watchDragging) return;
+    const dx = e.clientX - this._watchDragX;
+    this._watchDragDX = dx;
+    if (Math.abs(dx) > 8) {
+      this._watchDragged = true;
+      if (!this._watchPointerCaptured && e.currentTarget.setPointerCapture) {
+        e.currentTarget.setPointerCapture(e.pointerId);
+        this._watchPointerCaptured = true;
+      }
+    }
+    const rail = document.querySelector('[data-watch-rail]');
+    if (rail) rail.style.transform = 'translateX(' + Math.max(-64, Math.min(64, dx * 0.3)) + 'px)';
+  }
+
+  _watchDragEnd() {
+    if (!this._watchDragging) return;
+    this._watchDragging = false;
+    const dx = this._watchDragDX || 0;
+    const rail = document.querySelector('[data-watch-rail]');
+    if (rail) {
+      rail.style.transition = 'transform .36s cubic-bezier(.18,.86,.22,1)';
+      rail.style.transform = 'none';
+    }
+    if (Math.abs(dx) > 42) this._stepWatch(dx < 0 ? 1 : -1);
+    this._suppressWatchClick = this._watchDragged;
+    setTimeout(() => { this._suppressWatchClick = false; }, 0);
+  }
+
+  _watchCardTransform(delta) {
+    const slots = {
+      '-2': 'translateX(calc(-50% - clamp(230px,32vw,430px))) translateY(44px) rotate(-10deg) scale(.74)',
+      '-1': 'translateX(calc(-50% - clamp(102px,16vw,220px))) translateY(24px) rotate(-6deg) scale(.86)',
+      '0': 'translateX(-50%) translateY(0) rotate(1deg) scale(1)',
+      '1': 'translateX(calc(-50% + clamp(102px,16vw,220px))) translateY(26px) rotate(7deg) scale(.86)',
+      '2': 'translateX(calc(-50% + clamp(230px,32vw,430px))) translateY(47px) rotate(11deg) scale(.74)'
+    };
+    return slots[String(delta)] || 'translateX(-50%) translateY(34px) scale(.68)';
+  }
+
+  _cardTransform(delta) {
+    const slots = {
+      '-2': 'translateX(calc(-50% - clamp(160px,28vw,390px))) translateY(42px) rotate(-12deg) scale(.72)',
+      '-1': 'translateX(calc(-50% - clamp(78px,15vw,220px))) translateY(24px) rotate(-7deg) scale(.86)',
+      '0': 'translateX(-50%) translateY(0) rotate(1deg) scale(1)',
+      '1': 'translateX(calc(-50% + clamp(78px,15vw,220px))) translateY(27px) rotate(8deg) scale(.86)',
+      '2': 'translateX(calc(-50% + clamp(160px,28vw,390px))) translateY(46px) rotate(13deg) scale(.72)'
+    };
+    return slots[String(delta)] || 'translateX(-50%) translateY(64px) rotate(0deg) scale(.62)';
+  }
+
+  _openPicker(index, e) {
+    this._pickerTrigger = e && e.currentTarget;
+    this._pickerScrollY = scrollY;
+    this.setState({ pickerOpen: true, pickerIndex: index, pickerAll: false });
+    setTimeout(() => {
+      const close = document.querySelector('[data-picker-close]');
+      if (close) close.focus();
+    }, 0);
+  }
+
+  _openAll(e) {
+    this._pickerTrigger = e && e.currentTarget;
+    this._pickerScrollY = scrollY;
+    this.setState({ pickerOpen: true, pickerAll: true });
+    setTimeout(() => {
+      const close = document.querySelector('[data-picker-close]');
+      if (close) close.focus();
+    }, 0);
+  }
+
+  _closePicker() {
+    this.setState({ pickerOpen: false }, () => {
+      requestAnimationFrame(() => {
+        scrollTo(0, this._pickerScrollY ?? scrollY);
+        this._frame();
+        if (this._pickerTrigger && this._pickerTrigger.focus) this._pickerTrigger.focus();
+      });
+    });
+  }
+
+  _openResidency(e) {
+    this._residencyTrigger = e && e.currentTarget;
+    this._residencyScrollY = scrollY;
+    this.setState({ residencyOpen: true });
+    setTimeout(() => {
+      const close = document.querySelector('[data-residency-close]');
+      if (close) close.focus();
+    }, 0);
+  }
+
+  _closeResidency() {
+    this.setState({ residencyOpen: false }, () => {
+      requestAnimationFrame(() => {
+        scrollTo(0, this._residencyScrollY ?? scrollY);
+        this._frame();
+        if (this._residencyTrigger && this._residencyTrigger.focus) this._residencyTrigger.focus();
+      });
+    });
+  }
+
+  _openMenu(e) {
+    this._menuTrigger = e && e.currentTarget;
+    this._menuScrollY = scrollY;
+    this.setState({ menu: true });
+  }
+
+  _closeMenu(restorePosition) {
+    this.setState({ menu: false }, () => {
+      if (restorePosition === false) return;
+      requestAnimationFrame(() => {
+        scrollTo(0, this._menuScrollY ?? scrollY);
+        this._frame();
+        if (this._menuTrigger && this._menuTrigger.focus) this._menuTrigger.focus();
+      });
+    });
+  }
+
+  async _submit(e) {
+    e.preventDefault();
+    if (this.state.submitting) return;
+    const form = e.currentTarget;
+    const fields = new FormData(form);
+
+    // Honeypot submissions get a quiet success state without reaching email.
+    if (String(fields.get('_honey') || '').trim()) {
+      form.reset();
+      this.setState({ sent: true, submitting: false, submitError: false });
+      return;
+    }
+
+    const clean = (name, max = 240) => String(fields.get(name) || '').trim().replace(/[\r\n]+/g, ' ').slice(0, max);
+    const name = clean('name', 120);
+    const email = clean('email', 180);
+    const eventType = clean('event_type', 120);
+    const eventDate = clean('event_date', 80);
+    const message = String(fields.get('message') || '').trim().slice(0, 5000);
+    const subject = 'New booking inquiry — ' + (eventType || 'Event') + ' — ' + (eventDate || 'Date TBD');
+
+    this.setState({ submitting: true, submitError: false });
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/6870be49db96c158057a0ae0fe96b5ae', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: subject,
+          _template: 'table',
+          _replyto: email,
+          Name: name,
+          Email: email,
+          'Event Type': eventType,
+          'Event Date': eventDate,
+          'Event Details': message,
+          'Submitted From': 'itskosi.com'
+        })
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.success === false) throw new Error('Submission rejected');
+      form.reset();
+      this.setState({ sent: true, submitting: false, submitError: false });
+    } catch (_) {
+      this.setState({ submitting: false, submitError: true });
+    }
+  }
+
+  // ---- geometry -----------------------------------------------------------
+  // One pinned stage holds every scene as an absolute viewport layer. The next
+  // scene is revealed by a circle that grows from the bottom-center instead of
+  // by translating a fixed arch into view. Everything below is a pure function
+  // of scrollY, so the reveal reverses precisely when the user scrolls up.
+  //
+  // Each scene owns a segment of scroll:
+  //   [ read_i ][ hold ][ transition -> scene i+1 ]
+  // read_i exists only when the scene's content is taller than the viewport:
+  // the content scrubs up by exactly its overflow, so short viewports reach
+  // everything without a nested scroller and without shrinking type. hold is
+  // the fully settled zone where no curve is on screen. transition scrubs the
+  // next scene from a point to full coverage as a direct function of scroll.
+  _layout() {
+    const vh = innerHeight;
+    // A zero-height measurement (mount before the frame has a size) would make
+    // the transition and track height 0, so keep the last good geometry and
+    // wait for a real measurement rather than publishing nonsense.
+    if (!vh) { this._retryLayout(); return; }
+    if (this._retryId) { clearInterval(this._retryId); this._retryId = null; }
+    const hold = (this.props.holdLength ?? 44) / 100 * vh;
+    this._layers = Array.from(document.querySelectorAll('[data-layer]'));
+    this._parts = this._layers.map(L => ({
+      dim: L.querySelector('[data-dim]'),
+      box: L.querySelector('[data-fitbox]'),
+      risers: Array.from(L.querySelectorAll('[data-rise]'))
+    }));
+    this._trans = (this.props.revealLength ?? 112) / 100 * vh;
+    this._hold = hold;
+    // Give each entered chapter a settled zone before its entrance reverses.
+    // Internal chapters stay lighter; Booking gets a little more resistance
+    // because it contains the inquiry form and sits at the end of the track.
+    const last = this._layers.length - 1;
+    this._guards = this._layers.map((_, i) => i === 0 ? 0 : (i === last ? 0.34 * vh : 0.24 * vh));
+
+    // Natural content height per scene -> read allowance.
+    this._over = this._layers.map(L => {
+      const body = L.querySelector('section, footer');
+      const box = L.querySelector('[data-fitbox]');
+      if (!body || !box) return 0;
+      box.style.transform = 'none';
+      const cs = getComputedStyle(body);
+      const avail = body.clientHeight -
+        parseFloat(cs.paddingTop || 0) - parseFloat(cs.paddingBottom || 0);
+      // Panels use `safe` alignment, so an overflowing box starts at the
+      // panel's top edge and this overflow is exactly the read distance.
+      return Math.max(0, Math.ceil(box.scrollHeight - avail));
+    });
+
+    // Settled scroll offset of each scene.
+    this._rest = [0];
+    for (let i = 1; i < this._layers.length; i++) {
+      this._rest[i] = this._rest[i - 1] + this._guards[i - 1] + this._over[i - 1] + hold + this._trans;
+    }
+    const total = this._rest[last] + this._guards[last] + this._over[last] + hold;
+    const track = document.querySelector('[data-track]');
+    if (track) track.style.height = (total + vh) + 'px';
+  }
+
+  // Keep re-measuring until the frame has a real size. Without this the CSS
+  // resting state would stand forever in a context where resize, load and
+  // ResizeObserver never fire (a hidden or backgrounded document).
+  _retryLayout() {
+    if (this._retryId) return;
+    this._retryId = setInterval(() => {
+      if (!innerHeight) return;
+      this._layout();
+      this._frame();
+    }, 100);
+  }
+
+  _frame() {
+    if (!this._layers) return;
+    if (!(this._trans > 0)) return this._parkAll();
+    const y = scrollY, trans = this._trans, hold = this._hold;
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+    const enter = (i) => {
+      if (i < 1) return 1;
+      const from = this._rest[i - 1] + (this._guards[i - 1] || 0) + this._over[i - 1] + hold;
+      const raw = (y - from) / trans;
+      return raw < 0 ? 0 : raw > 1 ? 1 : raw;
+    };
+    this._layers.forEach((L, i) => {
+      const pIn = enter(i);
+      if (i > 0 && !Number.isFinite(pIn)) return this._park(L);
+      const pOut = i + 1 < this._layers.length ? enter(i + 1) : 0;
+      const grow = Math.pow(pIn, 2.7);
+      const contentIn = easeOut(Math.min(1, Math.max(0, (pIn - 0.68) / 0.32)));
+
+      // Slow at first, then quickly resolving near the end: only the incoming
+      // layer is clipped, so the outgoing scene remains visually dominant.
+      if (i > 0) {
+        L.style.visibility = pIn === 0 ? 'hidden' : 'visible';
+        L.style.clipPath = pIn >= 1
+          ? 'none'
+          : 'circle(' + (155 * grow).toFixed(3) + '% at 50% 110%)';
+      }
+
+      // A light late-stage dim lets the reveal read cleanly without making the
+      // current scene feel covered before the growing shape reaches it.
+      const dim = this._parts[i].dim;
+      if (dim) dim.style.opacity = (0.10 * Math.pow(pOut, 3)).toFixed(4);
+      this._reveal(i, pIn >= 0.76);
+
+      const box = this._parts[i].box;
+      if (!box) return;
+      const over = this._over[i];
+      const guard = this._guards[i] || 0;
+      const q = over ? Math.min(1, Math.max(0, (y - this._rest[i] - guard) / over)) : 0;
+      const lag = i === 0 ? 0 : (1 - contentIn) * 46;
+      const shift = -over * q + lag;
+      box.style.opacity = i === 0 ? '1' : contentIn.toFixed(4);
+      box.style.transform = shift ? 'translateY(' + shift + 'px)' : 'none';
+    });
+  }
+
+  // Parked is the safe resting state: an unrevealed layer is clipped to a point
+  // and hidden so it cannot cover the scene beneath it.
+  _park(L) {
+    L.style.clipPath = 'circle(0% at 50% 110%)';
+    L.style.visibility = 'hidden';
+  }
+  _parkAll() {
+    this._layers.forEach((L, i) => { if (i > 0) this._park(L); });
+  }
+
+  // No cached flag: a re-render restores the authored inline styles while
+  // keeping the same nodes, so the only reliable state is the style itself.
+  _reveal(i, on) {
+    this._parts[i].risers.forEach(el => {
+      const op = on ? (el.dataset.riseOp || '1') : '0';
+      if (el.style.opacity === op) return;
+      const d = parseInt(el.dataset.riseDelay || '0', 10);
+      el.style.transitionDelay = on && d ? d + 'ms' : '0ms';
+      el.style.opacity = op;
+      el.style.transform = on ? 'none' : (el.dataset.rise === 'fade' ? 'translateY(30px)' : 'translateY(38px)');
+    });
+  }
+
+  // Layers are out of normal flow, so hash links need the scene's settled offset.
+  _jump(e) {
+    const a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || !this._layers) return;
+    const id = a.getAttribute('href').slice(1);
+    if (id === 'top') { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    const idx = this._layers.findIndex(L => L.querySelector('#' + id));
+    if (idx < 0) return;
+    e.preventDefault();
+    // A merged chapter's later blocks are only on screen part-way through its
+    // read scrub, so add the target's offset inside the fit box. The rect delta
+    // is transform-invariant, so the live translate does not need clearing.
+    const box = this._parts[idx].box;
+    const el = document.getElementById(id);
+    let inner = 0;
+    if (box && el) {
+      inner = Math.max(0, Math.round(
+        el.getBoundingClientRect().top - box.getBoundingClientRect().top));
+    }
+    const guard = this._guards[idx] || 0;
+    const top = this._rest[idx] + guard + Math.min(this._over[idx] || 0, inner);
+    scrollTo({ top: Math.round(top), behavior: 'smooth' });
+  }
+
+  renderVals() {
+    const marquee = this.props.marquee ?? true;
+    const total = this._mixes.length;
+    const active = this._mixes[this.state.activeMix];
+    const mixCards = this._mixes.map((mix, index) => {
+      let delta = index - this.state.activeMix;
+      if (delta > total / 2) delta -= total;
+      if (delta < -total / 2) delta += total;
+      const visible = Math.abs(delta) <= 2;
+      return {
+        image: mix.image,
+        alt: mix.title + ' cover art',
+        active: delta === 0 ? 'true' : 'false',
+        transform: this._cardTransform(delta),
+        opacity: visible ? '1' : '0',
+        z: String(30 - Math.abs(delta)),
+        pointer: visible ? 'auto' : 'none',
+        cue: delta === 0 ? 'LISTEN' : 'BRING TO FRONT',
+        label: delta === 0 ? 'Choose where to hear ' + mix.title : 'Bring ' + mix.title + ' to the front',
+        select: (e) => this._selectMix(index, e)
+      };
+    });
+    const watchTotal = this._watchClips.length;
+    const watchActive = ((this.state.activeWatch % watchTotal) + watchTotal) % watchTotal;
+    const watch = this._watchClips[watchActive];
+    const watchCards = this._watchClips.map((clip, index) => {
+      let delta = index - watchActive;
+      if (delta > watchTotal / 2) delta -= watchTotal;
+      if (delta < -watchTotal / 2) delta += watchTotal;
+      const visible = Math.abs(delta) <= 2;
+      return {
+        title: clip.title,
+        platform: clip.platform,
+        embed: clip.embed,
+        active: delta === 0 ? 'true' : 'false',
+        transform: this._watchCardTransform(delta),
+        opacity: visible ? '1' : '0',
+        z: String(30 - Math.abs(delta)),
+        pointer: visible ? 'auto' : 'none',
+        cue: delta === 0 ? 'WATCH' : 'BRING TO FRONT',
+        label: delta === 0 ? 'Open ' + clip.title + ' on ' + clip.platform : 'Bring ' + clip.title + ' to the front',
+        select: (e) => this._selectWatch(index, e)
+      };
+    });
+    const overlayIndex = ((this.state.watchIndex % watchTotal) + watchTotal) % watchTotal;
+    const watchOverlay = this._watchClips[overlayIndex];
+    const picked = this.state.pickerAll ? null : this._mixes[this.state.pickerIndex];
+    return {
+      menu: this.state.menu,
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      submitting: this.state.submitting,
+      notSubmitting: !this.state.submitting,
+      submitError: this.state.submitError,
+      marquee,
+      staticCred: !marquee,
+      showWatch: this.props.showWatch ?? true,
+      mixCards,
+      activeMixTitle: active.title,
+      activeMixKind: active.kind,
+      activeMixCount: String(this.state.activeMix + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0'),
+      mixPrev: () => this._stepMix(-1),
+      mixNext: () => this._stepMix(1),
+      mixKey: (e) => this._mixKey(e),
+      mixDragStart: (e) => this._mixDragStart(e),
+      mixDragMove: (e) => this._mixDragMove(e),
+      mixDragEnd: () => this._mixDragEnd(),
+      mixDragCancel: () => this._mixDragEnd(),
+      watchCards,
+      watchTitle: watch.title,
+      watchPlatform: watch.platform,
+      watchCount: String(watchActive + 1).padStart(2, '0') + ' / ' + String(watchTotal).padStart(2, '0'),
+      watchOpen: this.state.watchOpen,
+      watchOverlayTitle: watchOverlay.title,
+      watchOverlayPlatform: watchOverlay.platform,
+      watchOverlayEmbed: watchOverlay.embed,
+      watchOverlayUrl: watchOverlay.url,
+      openActiveWatch: (e) => this._openWatch(watchActive, e),
+      closeWatch: () => this._closeWatch(),
+      watchPrev: () => this._stepWatch(-1),
+      watchNext: () => this._stepWatch(1),
+      watchKey: (e) => this._watchKey(e),
+      watchDragStart: (e) => this._watchDragStart(e),
+      watchDragMove: (e) => this._watchDragMove(e),
+      watchDragEnd: () => this._watchDragEnd(),
+      watchDragCancel: () => this._watchDragEnd(),
+      pickerOpen: this.state.pickerOpen,
+      pickerTitle: this.state.pickerAll ? 'Everything by Kosi' : (picked ? picked.title : ''),
+      pickerKind: this.state.pickerAll ? 'Choose where you want to browse the full catalog.' : (picked ? picked.kind : ''),
+      pickerYoutube: this.state.pickerAll ? 'https://www.youtube.com/@iisokk' : (picked ? picked.youtube : '#'),
+      pickerSoundcloud: this.state.pickerAll ? 'https://soundcloud.com/iisokk' : (picked ? picked.soundcloud : '#'),
+      openAll: (e) => this._openAll(e),
+      closePicker: () => this._closePicker(),
+      stopPicker: (e) => e.stopPropagation(),
+      choosePlatform: () => setTimeout(() => this._closePicker(), 0),
+      residencyOpen: this.state.residencyOpen,
+      openResidency: (e) => this._openResidency(e),
+      closeResidency: () => this._closeResidency(),
+      holdOverlay: (e) => e.preventDefault(),
+      openMenu: (e) => this._openMenu(e),
+      closeMenu: () => this._closeMenu(true),
+      closeMenuNav: () => this._closeMenu(false),
+      submit: (e) => this._submit(e)
+    };
+  }
+}
+</script>
+</body>
 </html>

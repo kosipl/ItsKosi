@@ -1,30 +1,28 @@
-# React + TypeScript + Vite
+# ItsKosi.com
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The official website for Kosi: DJ mixes and edits, social video, residencies, background, and booking inquiries.
 
-Currently, two official plugins are available:
+## Local development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```sh
+npm install
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+The development server runs at `http://localhost:3000`.
+
+## Production build
+
+```sh
+npm run build
+```
+
+The production-ready site is generated in `dist/`.
+
+## Site structure
+
+- `index.html` contains the page structure, styles, content, and interactive sections.
+- `public/support.js` contains the shared menu, modal, navigation, and accessibility behavior.
+- `public/assets/` contains the site photography and artwork.
+
+The booking form uses the activated FormSubmit endpoint and sends inquiries to the site's configured contact inbox. The public contact email is also available in the footer.
