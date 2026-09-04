@@ -52,6 +52,15 @@
   .mix-card:focus-visible,.mix-control:focus-visible,.listen-choice:focus-visible{outline:2px solid #2B2622;outline-offset:5px;}
   .mix-control{width:48px;height:48px;border:1px solid rgba(43,38,34,.42);background:rgba(247,244,238,.72);color:#2B2622;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:17px;transition:background .2s ease,color .2s ease;}
   .mix-control:hover{background:#2B2622;color:#F7F4EE;}
+  .mixes-dark{background:#1E1C1A!important;color:#F7F4EE;}
+  .mixes-dark .mix-heading{color:#F7F4EE!important;}
+  .mixes-dark .mix-title{color:#F7F4EE!important;}
+  .mixes-dark .mix-detail{color:rgba(247,244,238,.64)!important;}
+  .mixes-dark .mix-control{border-color:rgba(247,244,238,.5);background:rgba(247,244,238,.06);color:#F7F4EE;}
+  .mixes-dark .mix-control:hover{background:#F7F4EE;color:#1E1C1A;}
+  .mixes-dark .mix-card img{border-color:rgba(247,244,238,.24);}
+  .mixes-dark .mix-card:focus-visible,.mixes-dark .mix-control:focus-visible{outline-color:#F7F4EE;}
+  .mixes-dark .mix-all{background:#F7F4EE!important;color:#1E1C1A!important;}
   .watch-deck{position:relative;height:clamp(470px,52vw,620px);overflow:hidden;touch-action:pan-y;user-select:none;}
   .watch-card{position:absolute;left:50%;top:12px;width:clamp(190px,24vw,310px);padding:0;border:0;background:none;cursor:pointer;transform-origin:50% 88%;transition:transform .72s cubic-bezier(.18,.86,.22,1),opacity .44s ease,filter .4s ease;}
   .watch-card-sleeve{position:relative;display:block;aspect-ratio:9/16;overflow:hidden;background:#C9C0B1;border:1px solid rgba(43,38,34,.24);transition:transform .28s cubic-bezier(.18,.86,.22,1),box-shadow .28s ease;}
@@ -148,14 +157,11 @@
     .menu-meta:last-child{gap:14px 22px!important;padding-bottom:max(4px,env(safe-area-inset-bottom));}
     #mixes,#watch,#press,#about,#booking{padding-top:96px!important;padding-bottom:52px!important;}
     .shows-content{padding-top:96px!important;padding-bottom:58px!important;}
-    .chapter-meta{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:start!important;gap:8px 14px!important;font-size:10px!important;letter-spacing:.16em!important;}
     .chapter-title{font-size:clamp(48px,15vw,70px)!important;line-height:.86!important;margin-bottom:30px!important;}
-    .played-row{grid-template-columns:1fr!important;gap:14px!important;padding:18px 0!important;}
-    .played-list{gap:10px 12px!important;font-size:13px!important;letter-spacing:.1em!important;}
-    .residency-card{grid-template-columns:1fr!important;gap:20px!important;align-items:start!important;}
-    .residency-card button{width:100%;min-height:48px;}
     .event-row,.press-row{grid-template-columns:minmax(62px,74px) minmax(0,1fr)!important;gap:16px 18px!important;align-items:start!important;}
     .event-row>a,.press-row>a{grid-column:2;justify-self:start;min-height:36px;display:flex;align-items:center;}
+    .event-row .event-date{grid-column:1;grid-row:1/span 3;}
+    .event-row .event-venue,.event-row .event-location{grid-column:2;}
     .mix-card{width:clamp(180px,58vw,250px)}
     .mix-control{width:44px;height:44px}
     .mix-deck{height:330px!important;}
@@ -238,28 +244,6 @@
     </div>
   </sc-if>
 
-  <sc-if value="{{ residencyOpen }}" hint-placeholder-val="{{ false }}">
-    <div class="picker-backdrop" onClick="{{ closeResidency }}" onWheel="{{ holdOverlay }}" onTouchMove="{{ holdOverlay }}" style="position:fixed;inset:0;z-index:114;background:rgba(43,38,34,.32);backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;padding:22px;">
-      <div class="picker-panel" onClick="{{ stopPicker }}" role="dialog" aria-modal="true" aria-labelledby="residency-title" style="width:min(650px,100%);background:#F7F4EE;border:1px solid rgba(43,38,34,.28);padding:clamp(26px,5vw,52px);box-shadow:0 22px 70px rgba(43,38,34,.2);">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:clamp(42px,7vw,70px);">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.24em;color:#7A6E60;">WEEKLY RESIDENCY · SEATTLE</span>
-          <button data-residency-close="true" type="button" onClick="{{ closeResidency }}" style="background:none;border:none;border-bottom:1px solid rgba(43,38,34,.45);padding:0 0 3px;color:#2B2622;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;cursor:pointer;">CLOSE</button>
-        </div>
-        <h2 id="residency-title" style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 72;font-weight:850;font-size:clamp(42px,8vw,76px);line-height:.9;letter-spacing:-.015em;text-transform:uppercase;color:#2B2622;">Big Marios Pizza<br>Capitol Hill</h2>
-        <div style="margin-top:clamp(36px,6vw,58px);border-top:1px solid rgba(43,38,34,.24);">
-          <div style="display:grid;grid-template-columns:minmax(90px,130px) minmax(0,1fr);gap:18px;padding:20px 0;border-bottom:1px solid rgba(43,38,34,.18);">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;color:#7A6E60;">ADDRESS</span>
-            <span style="font-size:16px;line-height:1.45;color:#2B2622;">1009 E Pike St, Seattle, WA 98122</span>
-          </div>
-          <div style="display:grid;grid-template-columns:minmax(90px,130px) minmax(0,1fr);gap:18px;padding:20px 0;border-bottom:1px solid rgba(43,38,34,.18);">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;color:#7A6E60;">WHEN</span>
-            <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 82;font-weight:750;font-size:clamp(22px,4vw,34px);line-height:1;text-transform:uppercase;color:#2B2622;">10 PM — 2 AM<br><span style="font-size:.56em;letter-spacing:.02em;color:#6B6259;">Every Saturday</span></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </sc-if>
-
   <div data-side-label style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:70;writing-mode:vertical-rl;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.42em;color:rgba(43,38,34,.45);padding:8px 10px;will-change:opacity;">ISOK LLC · OPEN FORMAT</div>
 
   <div data-track style="position:relative;height:calc(5 * (var(--reveal) + var(--hold)) + var(--hold) + 130vh + 100vh);">
@@ -302,20 +286,16 @@
     <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
   </div>
 
-  <!-- CHAPTER 3 · LISTEN — MIXES + SHOWS -->
+  <!-- CHAPTER 3 · LISTEN — MIXES + SHOWS + FEED + PRESS -->
   <div data-layer="2" style="position:absolute;inset:0;height:100vh;z-index:3;visibility:hidden;clip-path:circle(0% at 50% 110%);">
     <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#E6E1D7;">
       <div data-fitbox style="width:100%;">
-      <section id="mixes" data-screen-label="The Mixes" style="position:relative;background:#E6E1D7;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
+      <section id="mixes" class="mixes-dark" data-screen-label="The Mixes" style="position:relative;background:#1E1C1A;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
       <div data-inner style="width:100%;">
       <div style="max-width:1360px;margin:0 auto;width:100%;position:relative;">
-        <div class="chapter-meta" style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:18px;">
-          <span>01 — RECENT RELEASES</span>
-          <span>YOUTUBE · SOUNDCLOUD</span>
-        </div>
         <div style="position:relative;overflow-x:clip;">
-          <h2 data-rise="fade" data-rise-op="0.55" style="margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 66;font-weight:900;font-size:clamp(72px,17vw,270px);line-height:.82;letter-spacing:-.025em;color:#2B2622;opacity:0;pointer-events:none;user-select:none;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.16,.84,.44,1);">THE MIXES</h2>
-          <div data-rise="y" data-rise-delay="180" style="opacity:0;transform:translateY(52px);transition:opacity .95s cubic-bezier(.16,.84,.44,1),transform .95s cubic-bezier(.16,.84,.44,1);position:relative;margin-top:clamp(-62px,-7vw,-34px);">
+          <h2 class="mix-heading" data-rise="fade" data-rise-op="1" style="margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 66;font-weight:900;font-size:clamp(72px,17vw,270px);line-height:.82;letter-spacing:-.012em;word-spacing:clamp(.12em,2vw,.24em);color:#F7F4EE;opacity:0;pointer-events:none;user-select:none;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.16,.84,.44,1);">THE MIXES</h2>
+          <div data-rise="y" data-rise-delay="180" style="opacity:0;transform:translateY(52px);transition:opacity .95s cubic-bezier(.16,.84,.44,1),transform .95s cubic-bezier(.16,.84,.44,1);position:relative;margin-top:clamp(-36px,-3vw,-18px);">
             <div class="mix-deck" data-mix-deck="true" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Kosi mixes, mashups, and edits" onKeyDown="{{ mixKey }}" onPointerDown="{{ mixDragStart }}" onPointerMove="{{ mixDragMove }}" onPointerUp="{{ mixDragEnd }}" onPointerCancel="{{ mixDragCancel }}" style="position:relative;height:clamp(300px,34vw,450px);touch-action:pan-y;user-select:none;">
               <div data-mix-rail="true" style="position:absolute;inset:0;transition:transform .38s cubic-bezier(.18,.86,.22,1);">
                 <sc-for list="{{ mixCards }}" as="card" hint-placeholder-count="8">
@@ -330,20 +310,16 @@
               <button type="button" class="mix-control" onClick="{{ mixPrev }}" aria-label="Previous release" style="position:absolute;left:0;top:50%;transform:translateY(-50%);z-index:40;">←</button>
               <button type="button" class="mix-control" onClick="{{ mixNext }}" aria-label="Next release" style="position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:40;">→</button>
             </div>
-            <div aria-live="polite" style="max-width:760px;margin:0 auto;border-top:1px solid rgba(43,38,34,.22);padding-top:20px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;">
-              <div style="display:flex;flex-direction:column;gap:6px;min-width:0;">
-                <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 82;font-weight:800;font-size:clamp(20px,2.5vw,30px);line-height:1;text-transform:uppercase;color:#2B2622;">{{ activeMixTitle }}</span>
-                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:#7A6E60;">{{ activeMixKind }}</span>
-              </div>
-              <div style="text-align:right;display:flex;flex-direction:column;gap:6px;align-items:flex-end;">
-                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:#7A6E60;">{{ activeMixCount }}</span>
-                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:#7A6E60;">DRAG / SWIPE</span>
+            <div aria-live="polite" style="max-width:760px;margin:0 auto;padding-top:20px;display:flex;justify-content:center;text-align:center;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;">
+                <span class="mix-title" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 82;font-weight:800;font-size:clamp(20px,2.5vw,30px);line-height:1;text-transform:uppercase;color:#F7F4EE;">{{ activeMixTitle }}</span>
+                <span class="mix-detail" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:rgba(247,244,238,.64);">{{ activeMixKind }}</span>
               </div>
             </div>
           </div>
         </div>
         <div style="display:flex;justify-content:safe center;padding-top:clamp(26px,3vw,42px);">
-          <a href="music/" onClick="{{ openMusic }}" style="display:inline-block;background:#2B2622;color:#F7F4EE;border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:17px 34px;cursor:pointer;">HEAR EVERYTHING</a>
+          <a class="mix-all" href="music/" onClick="{{ openMusic }}" style="display:inline-block;background:#F7F4EE;color:#1E1C1A;border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:17px 34px;cursor:pointer;">HEAR EVERYTHING</a>
         </div>
       </div>
     </div>
@@ -369,66 +345,31 @@
       </sc-if>
       <div class="shows-content" style="padding:clamp(48px,6vw,86px) clamp(20px,5vw,72px) clamp(60px,7vw,100px);">
         <div style="max-width:1240px;margin:0 auto;">
-          <div class="chapter-meta" style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:22px;">
-            <span>02 — RESIDENCY &amp; SHOWS</span>
-            <span>SEATTLE + INTERNATIONAL</span>
+          <h2 class="chapter-title" data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(30px,4vw,52px);text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Where to<br>catch me</h2>
+          <div class="event-row" data-rise="y" data-rise-delay="90" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);display:grid;grid-template-columns:minmax(82px,110px) minmax(0,1.35fr) minmax(180px,.75fr) auto;gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(24px,3vw,34px) 0;border-top:1px solid rgba(43,38,34,.28);border-bottom:1px solid rgba(43,38,34,.2);">
+            <span class="event-date" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 78;font-weight:800;font-size:clamp(18px,2.2vw,28px);line-height:1;text-transform:uppercase;color:#2B2622;">SEP 04</span>
+            <span class="event-venue" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 82;font-weight:800;font-size:clamp(20px,2.5vw,31px);line-height:1.05;text-transform:uppercase;color:#2B2622;">Comet Tavern · Capitol Hill</span>
+            <span class="event-location" style="font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.45;letter-spacing:.1em;text-transform:uppercase;color:#6B6259;">Seattle · 10 PM — 2 AM</span>
+            <a href="https://www.instagram.com/comet_tavern/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;background:#2B2622;color:#F7F4EE;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;padding:14px 20px;white-space:nowrap;">DETAILS ↗</a>
           </div>
-          <h2 class="chapter-title" data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(30px,4vw,52px);font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Where to<br>catch me</h2>
-          <div class="played-row" data-rise="y" data-rise-delay="60" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);display:grid;grid-template-columns:minmax(110px,150px) minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:start;padding:18px 0;border-top:1px solid rgba(43,38,34,.22);">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.2em;color:#7A6E60;">PLAYED ACROSS</span>
-            <div class="played-list" style="display:flex;flex-wrap:wrap;gap:10px 16px;font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.35;letter-spacing:.12em;text-transform:uppercase;color:#2B2622;">
-              <span>Seattle</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>London</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>Norway</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>Switzerland</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>Mexico</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>New York City</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>San Francisco</span>
-            </div>
-          </div>
-          <div class="residency-card" data-rise="y" data-rise-delay="90" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);border-top:1px solid rgba(43,38,34,.22);border-bottom:1px solid rgba(43,38,34,.22);padding:clamp(20px,2.6vw,32px) 0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;">
-            <div style="display:flex;flex-direction:column;gap:8px;">
-              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;">WEEKLY RESIDENCY</span>
-              <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 76;font-weight:800;font-size:clamp(28px,4.2vw,56px);line-height:.96;text-transform:uppercase;color:#2B2622;">Big Marios Pizza</span>
-              <span style="font-size:16px;color:#6B6259;">Every week in Seattle — open format, no cover.</span>
-            </div>
-            <button type="button" onClick="{{ openResidency }}" style="border:0;background:#2B2622;color:#F7F4EE;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;padding:15px 28px;white-space:nowrap;cursor:pointer;">DETAILS</button>
-          </div>
-          <div class="event-row" data-rise="y" data-rise-delay="150" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);display:grid;grid-template-columns:minmax(96px,140px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(43,38,34,.16);">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">09/04</span>
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 86;font-weight:700;font-size:clamp(19px,2.2vw,26px);text-transform:uppercase;color:#2B2622;">Comet Tavern · Capitol Hill</span>
-              <span style="font-size:16px;line-height:1.5;color:#6B6259;">Seattle · 10 PM — 2 AM</span>
-            </div>
-            <a href="https://www.instagram.com/comet_tavern/" target="_blank" rel="noopener noreferrer" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;border-bottom:1px solid rgba(43,38,34,.4);padding-bottom:2px;white-space:nowrap;">INSTAGRAM ↗</a>
-          </div>
-          <div class="event-row" data-rise="y" data-rise-delay="210" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);display:grid;grid-template-columns:minmax(96px,140px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(43,38,34,.16);">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">09/05</span>
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 86;font-weight:700;font-size:clamp(19px,2.2vw,26px);text-transform:uppercase;color:#2B2622;">Big Marios Pizza · Capitol Hill</span>
-              <span style="font-size:16px;line-height:1.5;color:#6B6259;">Seattle · 10 PM — 2 AM</span>
-            </div>
-            <a href="https://www.instagram.com/bigmariospizza/" target="_blank" rel="noopener noreferrer" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;border-bottom:1px solid rgba(43,38,34,.4);padding-bottom:2px;white-space:nowrap;">INSTAGRAM ↗</a>
+          <div class="event-row" data-rise="y" data-rise-delay="150" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);display:grid;grid-template-columns:minmax(82px,110px) minmax(0,1.35fr) minmax(180px,.75fr) auto;gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(24px,3vw,34px) 0;border-bottom:1px solid rgba(43,38,34,.2);">
+            <span class="event-date" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 78;font-weight:800;font-size:clamp(18px,2.2vw,28px);line-height:1;text-transform:uppercase;color:#2B2622;">SEP 05</span>
+            <span class="event-venue" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 82;font-weight:800;font-size:clamp(20px,2.5vw,31px);line-height:1.05;text-transform:uppercase;color:#2B2622;">Big Marios Pizza · Capitol Hill</span>
+            <span class="event-location" style="font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.45;letter-spacing:.1em;text-transform:uppercase;color:#6B6259;">Seattle · 10 PM — 2 AM</span>
+            <a href="https://www.instagram.com/bigmariospizza/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;background:#2B2622;color:#F7F4EE;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;padding:14px 20px;white-space:nowrap;">DETAILS ↗</a>
           </div>
         </div>
       </div>
     </div>
     </section>
-      </div>
-    </section>
-    <div data-bleed style="position:absolute;top:100%;left:0;right:0;height:26vh;background:#F7F4EE;"></div>
-    <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
-  </div>
-
-  <!-- CHAPTER 4 · THE FEED + PRESS -->
-  <div data-layer="3" style="position:absolute;inset:0;height:100vh;z-index:4;visibility:hidden;clip-path:circle(0% at 50% 110%);">
-    <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#E6E1D7;">
-      <div data-fitbox style="width:100%;">
+      <!-- THE FEED + PRESS CONTINUE IN THE SAME SCROLLING CHAPTER -->
       <sc-if value="{{ showWatch }}" hint-placeholder-val="{{ true }}">
         <section id="watch" data-screen-label="The Feed" style="position:relative;background:#E6E1D7;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
       <div data-inner style="width:100%;">
         <div style="max-width:1240px;margin:0 auto;width:100%;">
-          <div class="chapter-meta" style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:20px;">
-            <span>03 — THE FEED</span>
-            <span>INSTAGRAM · TIKTOK</span>
-          </div>
           <div style="position:relative;overflow:hidden;">
-            <h2 data-rise="fade" data-rise-op="0.55" style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.16,.84,.44,1);margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 66;font-weight:900;font-size:clamp(72px,16vw,230px);line-height:.82;letter-spacing:-.025em;text-transform:uppercase;color:#2B2622;pointer-events:none;user-select:none;">The Feed</h2>
-          <div data-rise="y" data-rise-delay="120" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);position:relative;margin-top:clamp(-54px,-6vw,-28px);">
+            <h2 data-rise="fade" data-rise-op="1" style="opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.16,.84,.44,1);margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 66;font-weight:900;font-size:clamp(72px,16vw,230px);line-height:.82;letter-spacing:-.012em;word-spacing:clamp(.12em,2vw,.24em);text-transform:uppercase;color:#2B2622;pointer-events:none;user-select:none;">The Feed</h2>
+          <div data-rise="y" data-rise-delay="120" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);position:relative;margin-top:clamp(-34px,-3vw,-16px);">
             <div class="watch-deck" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Kosi vertical social videos" onKeyDown="{{ watchKey }}" onPointerDown="{{ watchDragStart }}" onPointerMove="{{ watchDragMove }}" onPointerUp="{{ watchDragEnd }}" onPointerCancel="{{ watchDragCancel }}">
               <div data-watch-rail="true" style="position:absolute;inset:0;transition:transform .36s cubic-bezier(.18,.86,.22,1);">
                 <sc-for list="{{ watchCards }}" as="clip" hint-placeholder-count="9">
@@ -469,11 +410,7 @@
       <section id="press" data-screen-label="Press and Moments" style="position:relative;background:#F7F4EE;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
       <div data-inner style="width:100%;">
       <div style="max-width:1240px;margin:0 auto;width:100%;">
-        <div class="chapter-meta" style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:22px;">
-          <span>04 — PRESS &amp; MOMENTS</span>
-          <span>ONGOING</span>
-        </div>
-        <h2 class="chapter-title" data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(28px,3.4vw,46px);font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Press</h2>
+        <h2 class="chapter-title" data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(28px,3.4vw,46px);text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Press</h2>
         <div data-rise="y" data-rise-delay="120" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);border-top:1px solid rgba(43,38,34,.22);">
           <div class="press-row" style="display:grid;grid-template-columns:minmax(96px,150px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(43,38,34,.16);">
             <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">08/03/23</span>
@@ -493,8 +430,8 @@
     <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
   </div>
 
-  <!-- CHAPTER 5 · ABOUT -->
-  <div data-layer="4" style="position:absolute;inset:0;height:100vh;z-index:5;visibility:hidden;clip-path:circle(0% at 50% 110%);">
+  <!-- CHAPTER 4 · ABOUT -->
+  <div data-layer="3" style="position:absolute;inset:0;height:100vh;z-index:4;visibility:hidden;clip-path:circle(0% at 50% 110%);">
     <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#EADFCB;;display:flex;flex-direction:column;justify-content:safe center">
       <div data-fitbox style="width:100%;">
       <section id="about" data-screen-label="About" style="position:relative;min-height:100vh;overflow:hidden;background:#2B2622;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
@@ -506,7 +443,6 @@
       <div data-inner style="width:100%;position:relative;z-index:2;">
       <div style="max-width:1240px;margin:0 auto;width:100%;">
         <div data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:rgba(247,244,238,.72);padding-bottom:20px;">05 — ABOUT</div>
           <h2 style="margin:0 0 24px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(48px,8vw,124px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#F7F4EE;">About<br>Kosi</h2>
           <div style="display:flex;flex-direction:column;gap:16px;max-width:560px;">
             <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(247,244,238,.88);text-wrap:pretty;">Producing since 2017 and DJing since 2022, Kosi works open format — Hip-Hop, R&amp;B, and Dancehall held together by reading the room rather than a fixed setlist.</p>
@@ -522,15 +458,14 @@
     <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
   </div>
 
-  <!-- CHAPTER 6 · BOOKING + FOOTER -->
-  <div data-layer="5" style="position:absolute;inset:0;height:100vh;z-index:6;visibility:hidden;clip-path:circle(0% at 50% 110%);">
+  <!-- CHAPTER 5 · BOOKING + FOOTER -->
+  <div data-layer="4" style="position:absolute;inset:0;height:100vh;z-index:5;visibility:hidden;clip-path:circle(0% at 50% 110%);">
     <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#F7F4EE;">
       <div data-fitbox style="width:100%;">
       <section id="booking" data-screen-label="Booking" style="position:relative;background:#F7F4EE;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
       <div data-inner style="width:100%;">
       <div style="max-width:1000px;margin:0 auto;width:100%;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:20px;">06 — BOOKING</div>
-        <h2 class="chapter-title" data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 16px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Let's make<br>it loud</h2>
+        <h2 class="chapter-title" data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 16px;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Let's make<br>it loud</h2>
         <p data-rise="y" data-rise-delay="110" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(28px,3.4vw,44px);font-size:17px;line-height:1.6;color:#6B6259;max-width:520px;">Tell me what the room is and I'll come back with availability and a quote. Every inquiry gets a reply within 24 hours.</p>
         <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
           <form action="https://formsubmit.co/ajax/6870be49db96c158057a0ae0fe96b5ae" method="POST" onSubmit="{{ submit }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(18px,2.6vw,30px);">
@@ -630,7 +565,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;revealLength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:112,&quot;min&quot;:70,&quot;max&quot;:160,&quot;step&quot;:2,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll transitions&quot;},&quot;holdLength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:44,&quot;min&quot;:0,&quot;max&quot;:110,&quot;step&quot;:2,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll transitions&quot;},&quot;marquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showWatch&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
 class Component extends DCLogic {
-  state = { menu: false, menuClosing: false, transitionOut: false, sent: false, submitting: false, submitError: false, activeMix: 0, activeWatch: 0, watchOpen: false, watchIndex: 0, pickerOpen: false, pickerIndex: 0, pickerAll: false, residencyOpen: false };
+  state = { menu: false, menuClosing: false, transitionOut: false, sent: false, submitting: false, submitError: false, activeMix: 0, activeWatch: 0, watchOpen: false, watchIndex: 0, pickerOpen: false, pickerIndex: 0, pickerAll: false };
 
   _mixes = [
     {
@@ -758,10 +693,9 @@ class Component extends DCLogic {
     this._onVisibilityChange = () => { this._layout(); this._frame(); };
     this._onClick = (e) => this._jump(e);
     this._onGlobalKey = (e) => {
-      const overlayOpen = this.state.pickerOpen || this.state.watchOpen || this.state.residencyOpen || this.state.menu;
+      const overlayOpen = this.state.pickerOpen || this.state.watchOpen || this.state.menu;
       if (e.key === 'Escape' && this.state.watchOpen) return this._closeWatch();
       if (e.key === 'Escape' && this.state.pickerOpen) return this._closePicker();
-      if (e.key === 'Escape' && this.state.residencyOpen) return this._closeResidency();
       if (e.key === 'Escape' && this.state.menu) return this._closeMenu(true);
       if (overlayOpen && ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(e.key)) e.preventDefault();
     };
@@ -1171,26 +1105,6 @@ class Component extends DCLogic {
     });
   }
 
-  _openResidency(e) {
-    this._residencyTrigger = e && e.currentTarget;
-    this._residencyScrollY = scrollY;
-    this.setState({ residencyOpen: true });
-    setTimeout(() => {
-      const close = document.querySelector('[data-residency-close]');
-      if (close) close.focus();
-    }, 0);
-  }
-
-  _closeResidency() {
-    this.setState({ residencyOpen: false }, () => {
-      requestAnimationFrame(() => {
-        scrollTo(0, this._residencyScrollY ?? scrollY);
-        this._frame();
-        if (this._residencyTrigger && this._residencyTrigger.focus) this._residencyTrigger.focus();
-      });
-    });
-  }
-
   _openMenu(e) {
     if (this.state.menu || this.state.transitionOut) return;
     this._menuTrigger = e && e.currentTarget;
@@ -1534,7 +1448,6 @@ class Component extends DCLogic {
       mixCards,
       activeMixTitle: active.title,
       activeMixKind: active.kind,
-      activeMixCount: String(this.state.activeMix + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0'),
       mixPrev: () => this._stepMix(-1),
       mixNext: () => this._stepMix(1),
       mixKey: (e) => this._mixKey(e),
@@ -1570,9 +1483,6 @@ class Component extends DCLogic {
       closePicker: () => this._closePicker(),
       stopPicker: (e) => e.stopPropagation(),
       choosePlatform: () => setTimeout(() => this._closePicker(), 0),
-      residencyOpen: this.state.residencyOpen,
-      openResidency: (e) => this._openResidency(e),
-      closeResidency: () => this._closeResidency(),
       holdOverlay: (e) => e.preventDefault(),
       openMenu: (e) => this._openMenu(e),
       closeMenu: () => this._closeMenu(true),
