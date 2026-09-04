@@ -23,6 +23,7 @@
 <meta name="twitter:title" content="Kosi — Open-Format DJ &amp; MC">
 <meta name="twitter:description" content="Seattle-based open-format DJ and MC performing across the U.S. and internationally.">
 <meta name="twitter:image" content="https://itskosi.com/og-image.png">
+<script>try{history.scrollRestoration='manual';}catch(_){}</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -66,15 +67,31 @@
   .watch-card:focus-visible{outline:2px solid #2B2622;outline-offset:5px;}
   .listen-choice{border:1px solid rgba(43,38,34,.34);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.18em;color:#2B2622;transition:background .2s ease,color .2s ease;}
   .listen-choice:hover{background:#2B2622;color:#F7F4EE;}
-  .menu-panel{animation:menuReveal .74s cubic-bezier(.16,.84,.44,1) both;touch-action:none;overscroll-behavior:contain;}
-  .menu-meta{animation:menuMetaIn .48s .18s ease both;}
-  .menu-nav a{opacity:0;animation:menuItemIn .62s cubic-bezier(.16,.84,.44,1) both;}
-  .menu-nav a:nth-child(1){animation-delay:.12s;}
-  .menu-nav a:nth-child(2){animation-delay:.16s;}
-  .menu-nav a:nth-child(3){animation-delay:.20s;}
-  .menu-nav a:nth-child(4){animation-delay:.24s;}
-  .menu-nav a:nth-child(5){animation-delay:.28s;}
-  .menu-nav a:nth-child(6){animation-delay:.32s;}
+  .menu-panel{touch-action:none;overscroll-behavior:contain;}
+  .menu-panel.menu-opening{animation:menuReveal .74s cubic-bezier(.16,.84,.44,1) both;}
+  .menu-opening .menu-meta{animation:menuMetaIn .48s .18s ease both;}
+  .menu-opening .menu-nav>.menu-music-group,.menu-opening .menu-nav>.menu-primary{opacity:0;animation:menuItemIn .62s cubic-bezier(.16,.84,.44,1) both;}
+  .menu-opening .menu-nav>:nth-child(1){animation-delay:.12s;}
+  .menu-opening .menu-nav>:nth-child(2){animation-delay:.17s;}
+  .menu-opening .menu-nav>:nth-child(3){animation-delay:.22s;}
+  .menu-opening .menu-nav>:nth-child(4){animation-delay:.27s;}
+  .menu-opening .menu-nav>:nth-child(5){animation-delay:.32s;}
+  .menu-opening .menu-nav>:nth-child(6){animation-delay:.37s;}
+  .menu-panel.menu-closing{animation:menuClose .52s cubic-bezier(.55,.06,.68,.19) both;pointer-events:none;}
+  .menu-closing .menu-meta{animation:menuMetaOut .24s ease both;}
+  .menu-closing .menu-nav>.menu-music-group,.menu-closing .menu-nav>.menu-primary{animation:menuItemOut .28s ease both;}
+  .menu-primary{font-size:clamp(38px,min(8vw,9vh),104px)!important;}
+  .menu-music-group{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(5px,1vh,11px);}
+  .menu-sublink{position:relative;margin-left:clamp(14px,2.5vw,38px);padding-bottom:5px;font-family:'IBM Plex Mono',monospace!important;font-size:clamp(12px,min(1.5vw,2vh),17px)!important;font-weight:500!important;line-height:1.2!important;letter-spacing:.18em!important;color:#7A6E60!important;transition:color .22s ease,transform .32s cubic-bezier(.16,.84,.44,1),letter-spacing .32s ease;}
+  .menu-sublink::after{content:"";position:absolute;left:1.75em;right:0;bottom:0;height:1px;background:#2B2622;transform:scaleX(0);transform-origin:left;transition:transform .32s cubic-bezier(.16,.84,.44,1);}
+  .menu-sublink:hover,.menu-sublink:focus-visible{color:#2B2622!important;transform:translateX(10px);letter-spacing:.21em!important;}
+  .menu-sublink:hover::after,.menu-sublink:focus-visible::after{transform:scaleX(1);}
+  .menu-sublink:focus-visible{outline:none;}
+  .record-transition{position:fixed;inset:0;z-index:150;display:grid;place-items:center;background:#EADFCB;clip-path:circle(0 at 50% 50%);animation:recordWipe .82s cubic-bezier(.76,0,.24,1) both;pointer-events:none;}
+  .record-transition::before,.record-transition::after{content:"";position:absolute;left:50%;top:50%;border:1px solid rgba(43,38,34,.28);border-radius:50%;transform:translate(-50%,-50%);animation:recordRing .68s .08s cubic-bezier(.16,.84,.44,1) both;}
+  .record-transition::before{width:24vmin;height:24vmin;}
+  .record-transition::after{width:42vmin;height:42vmin;}
+  .record-transition span{position:relative;z-index:1;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(30px,6vw,86px);line-height:.9;letter-spacing:-.015em;text-align:center;text-transform:uppercase;color:#2B2622;opacity:0;animation:recordLabelIn .5s .16s ease both;}
   .picker-backdrop{animation:pickerFadeIn .28s ease both;touch-action:none;overscroll-behavior:contain;}
   .picker-panel{animation:pickerPanelIn .42s cubic-bezier(.16,.84,.44,1) both;}
   .social-player-dialog{width:min(520px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#F7F4EE;border:1px solid rgba(43,38,34,.28);padding:clamp(20px,4vw,36px);box-shadow:0 22px 70px rgba(43,38,34,.22);animation:pickerPanelIn .42s cubic-bezier(.16,.84,.44,1) both;}
@@ -94,13 +111,19 @@
   @keyframes riseWord{0%{opacity:0;transform:translateY(96px)}100%{opacity:1;transform:translateY(0)}}
   @keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
   @keyframes menuReveal{0%{opacity:.4;clip-path:circle(0% at 96% 4%)}100%{opacity:1;clip-path:circle(150% at 96% 4%)}}
+  @keyframes menuClose{0%{opacity:1;clip-path:circle(150% at 96% 4%)}100%{opacity:.35;clip-path:circle(0% at 96% 4%)}}
   @keyframes menuMetaIn{0%{opacity:0}100%{opacity:1}}
+  @keyframes menuMetaOut{0%{opacity:1}100%{opacity:0}}
   @keyframes menuItemIn{0%{opacity:0;transform:translateY(28px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes menuItemOut{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-14px)}}
+  @keyframes recordWipe{0%{clip-path:circle(0 at 50% 50%)}100%{clip-path:circle(76vmax at 50% 50%)}}
+  @keyframes recordRing{0%{opacity:0;transform:translate(-50%,-50%) scale(.25)}100%{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+  @keyframes recordLabelIn{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:none}}
   @keyframes pickerFadeIn{0%{opacity:0}100%{opacity:1}}
   @keyframes pickerPanelIn{0%{opacity:0;transform:translateY(22px) scale(.985)}100%{opacity:1;transform:translateY(0) scale(1)}}
   @keyframes scrollCueIn{0%{opacity:0;transform:translate(-50%,18px)}100%{opacity:1;transform:translate(-50%,0)}}
   @keyframes scrollCueTravel{0%{transform:translateY(-120%);opacity:0}18%{opacity:1}78%{opacity:1}100%{transform:translateY(250%);opacity:0}}
-  @media (max-width:700px){.mix-card{width:clamp(180px,58vw,250px)}.mix-control{width:42px;height:42px}.mix-deck{height:330px!important;}.watch-card{width:clamp(170px,52vw,225px)}.watch-deck{height:430px}.event-row,.press-row{grid-template-columns:minmax(64px,80px) minmax(0,1fr)!important}.event-row>a,.press-row>a{grid-column:2;justify-self:start}}
+  @media (max-width:700px){.mix-card{width:clamp(180px,58vw,250px)}.mix-control{width:42px;height:42px}.mix-deck{height:330px!important;}.watch-card{width:clamp(170px,52vw,225px)}.watch-deck{height:430px}.event-row,.press-row{grid-template-columns:minmax(64px,80px) minmax(0,1fr)!important}.event-row>a,.press-row>a{grid-column:2;justify-self:start}.menu-primary{font-size:clamp(38px,min(11vw,8.6vh),70px)!important}.menu-sublink{font-size:clamp(11px,min(3.3vw,1.9vh),15px)!important;}}
   @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important;}.scroll-cue-line::after{animation:none!important;transform:translateY(68%);opacity:1;}}
 </style>
 </helmet>
@@ -113,18 +136,22 @@
   </div>
 
   <sc-if value="{{ menu }}" hint-placeholder-val="{{ false }}">
-    <div class="menu-panel" onWheel="{{ holdOverlay }}" onTouchMove="{{ holdOverlay }}" style="position:fixed;inset:0;z-index:90;background:#F7F4EE;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(24px,5vw,64px);">
+    <div class="menu-panel {{ menuClass }}" onWheel="{{ holdOverlay }}" onTouchMove="{{ holdOverlay }}" style="position:fixed;inset:0;z-index:90;background:#F7F4EE;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(24px,5vw,64px);">
       <div class="menu-meta" style="display:flex;justify-content:space-between;align-items:flex-start;">
         <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;">ITSKOSI.COM</span>
         <button onClick="{{ closeMenu }}" style="background:none;border:1px solid #2B2622;color:#2B2622;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:9px 16px;cursor:pointer;">CLOSE</button>
       </div>
-      <nav class="menu-nav" style="display:flex;flex-direction:column;gap:2px;">
-        <a href="#mixes" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:clamp(44px,8vw,104px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">The Mixes</a>
-        <a href="#shows" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:clamp(44px,8vw,104px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Residency &amp; Shows</a>
-        <a href="#watch" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:clamp(44px,8vw,104px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">The Feed</a>
-        <a href="#press" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:clamp(44px,8vw,104px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Press</a>
-        <a href="#about" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:clamp(44px,8vw,104px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">About</a>
-        <a href="#booking" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:clamp(44px,8vw,104px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Booking</a>
+      <nav class="menu-nav" style="display:flex;flex-direction:column;gap:clamp(1px,.45vh,6px);">
+        <div class="menu-music-group">
+          <span class="menu-primary" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Music</span>
+          <a class="menu-sublink" href="#mixes" onClick="{{ closeMenuNav }}">↳ THE MIXES · FEATURED</a>
+          <a class="menu-sublink" href="music/" onClick="{{ openMusic }}">↳ THE RECORD SHOP · ALL</a>
+        </div>
+        <a class="menu-primary" href="#shows" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Residency &amp; Shows</a>
+        <a class="menu-primary" href="#watch" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">The Feed</a>
+        <a class="menu-primary" href="#press" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Press</a>
+        <a class="menu-primary" href="#about" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">About</a>
+        <a class="menu-primary" href="#booking" onClick="{{ closeMenuNav }}" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Booking</a>
       </nav>
       <div class="menu-meta" style="display:flex;gap:28px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;color:#7A6E60;flex-wrap:wrap;">
         <a href="https://soundcloud.com/iisokk" target="_blank" rel="noopener noreferrer">SOUNDCLOUD</a>
@@ -134,6 +161,10 @@
         <a href="https://iisokk.bandcamp.com/" target="_blank" rel="noopener noreferrer">BANDCAMP</a>
       </div>
     </div>
+  </sc-if>
+
+  <sc-if value="{{ transitionOut }}" hint-placeholder-val="{{ false }}">
+    <div class="record-transition" aria-hidden="true"><span>THE RECORD SHOP</span></div>
   </sc-if>
 
   <sc-if value="{{ pickerOpen }}" hint-placeholder-val="{{ false }}">
@@ -191,7 +222,7 @@
     </div>
   </sc-if>
 
-  <div style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:70;writing-mode:vertical-rl;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.42em;color:rgba(43,38,34,.45);padding:8px 10px;animation:fadeIn 1.2s 1.15s both;">ISOK LLC · OPEN FORMAT</div>
+  <div data-side-label style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:70;writing-mode:vertical-rl;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.42em;color:rgba(43,38,34,.45);padding:8px 10px;will-change:opacity;">ISOK LLC · OPEN FORMAT</div>
 
   <div data-track style="position:relative;height:calc(5 * (var(--reveal) + var(--hold)) + var(--hold) + 130vh + 100vh);">
     <div style="position:sticky;top:0;height:100vh;overflow:hidden;">
@@ -213,11 +244,11 @@
 
   <!-- CHAPTER 2 · BIO -->
   <div data-layer="1" style="position:absolute;inset:0;height:100vh;z-index:2;visibility:hidden;clip-path:circle(0% at 50% 110%);">
-    <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#F7F4EE;;display:flex;flex-direction:column;justify-content:safe center">
-      <div data-fitbox style="width:100%;">
-      <section id="bio" data-screen-label="Bio" style="position:relative;background:#F7F4EE;display:flex;align-items:safe center;justify-content:safe center;padding:clamp(90px,12vw,150px) clamp(20px,5vw,72px);">
+    <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#F7F4EE;display:flex;flex-direction:column;justify-content:center;">
+      <div data-fitbox style="width:100%;min-height:100vh;display:grid;place-items:center;">
+      <section id="bio" data-screen-label="Bio" style="position:relative;width:100%;background:#F7F4EE;padding:clamp(90px,12vw,150px) clamp(20px,5vw,72px);">
       <div data-inner style="width:100%;">
-      <p data-rise="y" data-rise-delay="120" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);max-width:1040px;margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 92;font-weight:500;font-size:clamp(22px,3vw,42px);line-height:1.24;letter-spacing:-.01em;text-wrap:pretty;color:#2B2622;">Open-format DJ &amp; MC blending Hip-Hop, R&amp;B, and Dancehall for rooms from local residencies to international stages.</p>
+      <p data-rise="y" data-rise-delay="120" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);max-width:1040px;margin:0 auto;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 92;font-weight:500;font-size:clamp(22px,3vw,42px);line-height:1.24;letter-spacing:-.01em;text-wrap:pretty;color:#2B2622;">Open-format DJ &amp; MC blending Hip-Hop, R&amp;B, and Dancehall for rooms from local residencies to international stages.</p>
     </div>
     </section>
       </div>
@@ -267,7 +298,7 @@
           </div>
         </div>
         <div style="display:flex;justify-content:safe center;padding-top:clamp(26px,3vw,42px);">
-          <button type="button" onClick="{{ openAll }}" style="background:#2B2622;color:#F7F4EE;border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:17px 34px;cursor:pointer;">HEAR EVERYTHING</button>
+          <a href="music/" onClick="{{ openMusic }}" style="display:inline-block;background:#2B2622;color:#F7F4EE;border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:17px 34px;cursor:pointer;">HEAR EVERYTHING</a>
         </div>
       </div>
     </div>
@@ -496,7 +527,9 @@
       <div style="max-width:1360px;margin:0 auto;width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:clamp(24px,3.4vw,48px);padding-bottom:clamp(40px,5vw,72px);">
         <div style="display:flex;flex-direction:column;gap:12px;">
           <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">PAGES</span>
-          <a href="#mixes" style="font-size:16px;">The Mixes</a>
+          <span style="font-size:16px;">Music</span>
+          <a href="#mixes" style="font-size:14px;margin-left:12px;color:#7A6E60;">↳ The Mixes · Featured</a>
+          <a href="music/" onClick="{{ openMusic }}" style="font-size:14px;margin-left:12px;color:#7A6E60;">↳ The Record Shop · All</a>
           <a href="#shows" style="font-size:16px;">Residency &amp; Shows</a>
           <a href="#watch" style="font-size:16px;">The Feed</a>
           <a href="#press" style="font-size:16px;">Press</a>
@@ -541,7 +574,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;revealLength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:112,&quot;min&quot;:70,&quot;max&quot;:160,&quot;step&quot;:2,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll transitions&quot;},&quot;holdLength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:44,&quot;min&quot;:0,&quot;max&quot;:110,&quot;step&quot;:2,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll transitions&quot;},&quot;marquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showWatch&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
 class Component extends DCLogic {
-  state = { menu: false, sent: false, submitting: false, submitError: false, activeMix: 0, activeWatch: 0, watchOpen: false, watchIndex: 0, pickerOpen: false, pickerIndex: 0, pickerAll: false, residencyOpen: false };
+  state = { menu: false, menuClosing: false, transitionOut: false, sent: false, submitting: false, submitError: false, activeMix: 0, activeWatch: 0, watchOpen: false, watchIndex: 0, pickerOpen: false, pickerIndex: 0, pickerAll: false, residencyOpen: false };
 
   _mixes = [
     {
@@ -666,8 +699,19 @@ class Component extends DCLogic {
       this._ro = new ResizeObserver(this._onResize);
       this._ro.observe(document.documentElement);
     }
-    this._layout();
-    this._frame();
+    const sectionParam = new URLSearchParams(location.search).get('section');
+    const initialHash = sectionParam || decodeURIComponent((location.hash || '').replace(/^#/, ''));
+    if (sectionParam) history.replaceState(null, '', location.pathname + '#' + encodeURIComponent(sectionParam));
+    const enterDeepLink = () => {
+      this._layout();
+      if (initialHash && initialHash !== 'top') this._jumpToId(initialHash, 'auto');
+      this._frame();
+    };
+    enterDeepLink();
+    if (initialHash && initialHash !== 'top') {
+      requestAnimationFrame(() => requestAnimationFrame(enterDeepLink));
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(enterDeepLink);
+    }
     setTimeout(this._onResize, 0);
     setTimeout(this._onResize, 400);
   }
@@ -678,6 +722,9 @@ class Component extends DCLogic {
   componentWillUnmount() {
     if (this._ro) this._ro.disconnect();
     if (this._retryId) clearInterval(this._retryId);
+    if (this._menuTimer) clearTimeout(this._menuTimer);
+    if (this._musicTimer) clearTimeout(this._musicTimer);
+    document.body.style.overflow = '';
     document.removeEventListener('visibilitychange', this._onResize);
     removeEventListener('scroll', this._onScroll);
     removeEventListener('resize', this._onResize);
@@ -906,20 +953,50 @@ class Component extends DCLogic {
   }
 
   _openMenu(e) {
+    if (this.state.menu || this.state.transitionOut) return;
     this._menuTrigger = e && e.currentTarget;
     this._menuScrollY = scrollY;
-    this.setState({ menu: true });
+    this.setState({ menu: true, menuClosing: false });
   }
 
-  _closeMenu(restorePosition) {
-    this.setState({ menu: false }, () => {
-      if (restorePosition === false) return;
-      requestAnimationFrame(() => {
-        scrollTo(0, this._menuScrollY ?? scrollY);
-        this._frame();
-        if (this._menuTrigger && this._menuTrigger.focus) this._menuTrigger.focus();
-      });
+  _closeMenu(restorePosition, afterClose) {
+    if (!this.state.menu || this.state.menuClosing) return;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.setState({ menuClosing: true }, () => {
+      this._menuTimer = setTimeout(() => {
+        this.setState({ menu: false, menuClosing: false }, () => {
+          requestAnimationFrame(() => {
+            if (restorePosition !== false) {
+              scrollTo(0, this._menuScrollY ?? scrollY);
+              this._frame();
+              if (this._menuTrigger && this._menuTrigger.focus) this._menuTrigger.focus();
+            }
+            if (typeof afterClose === 'function') afterClose();
+          });
+        });
+      }, reduced ? 20 : 520);
     });
+  }
+
+  _closeMenuTo(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = e.currentTarget.getAttribute('href').replace(/^#/, '');
+    this._closeMenu(false, () => this._jumpToId(id));
+  }
+
+  _startMusicTransition(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (this.state.transitionOut) return;
+    const href = e.currentTarget.href;
+    try { sessionStorage.setItem('kosi:record-shop-entry', '1'); } catch (_) {}
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      location.assign(href);
+      return;
+    }
+    this.setState({ transitionOut: true });
+    this._musicTimer = setTimeout(() => location.assign(href), 820);
   }
 
   async _submit(e) {
@@ -991,6 +1068,7 @@ class Component extends DCLogic {
     if (this._retryId) { clearInterval(this._retryId); this._retryId = null; }
     const hold = (this.props.holdLength ?? 44) / 100 * vh;
     this._layers = Array.from(document.querySelectorAll('[data-layer]'));
+    this._sideLabel = document.querySelector('[data-side-label]');
     this._parts = this._layers.map(L => ({
       dim: L.querySelector('[data-dim]'),
       box: L.querySelector('[data-fitbox]'),
@@ -1051,6 +1129,12 @@ class Component extends DCLogic {
       const raw = (y - from) / trans;
       return raw < 0 ? 0 : raw > 1 ? 1 : raw;
     };
+    if (this._sideLabel) {
+      const intoMixes = enter(2);
+      const fade = Math.min(1, Math.max(0, (intoMixes - 0.28) / 0.42));
+      this._sideLabel.style.opacity = (1 - fade).toFixed(4);
+      this._sideLabel.style.visibility = fade >= 1 ? 'hidden' : 'visible';
+    }
     this._layers.forEach((L, i) => {
       const pIn = enter(i);
       if (i > 0 && !Number.isFinite(pIn)) return this._park(L);
@@ -1108,15 +1192,11 @@ class Component extends DCLogic {
     });
   }
 
-  // Layers are out of normal flow, so hash links need the scene's settled offset.
-  _jump(e) {
-    const a = e.target.closest && e.target.closest('a[href^="#"]');
-    if (!a || !this._layers) return;
-    const id = a.getAttribute('href').slice(1);
-    if (id === 'top') { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); return; }
+  _jumpToId(id, behavior = 'smooth') {
+    if (!this._layers) return;
+    if (id === 'top') { scrollTo({ top: 0, behavior }); return; }
     const idx = this._layers.findIndex(L => L.querySelector('#' + id));
     if (idx < 0) return;
-    e.preventDefault();
     // A merged chapter's later blocks are only on screen part-way through its
     // read scrub, so add the target's offset inside the fit box. The rect delta
     // is transform-invariant, so the live translate does not need clearing.
@@ -1129,7 +1209,15 @@ class Component extends DCLogic {
     }
     const guard = this._guards[idx] || 0;
     const top = this._rest[idx] + guard + Math.min(this._over[idx] || 0, inner);
-    scrollTo({ top: Math.round(top), behavior: 'smooth' });
+    scrollTo({ top: Math.round(top), behavior });
+  }
+
+  // Layers are out of normal flow, so hash links need the scene's settled offset.
+  _jump(e) {
+    const a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || !this._layers) return;
+    e.preventDefault();
+    this._jumpToId(a.getAttribute('href').slice(1));
   }
 
   renderVals() {
@@ -1181,6 +1269,8 @@ class Component extends DCLogic {
     const picked = this.state.pickerAll ? null : this._mixes[this.state.pickerIndex];
     return {
       menu: this.state.menu,
+      menuClass: this.state.menuClosing ? 'menu-closing' : 'menu-opening',
+      transitionOut: this.state.transitionOut,
       sent: this.state.sent,
       notSent: !this.state.sent,
       submitting: this.state.submitting,
@@ -1233,7 +1323,8 @@ class Component extends DCLogic {
       holdOverlay: (e) => e.preventDefault(),
       openMenu: (e) => this._openMenu(e),
       closeMenu: () => this._closeMenu(true),
-      closeMenuNav: () => this._closeMenu(false),
+      closeMenuNav: (e) => this._closeMenuTo(e),
+      openMusic: (e) => this._startMusicTransition(e),
       submit: (e) => this._submit(e)
     };
   }

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Record Shop — Kosi</title>
+<meta name="description" content="Browse Kosi's complete catalog of DJ mixes, mashups, edits, beat tapes, and original releases.">
+<meta name="author" content="Kosi">
+<meta name="theme-color" content="#F7F4EE">
+<link rel="canonical" href="https://itskosi.com/music/">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="It's Kosi">
+<meta property="og:title" content="The Record Shop — Kosi">
+<meta property="og:description" content="Every Kosi DJ mix, mashup, and edit in one place.">
+<meta property="og:url" content="https://itskosi.com/music/">
+<meta property="og:image" content="https://itskosi.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Record Shop — Kosi">
+<meta name="twitter:description" content="Every Kosi DJ mix, mashup, and edit in one place.">
+<meta name="twitter:image" content="https://itskosi.com/og-image.png">
+<script>try{if(sessionStorage.getItem('kosi:record-shop-entry')){document.documentElement.classList.add('from-home');sessionStorage.removeItem('kosi:record-shop-entry');}}catch(_){}</script>
+<style>
+  .music-entry{display:none;}
+  html.from-home .music-entry{position:fixed;inset:0;z-index:999;display:grid;place-items:center;background:#EADFCB;pointer-events:none;animation:musicEntryAway .52s .1s ease both;}
+  .music-entry span{font-family:'Arial Narrow',sans-serif;font-size:clamp(30px,6vw,86px);font-weight:900;line-height:.9;letter-spacing:-.02em;text-align:center;text-transform:uppercase;color:#2B2622;}
+  @keyframes musicEntryAway{0%{opacity:1}100%{opacity:0}}
+  @media (prefers-reduced-motion:reduce){html.from-home .music-entry{display:none;}}
+</style>
+<script src="../support.js"></script>
+</head>
+<body>
+<div class="music-entry" aria-hidden="true"><span>THE RECORD SHOP</span></div>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,100..900&amp;family=Instrument+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F7F4EE;--stone:#E6E1D7;--sand:#EADFCB;--ink:#2B2622;--muted:#7A6E60;--rule:rgba(43,38,34,.22);}
+  html{scroll-behavior:smooth;overflow-x:clip;}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:'Instrument Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  *{box-sizing:border-box;}
+  body{min-width:320px;}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:140;opacity:.055;mix-blend-mode:multiply;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22/></filter><rect width=%22160%22 height=%22160%22 filter=%22url(%23n)%22/></svg>');}
+  a{color:var(--ink);text-decoration:none;}
+  a:hover{color:var(--muted);}
+  button{font:inherit;}
+  .site-nav a{transition:color .2s ease;}
+  .release-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(46%,var(--tile)),1fr));gap:clamp(24px,3vw,44px) clamp(14px,1.8vw,28px);}
+  .release-tile{cursor:pointer;outline:none;transition:transform .34s cubic-bezier(.16,.84,.44,1);}
+  .release-tile:hover,.release-tile:focus-visible{transform:translateY(-7px);}
+  .release-tile:focus-visible{outline:2px solid var(--ink);outline-offset:7px;}
+  .cover-shell{position:relative;aspect-ratio:1;overflow:hidden;background:var(--stone);border:1px solid var(--rule);box-shadow:0 0 0 rgba(43,38,34,0);transition:box-shadow .34s ease,filter .34s ease;}
+  .release-tile:hover .cover-shell,.release-tile:focus-visible .cover-shell{box-shadow:0 22px 42px rgba(43,38,34,.15);filter:saturate(1.05);}
+  .cover-shell::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(100deg,rgba(230,225,215,.1) 18%,rgba(247,244,238,.72) 42%,rgba(230,225,215,.1) 68%);background-size:220% 100%;animation:shim 1.35s linear infinite;transition:opacity .25s ease;}
+  .cover-shell.is-loaded::after,.cover-shell.is-error::after{opacity:0;pointer-events:none;}
+  .cover-image{position:absolute;inset:0;z-index:1;display:block;width:100%;height:100%;object-fit:cover;transition:transform .42s cubic-bezier(.16,.84,.44,1);}
+  .release-tile:hover .cover-image,.release-tile:focus-visible .cover-image{transform:scale(1.018);}
+  .cover-fallback{position:absolute;inset:0;display:flex;align-items:flex-end;padding:clamp(16px,2vw,26px);background:var(--ink);color:var(--paper);font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 72;font-weight:850;font-size:clamp(22px,3vw,42px);line-height:.93;text-transform:uppercase;}
+  .listen-cue{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;background:rgba(43,38,34,.48);opacity:0;transition:opacity .25s ease;}
+  .release-tile:hover .listen-cue,.release-tile:focus-visible .listen-cue{opacity:1;}
+  .listen-cue span{border:1px solid rgba(247,244,238,.74);padding:10px 18px;color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.28em;}
+  .platform-link{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 20px;border:1px solid var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;transition:background .2s ease,color .2s ease;}
+  .platform-link.primary,.platform-link:hover,.platform-link:focus-visible{background:var(--ink);color:var(--paper);}
+  .platform-link.primary:hover,.platform-link.primary:focus-visible{background:#494039;}
+  .platform-link:focus-visible,.modal-close:focus-visible,.previous-release:focus-visible,.next-release:focus-visible{outline:2px solid var(--ink);outline-offset:4px;}
+  .modal-backdrop{animation:fadeIn .24s ease both;background:rgba(43,38,34,.18);-webkit-backdrop-filter:blur(18px) saturate(.82);backdrop-filter:blur(18px) saturate(.82);}
+  .modal-panel{animation:panelIn .42s cubic-bezier(.16,.84,.44,1) both;grid-template-rows:minmax(0,1fr) auto;height:min(720px,100%);overflow:hidden!important;}
+  .modal-art,.focus-copy{min-height:0;overflow:auto;}
+  .modal-navigation{grid-column:1/-1;min-height:80px;background:var(--paper);border-top:1px solid rgba(43,38,34,.18);display:grid;grid-template-columns:auto 1fr;align-items:center;gap:20px;padding:18px clamp(22px,3vw,40px);position:relative;z-index:3;}
+  .bad-link{margin:0 auto clamp(50px,8vw,100px);max-width:1360px;padding:clamp(28px,4vw,46px);border:1px solid var(--rule);background:var(--stone);}
+  @keyframes shim{0%{background-position:180% 0}100%{background-position:-60% 0}}
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes panelIn{from{opacity:0;transform:translateY(22px) scale(.985)}to{opacity:1;transform:none}}
+  @media (max-width:700px){
+    .site-header{align-items:flex-start!important;}
+    .site-nav{justify-content:flex-end;flex-wrap:wrap;row-gap:9px!important;letter-spacing:.14em!important;}
+    .release-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .focus-panel{grid-template-columns:1fr!important;grid-template-rows:auto auto auto!important;height:100%;overflow:auto!important;}
+    .modal-art,.focus-copy{overflow:visible;}
+    .focus-copy{padding:0 clamp(22px,6vw,36px) clamp(24px,7vw,42px)!important;}
+    .modal-navigation{position:sticky;bottom:0;grid-template-columns:1fr;padding:15px clamp(22px,6vw,36px);gap:10px;}
+    .modal-navigation>div{justify-content:space-between!important;width:100%;}
+    .modal-close{background:var(--paper)!important;}
+  }
+  @media (max-width:420px){.site-nav a:first-child,.site-nav a:last-child{display:none;}.site-nav{font-size:10px!important;gap:12px!important;letter-spacing:.1em!important;}.release-grid{column-gap:12px;}.release-meta{font-size:8.5px!important;letter-spacing:.12em!important;}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.08s!important;}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:var(--paper);">
+  <header class="site-header" style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px clamp(20px,4vw,56px);border-bottom:1px solid rgba(43,38,34,.14);position:sticky;top:0;background:rgba(247,244,238,.96);backdrop-filter:blur(12px);z-index:70;">
+    <a href="../" aria-label="Kosi home" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:19px;letter-spacing:.04em;">KOSI</a>
+    <nav class="site-nav" aria-label="Primary navigation" style="display:flex;gap:clamp(14px,2.4vw,30px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;color:var(--muted);">
+      <a href="../">HOME</a>
+      <a href="../?section=mixes">THE MIXES</a>
+      <a href="#shop" aria-current="page" style="color:var(--ink);">RECORD SHOP</a>
+      <a href="../?section=shows">SHOWS</a>
+      <a href="../?section=booking">BOOKING</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="shop" data-screen-label="Record Shop" style="padding:clamp(50px,7vw,92px) clamp(20px,5vw,72px) clamp(42px,5vw,72px);max-width:1500px;margin:0 auto;width:100%;">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:var(--muted);padding-bottom:16px;">
+        <span>FULL CATALOG</span>
+        <span>{{ countLabel }}</span>
+      </div>
+      <h1 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 66;font-weight:900;font-size:clamp(58px,12.5vw,196px);line-height:.84;letter-spacing:-.025em;text-transform:uppercase;color:var(--ink);animation:rise .9s cubic-bezier(.16,.84,.44,1) both;">The Record Shop</h1>
+      <p style="margin:28px 0 0;max-width:52ch;font-size:clamp(16px,1.3vw,18px);line-height:1.55;color:#6B6259;text-wrap:pretty;">Every mix, mashup, and edit — browse the full shelf.</p>
+    </section>
+
+    <sc-if value="{{ badHash }}" hint-placeholder-val="{{ false }}">
+      <section class="bad-link" role="status">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--muted);">RELEASE NOT FOUND</span>
+        <h2 style="margin:14px 0 10px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 74;font-weight:850;font-size:clamp(28px,4vw,48px);line-height:1;text-transform:uppercase;">That record isn't on this shelf.</h2>
+        <p style="margin:0;color:#6B6259;font-size:16px;line-height:1.55;">It may have moved or been removed. The full catalog is still waiting below.</p>
+        <a href="#shop" onClick="{{ clearBadHash }}" style="display:inline-block;margin-top:22px;border-bottom:1px solid var(--ink);padding-bottom:3px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;">BACK TO THE FULL SHELF →</a>
+      </section>
+    </sc-if>
+
+    <sc-for list="{{ shelves }}" as="shelf" hint-placeholder-count="2">
+      <section aria-labelledby="{{ shelf.headingId }}" style="padding:0 clamp(20px,5vw,72px) clamp(64px,8vw,108px);max-width:1500px;margin:0 auto;width:100%;">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;border-bottom:1px solid rgba(43,38,34,.28);padding-bottom:12px;margin-bottom:clamp(26px,3vw,42px);">
+          <h2 id="{{ shelf.headingId }}" style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 74;font-weight:800;font-size:clamp(25px,3.4vw,46px);line-height:1;letter-spacing:-.005em;text-transform:uppercase;color:var(--ink);">{{ shelf.label }}</h2>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;color:var(--muted);white-space:nowrap;">{{ shelf.count }}</span>
+        </div>
+
+        <sc-if value="{{ shelf.empty }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:0 0 8px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;line-height:1.9;color:var(--muted);">{{ shelf.emptyNote }}</p>
+        </sc-if>
+
+        <div class="release-grid" onKeyDown="{{ gridKeys }}">
+          <sc-for list="{{ shelf.items }}" as="r" hint-placeholder-count="5">
+            <article class="release-tile" data-tile tabIndex="0" role="button" aria-label="Listen to {{ r.title }}" onClick="{{ r.open }}" onKeyDown="{{ r.keyOpen }}">
+              <div class="cover-shell">
+                <div class="cover-fallback">{{ r.title }}</div>
+                <img class="cover-image" src="{{ r.image }}" alt="{{ r.alt }}" loading="lazy" onLoad="{{ r.imageLoaded }}" onError="{{ r.imageError }}">
+                <div class="listen-cue" aria-hidden="true"><span>LISTEN</span></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;padding-top:14px;">
+                <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 82;font-weight:800;font-size:clamp(14px,1.1vw,17px);line-height:1.15;letter-spacing:.01em;text-transform:uppercase;color:var(--ink);">{{ r.title }}</span>
+                <span class="release-meta" style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.17em;line-height:1.5;color:var(--muted);">{{ r.sub }}</span>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </section>
+    </sc-for>
+  </main>
+
+  <footer style="border-top:1px solid rgba(43,38,34,.16);padding:clamp(44px,6vw,76px) clamp(20px,5vw,72px) clamp(26px,4vw,44px);background:var(--stone);">
+    <div style="max-width:1360px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:clamp(28px,5vw,72px);">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--muted);">PAGES</span>
+        <a href="../" style="font-size:16px;">Home</a>
+        <a href="../?section=mixes" style="font-size:16px;">The Mixes</a>
+        <a href="#shop" style="font-size:16px;">The Record Shop</a>
+        <a href="../?section=shows" style="font-size:16px;">Residency &amp; Shows</a>
+        <a href="../?section=booking" style="font-size:16px;">Booking</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--muted);">LISTEN</span>
+        <a href="https://soundcloud.com/iisokk" target="_blank" rel="noopener noreferrer" style="font-size:16px;">SoundCloud</a>
+        <a href="https://iisokk.bandcamp.com/" target="_blank" rel="noopener noreferrer" style="font-size:16px;">Bandcamp</a>
+        <a href="https://www.youtube.com/@iisokk" target="_blank" rel="noopener noreferrer" style="font-size:16px;">YouTube</a>
+        <a href="https://open.spotify.com/album/0cqRYB2b7yEgoc2jU7tSFK" target="_blank" rel="noopener noreferrer" style="font-size:16px;">Spotify</a>
+        <a href="https://linktr.ee/kosipl" target="_blank" rel="noopener noreferrer" style="font-size:16px;">Linktree</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--muted);">FOLLOW</span>
+        <a href="https://www.instagram.com/kosipl/" target="_blank" rel="noopener noreferrer" style="font-size:16px;">Instagram</a>
+        <a href="https://www.tiktok.com/@kosipl" target="_blank" rel="noopener noreferrer" style="font-size:16px;">TikTok</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--muted);">BOOKING</span>
+        <a href="mailto:contact@itskosi.com" style="font-size:16px;">contact@itskosi.com</a>
+        <span style="font-size:16px;color:#6B6259;">ISOK LLC · Seattle, WA</span>
+      </div>
+    </div>
+    <div style="max-width:1360px;margin:clamp(50px,7vw,90px) auto 0;border-top:1px solid rgba(43,38,34,.16);padding-top:clamp(18px,2.4vw,28px);">
+      <span style="display:block;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:900;font-size:clamp(88px,24vw,360px);line-height:.78;letter-spacing:-.02em;text-align:center;color:transparent;-webkit-text-stroke:1.5px rgba(43,38,34,.48);">KOSI</span>
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--muted);padding-top:16px;">
+        <span>ITSKOSI.COM</span><span>© 2026 ISOK LLC</span>
+      </div>
+    </div>
+  </footer>
+
+  <sc-if value="{{ focus }}" hint-placeholder-val="{{ false }}">
+    <div class="modal-backdrop" onClick="{{ close }}" onWheel="{{ holdOverlay }}" onTouchMove="{{ holdOverlay }}" style="position:fixed;inset:0;z-index:110;display:flex;align-items:center;justify-content:center;padding:clamp(12px,4vw,54px);">
+      <div class="modal-panel focus-panel" onClick="{{ stop }}" onWheel="{{ stop }}" onTouchMove="{{ stop }}" role="dialog" aria-modal="true" aria-labelledby="release-title" style="position:relative;background:var(--paper);border:1px solid rgba(43,38,34,.22);width:min(1000px,100%);max-height:100%;display:grid;grid-template-columns:minmax(280px,1fr) minmax(300px,1fr);">
+        <div class="modal-art" style="padding:clamp(22px,3vw,40px);">
+          <div class="cover-shell is-loaded">
+            <div class="cover-fallback">{{ focus.title }}</div>
+            <img class="cover-image" src="{{ focus.image }}" alt="{{ focus.alt }}" onError="{{ focus.imageError }}">
+          </div>
+        </div>
+        <div class="focus-copy" style="padding:clamp(44px,5vw,72px) clamp(22px,3vw,40px) clamp(26px,3vw,40px) 0;display:flex;flex-direction:column;justify-content:center;gap:18px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;line-height:1.6;color:var(--muted);">{{ focus.sub }}</span>
+          <h3 id="release-title" style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 72;font-weight:850;font-size:clamp(32px,4.4vw,58px);line-height:.94;letter-spacing:-.01em;text-transform:uppercase;color:var(--ink);">{{ focus.title }}</h3>
+          <p style="margin:0;font-size:16px;line-height:1.6;color:#6B6259;max-width:40ch;text-wrap:pretty;">{{ focus.blurb }}</p>
+          <div style="display:flex;flex-direction:column;gap:10px;padding-top:5px;">
+            <sc-if value="{{ focus.hasYoutube }}" hint-placeholder-val="{{ true }}"><a class="platform-link {{ focus.youtubeClass }}" href="{{ focus.youtube }}" target="_blank" rel="noopener noreferrer"><span>YOUTUBE</span><span>WATCH ↗</span></a></sc-if>
+            <sc-if value="{{ focus.hasSoundcloud }}" hint-placeholder-val="{{ true }}"><a class="platform-link {{ focus.soundcloudClass }}" href="{{ focus.soundcloud }}" target="_blank" rel="noopener noreferrer"><span>SOUNDCLOUD</span><span>LISTEN ↗</span></a></sc-if>
+            <sc-if value="{{ focus.hasBandcamp }}" hint-placeholder-val="{{ false }}"><a class="platform-link {{ focus.bandcampClass }}" href="{{ focus.bandcamp }}" target="_blank" rel="noopener noreferrer"><span>BANDCAMP</span><span>LISTEN ↗</span></a></sc-if>
+            <sc-if value="{{ focus.hasSpotify }}" hint-placeholder-val="{{ false }}"><a class="platform-link {{ focus.spotifyClass }}" href="{{ focus.spotify }}" target="_blank" rel="noopener noreferrer"><span>SPOTIFY</span><span>LISTEN ↗</span></a></sc-if>
+          </div>
+        </div>
+        <div class="modal-navigation" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--muted);">
+          <span>{{ focus.position }}</span>
+          <div style="display:flex;align-items:center;justify-content:flex-end;gap:clamp(14px,2.2vw,28px);flex-wrap:wrap;">
+            <button class="previous-release" type="button" onClick="{{ previous }}" style="background:none;border:none;padding:5px 0;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--ink);">← PREVIOUS ON SHELF</button>
+            <button class="next-release" type="button" onClick="{{ next }}" style="background:none;border:none;padding:5px 0;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--ink);">NEXT ON SHELF →</button>
+          </div>
+        </div>
+        <button class="modal-close" data-focus-close="true" type="button" onClick="{{ close }}" style="position:absolute;top:14px;right:14px;background:rgba(247,244,238,.9);border:1px solid rgba(43,38,34,.4);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;padding:8px 13px;cursor:pointer;">CLOSE</button>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Comfortable&quot;,&quot;Dense&quot;],&quot;default&quot;:&quot;Comfortable&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Shelf&quot;},&quot;showGenreTags&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Shelf&quot;}}">
+const r = (slug, title, collection, genre, year, image, links, blurb) => ({
+  slug, title, collection, genre, year, image, blurb, youtube:'', soundcloud:'', bandcamp:'', spotify:'', ...links
+});
+
+const CATALOG = [
+  r('mixplaced-vol-1','Mixplaced Vol. 1','DJ MIX','R&B · WORLD','2026','https://i1.sndcdn.com/artworks-MIwnXZxbJYv1yc4k-UpQhEw-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/r-b-modern-throwbacks-world',youtube:'https://www.youtube.com/watch?v=ETjbJFSHtBQ'},'Modern and throwback R&B moving through Chris Brown, Tyla, T-Pain, Keyshia Cole, and more.'),
+  r('club-cubicle-001','Club Cubicle 001','DJ MIX','HOUSE · DANCE · DISCO','2025','https://i1.sndcdn.com/artworks-c9zCNJey0i9EzE5Q-StJTRA-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/house-dance-disco-clubcubicle-offsite-no-1-dj-isok',youtube:'https://www.youtube.com/watch?v=IB7wBu8f08I'},'The first Club Cubicle offsite — a continuous trip through house, dance, and disco.'),
+  r('unmixed-company-vol-3','Unmixed Company Vol. 3','DJ MIX','R&B · NEO SOUL','2025','https://i1.sndcdn.com/artworks-Xnxdbn8t7XFpYDo4-SuJ43A-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/rnb-unmixed-company-3',youtube:'https://www.youtube.com/watch?v=GJhxoQXANPw'},'The third Unmixed Company session: R&B and neo-soul blended live.'),
+  r('unmixed-company-vol-2','Unmixed Company Vol. 2','DJ MIX','HIP-HOP · DANCEHALL · AFROBEATS','2025','https://i1.sndcdn.com/artworks-WRTpmcwm4DyJhvWm-ArI7CQ-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/unmixed-company-vol-2-hiphop-dancehall-afrobeats-dj-isok-set',youtube:'https://www.youtube.com/watch?v=WSPQQTo5EeY'},'The Pregame — hip-hop, dancehall, and Afrobeats in one open-format set.'),
+  r('unmixed-company-vol-1','Unmixed Company Vol. 1','DJ MIX','NEO SOUL · FUNK · DANCE','2025','https://i1.sndcdn.com/artworks-rz2f0eu5f0yFadv9-zmSWEQ-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/unmixed-company-vol-1-isok-mix-edits-neo-soul-funk-dance',youtube:'https://www.youtube.com/watch?v=nrmC0i4zoM8'},'The first Unmixed Company session — smooth edits, neo-soul, funk, and dance.'),
+  r('around-the-sun','Around the Sun','DJ MIX','OPEN FORMAT','2023','https://i1.sndcdn.com/artworks-HRwpHYgzRSUoBj9U-D5kwzg-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/around-the-sun-isokmix'},'A journey across Afrobeats, pop, amapiano, hip-hop, R&B, dancehall, and more.'),
+  r('lit-b4-the-game','Lit B4 the Game','DJ MIX','HIP-HOP · RAP','2023','https://i1.sndcdn.com/artworks-Q9yAu9RTACdYP2WU-cmpCFQ-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/lit-b4-the-game-isokmix'},'A high-energy pregame mix assembled from audience requests.'),
+  r('amapiano-isokmix','Amapiano [ISOKMIX]','DJ MIX','AMAPIANO','2023','https://i1.sndcdn.com/artworks-B9w5jhaXxYgdOsLh-UgnjVA-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/1-amapiano-isokmix'},'Kosi’s first recorded mix and the opening entry in the ISOKMIX series.'),
+
+  r('risk-your-heart','Risk Your Heart','MASHUPS / EDITS','R&B · SOUL','2026','https://i1.sndcdn.com/artworks-wS2HnP34mVtVLtxt-vrkvlA-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/risk-your-heart-risk-it-all-x',youtube:'https://www.youtube.com/watch?v=7lc4CzeOu28'},'Risk It All meets Use Your Heart in a smooth R&B blend.'),
+  r('back-of-it-all','Back of It All','MASHUPS / EDITS','R&B · SOUL','2026','https://i1.sndcdn.com/artworks-PX5ZWaSRAN40ZqnF-NhV5Tg-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/back-of-it-all-kosi-mix-risk',youtube:'https://www.youtube.com/watch?v=Tk7-ehBAgos'},'Risk It All meets Back of the Club.'),
+  r('make-it-rain-on-the-creek','Make It Rain on the Creek','MASHUPS / EDITS','HIP-HOP · RAP','2026','https://i1.sndcdn.com/artworks-ZBBBFWLULV61eU6I-JhvKRQ-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/make-it-rain-on-the-creek-kosi',youtube:'https://www.youtube.com/watch?v=UEEMdS_0l9Y'},'Quiet on the Creek meets Make It Rain.'),
+  r('yes-he-loves-me-a-million','Yes He Loves Me a Million','MASHUPS / EDITS','R&B · SOUL','2026','https://i1.sndcdn.com/artworks-KM6ARDNROBGI69TZ-KskD6g-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/yes-he-loves-me-a-million',youtube:'https://www.youtube.com/watch?v=4zXDlcTIzv8',bandcamp:'https://iisokk.bandcamp.com/track/yes-he-loves-me-a-million'},'Yes It Is, He Loves Me, and One in a Million layered into one extended blend.'),
+  r('say-he-loves-me','Say He Loves Me','MASHUPS / EDITS','R&B · SOUL','2026','https://i1.sndcdn.com/artworks-j1n2HEm61zSmugtr-hqUAmw-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/say-he-loves-me-kosi-mix-he',youtube:'https://www.youtube.com/watch?v=3k7GJSaoYUM'},'He Loves Me meets Say Yes.'),
+  r('dance-in-a-million','Dance in a Million','MASHUPS / EDITS','R&B · SOUL','2026','https://i1.sndcdn.com/artworks-8ItOJRYbojpgLGve-8JBBDw-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/dance-in-a-million-kosi-mix',youtube:'https://www.youtube.com/watch?v=1K_gIQQ5tRE'},'Dance Tonight meets One in a Million.'),
+  r('he-loves-our-anniversary','He Loves Our Anniversary','MASHUPS / EDITS','R&B · SOUL','2026','https://i1.sndcdn.com/artworks-3ZdntOMXUzfydIMY-ybPhHQ-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/he-loves-our-anniversary-2',youtube:'https://www.youtube.com/watch?v=TN5Ik4JUCzQ',bandcamp:'https://iisokk.bandcamp.com/track/he-loves-our-anniversary'},'He Loves Me meets Anniversary — two favorites in one mashup.'),
+  r('he-loves-me-tonight','He Loves Me Tonight','MASHUPS / EDITS','R&B · SOUL','2026','https://i1.sndcdn.com/artworks-JBeD4tzowekQJQ8L-om3G8w-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/he-loves-me-tonight-isok-1',youtube:'https://www.youtube.com/watch?v=ghbNVfWdykM',bandcamp:'https://iisokk.bandcamp.com/track/he-loves-me-tonight'},'Love, He Loves Me, Love Me, and Love Tonight in one four-song mashup.'),
+  r('chanel-isok-edit','Chanel','MASHUPS / EDITS','R&B · SOUL','2026','https://i1.sndcdn.com/artworks-nuCdgKJ5Nu2DiKXB-Qlxv4w-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/tyla-chanel-isok-edit'},'Chanel and The Beach with a Kosi twist.'),
+  r('i-cant-donk-it','I Can’t Donk It','MASHUPS / EDITS','HIP-HOP · RAP','2026','https://i1.sndcdn.com/artworks-571flRereUhjpjzw-Trw0Mg-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/i-cant-donk-it-isok-mashup'},'Donk meets I Can’t Help It.'),
+  r('tu-sonrisa','Tu Sonrisa','MASHUPS / EDITS','NOLA BOUNCE · LATIN','2026','https://i1.sndcdn.com/artworks-oV0zevvde1Yz43hp-2PLSfQ-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/tu-sonrisa-isok-bounce-edit-1',youtube:'https://www.youtube.com/watch?v=MyDRAvPEV14'},'Tu Sonrisa reworked as a New Orleans bounce edit.'),
+  r('fine-china-shake-dat','Fine China + Shake Dat','MASHUPS / EDITS','HIP-HOP · R&B','2026','https://i1.sndcdn.com/artworks-6V69DUJyMUysylSX-syOJWA-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/fine-china-shake-dat-is-ok',youtube:'https://www.youtube.com/watch?v=egM7LfHMmHY',bandcamp:'https://iisokk.bandcamp.com/track/fine-china-isok-edit'},'Fine China meets Shake Dat.'),
+  r('suavemente-bounce-edit','Suavemente','MASHUPS / EDITS','NOLA BOUNCE · LATIN','2026','https://i1.sndcdn.com/artworks-7fKOGTOl1lUUEYQd-vNkCXA-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/suavemente-isok-bounce-edit-1',youtube:'https://www.youtube.com/watch?v=0ob-VoKs3e8'},'Suavemente rebuilt as a New Orleans bounce edit.'),
+  r('oh-que-sera','Oh Que Sera','MASHUPS / EDITS','NOLA BOUNCE · LATIN','2026','https://i1.sndcdn.com/artworks-o0PEyPkmeUMf127m-oWiVAA-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/oh-que-sera-isok-bounce-edit',youtube:'https://www.youtube.com/watch?v=ovA2nCG58eA',bandcamp:'https://iisokk.bandcamp.com/album/oh-que-sera-bounce-edition'},'Oh Que Sera rebuilt as “salsa bounce.”'),
+  r('remember-ya-back','Remember Ya Back','MASHUPS / EDITS','NOLA BOUNCE · HIP-HOP','2026','https://i1.sndcdn.com/artworks-V0QeSJHOpyi5Gotk-NIkEpg-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/remember-ya-back-arch-ya-back',youtube:'https://www.youtube.com/watch?v=Nsf1l3CApg4',bandcamp:'https://iisokk.bandcamp.com/track/remember-ya-back'},'Arch Ya Back meets Remember the Time.'),
+  r('bend-it-ova-back','Bend It Ova Back','MASHUPS / EDITS','DISCO · BOUNCE','2026','https://i1.sndcdn.com/artworks-KaysXo3gC4yzBepG-Bci3cw-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/bend-it-ova-back-isok-mix',youtube:'https://www.youtube.com/watch?v=8adfRG7VtAQ'},'Bend It Ova meets I Want You Back — disco meets bounce.'),
+  r('pop-dat-falsetto','Pop Dat Falsetto','MASHUPS / EDITS','R&B · HIP-HOP','2026','https://i1.sndcdn.com/artworks-CdaWRpjtzSsN1Eab-8qvqPA-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/pop-dat-falsetto',youtube:'https://www.youtube.com/watch?v=Ay8WvAhfIDM'},'Pop Dat Thang, Falsetto, and RIIVERDANCE in one edit.'),
+  r('pop-dat-bedroom','Pop Dat Bedroom','MASHUPS / EDITS','R&B · HIP-HOP','2026','https://f4.bcbits.com/img/a3565152314_10.jpg',
+    {youtube:'https://www.youtube.com/watch?v=GvF8tY64DA4',bandcamp:'https://iisokk.bandcamp.com/track/pop-dat-bedroom'},'Pop Dat Thang meets Meeting in My Bedroom.'),
+  r('arch-ya-back','Arch Ya Back','MASHUPS / EDITS','NOLA BOUNCE · HIP-HOP','2026','https://i1.sndcdn.com/artworks-nqQDAog17znCWyyi-uI63OQ-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/arch-ya-back-isok-bounce-edit',youtube:'https://www.youtube.com/watch?v=16mwjO_fzYA',bandcamp:'https://iisokk.bandcamp.com/track/arch-ya-back'},'Arch Ya Back recut as a bounce edit.'),
+  r('aint-no-rehab','Ain’t No Rehab','MASHUPS / EDITS','INDIE · R&B','2025','https://i1.sndcdn.com/artworks-emU1fBvNiUyCftVa-uOifqQ-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/aint-no-rehab'},'Ain’t No Sunshine meets Rehab.'),
+  r('broken-clocks-back-of-the-club','Broken Clocks + Back of the Club','MASHUPS / EDITS','R&B · SOUL','2025','https://i1.sndcdn.com/artworks-CPbqCyR6Vqky4EKz-t5WRbA-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/broken-clocks-back-of-the-club'},'Broken Clocks meets Back of the Club.'),
+  r('heated-chill-edit','Heated [Chill Edit]','MASHUPS / EDITS','AFROBEAT · R&B','2025','https://i1.sndcdn.com/artworks-3OOmgMW4Q3J0UMlS-xSgnzg-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/heated-isok-chill-edit'},'A softer version of the Heated edit with My Heart and Liberian Girl.'),
+  r('heated-isok-edit','Heated','MASHUPS / EDITS','POP · DANCE','2025','https://i1.sndcdn.com/artworks-yvkvtzNM2y2JwBph-G8XVNg-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/heated-isok-edit',youtube:'https://www.youtube.com/watch?v=6KIfg4MDO_E'},'Heated meets My Heart and Liberian Girl.'),
+  r('ran-out-all-i-do','Ran Out x All I Do','MASHUPS / EDITS','HIP-HOP · R&B','2025','https://i1.sndcdn.com/artworks-zlarZL9dN5MNvyfP-6zyjUQ-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/ran-out-x-all-i-do-isok-edit',youtube:'https://www.youtube.com/watch?v=JsF8rKfDXko'},'Ran Out meets All I Do.'),
+  r('espresso-riiverdance-tempo','Espresso x RIIVERDANCE x Tempo','MASHUPS / EDITS','POP · R&B · FOLK','2025','https://i1.sndcdn.com/artworks-7QKsiG30OqK06SNd-K3ZceA-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/riiverdance-x-espresso-x-tempo-isok-edit',youtube:'https://www.youtube.com/watch?v=5uE7M0pmMVg'},'Espresso, RIIVERDANCE, and Tempo in one three-way edit.'),
+  r('loyalty-yes-it-is-love-tonight','Loyalty x Yes It Is x Love Tonight','MASHUPS / EDITS','R&B · HIP-HOP · HOUSE','2025','https://i1.sndcdn.com/artworks-D3TRiE1jeH4yGKzW-4wZd4g-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/loyalty-x-yes-it-is-x-love-tonight-x-skrilla-isok-edit',youtube:'https://www.youtube.com/watch?v=VxBEFh_OmKg'},'Loyalty, Yes It Is, Love Tonight, and Skrilla in one blend.'),
+  r('million-dollar-baby-amapiano','Million Dollar Baby [Amapiano Remix]','MASHUPS / EDITS','AMAPIANO','2024','https://i1.sndcdn.com/artworks-gj422c5pqXgKXvbc-wKvyZA-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/million-dollar-baby-tommy-1'},'Tommy Richman’s Million Dollar Baby flipped into amapiano.'),
+  r('million-dollar-baby-extended','Million Dollar Baby [Extended]','MASHUPS / EDITS','AMAPIANO','2024','https://i1.sndcdn.com/artworks-gj422c5pqXgKXvbc-wKvyZA-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/million-dollar-baby-tommy'},'The extended cut of Kosi’s Million Dollar Baby amapiano remix.'),
+  r('tell-ur-girlfriend-amapiano','Tell Ur Girlfriend [Amapiano Flip]','MASHUPS / EDITS','AMAPIANO','2024','https://i1.sndcdn.com/artworks-26XzD0PcYHX5fKOP-M1frwg-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/tell-ur-girlfriend-amapiano-flip-lay-bankz-isok'},'Lay Bankz’s Tell Ur Girlfriend flipped into amapiano.'),
+  r('th1ng-amapiano-flip','TH1NG','MASHUPS / EDITS','AMAPIANO · R&B','2023','https://i1.sndcdn.com/artworks-TV6V50yrMxhyro29-pP4oKA-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/th1ng-1-thing-isok-amapiano-flip-amerie-x-sheppard-x-isok'},'Amerie’s 1 Thing reworked from the Sheppard piano cover.'),
+  r('the-beach-amapiano','The Beach [Amapiano Remix]','MASHUPS / EDITS','AMAPIANO · R&B','2023','https://i1.sndcdn.com/artworks-mtHkjvV4AxvqSNBG-j2PcZQ-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/giveon-the-beach-amapiano-remix-isok'},'Giveon’s The Beach flipped into amapiano.'),
+  r('demon-time-amapiano','Demon Time [Amapiano Remix]','MASHUPS / EDITS','AMAPIANO · R&B','2023','https://i1.sndcdn.com/artworks-EfECotqW0VPj57qL-QW50qw-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/alex-vaughn-feat-ari-lennox-demon-time-amapiano-remix-isok'},'Alex Vaughn and Ari Lennox’s Demon Time flipped into amapiano.'),
+  r('so-be-it-amapiano','So Be It [Amapiano Remix]','MASHUPS / EDITS','AMAPIANO · R&B','2023','https://i1.sndcdn.com/artworks-whf356fcW5aQ5t98-3aX0sg-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/alex-vaughn-so-be-it-amapiano-remix-isok'},'Alex Vaughn’s So Be It recut as an upbeat amapiano flip.'),
+
+  r('a-matondo-isok-christmas','A Matondo & ISOK Christmas','PROJECTS / ORIGINALS','HOLIDAY · EDITS','2025','https://f4.bcbits.com/img/a1408964296_10.jpg',
+    {bandcamp:'https://youngmatondo.bandcamp.com/album/a-matondo-isok-christmas'},'A six-track holiday edit project by Matondo and Isok.'),
+  r('uku','Uku','PROJECTS / ORIGINALS','AFRO-HOUSE','2024','https://i1.sndcdn.com/artworks-VaB1n74ODVrRUCyw-8wWgaw-t500x500.jpg',
+    {soundcloud:'https://soundcloud.com/iisokk/uku'},'An original Afro-house release by Kosi.'),
+  r('sosa-beat-tape','SOSA (The Beat Tape)','PROJECTS / ORIGINALS','BEAT TAPE · 8 TRACKS','2022','https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0273fde8edc0eb6a223a9279f5',
+    {spotify:'https://open.spotify.com/album/0cqRYB2b7yEgoc2jU7tSFK'},'An eight-track beat tape released under the isok name.')
+];
+
+class Component extends DCLogic {
+  state = { openSlug: null, badHash: false };
+
+  componentDidMount() {
+    this._onKey = (e) => {
+      if (!this.state.openSlug) return;
+      if (e.key === 'Escape') this._close();
+      if (e.key === 'ArrowLeft') { e.preventDefault(); this._stepOpenRelease(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); this._stepOpenRelease(1); }
+    };
+    this._onHash = () => this._readHash();
+    document.addEventListener('keydown', this._onKey);
+    addEventListener('hashchange', this._onHash);
+    this._readHash();
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._onKey);
+    removeEventListener('hashchange', this._onHash);
+    this._unlockPageScroll(false);
+  }
+
+  _lockPageScroll() {
+    if (this._scrollLocked) return;
+    this._scrollY = scrollY;
+    this._scrollLocked = true;
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + this._scrollY + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+  }
+
+  _unlockPageScroll(restore = true) {
+    if (!this._scrollLocked) {
+      document.body.style.overflow = '';
+      return;
+    }
+    const y = this._scrollY || 0;
+    this._scrollLocked = false;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    document.body.style.overflow = '';
+    if (restore) {
+      const root = document.documentElement;
+      const previousBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      scrollTo(0, y);
+      requestAnimationFrame(() => { root.style.scrollBehavior = previousBehavior; });
+    }
+  }
+
+  _readHash() {
+    const hash = decodeURIComponent((location.hash || '').replace(/^#/, ''));
+    if (!hash || hash === 'shop') {
+      this._unlockPageScroll();
+      return this.setState({ openSlug:null, badHash:false });
+    }
+    const found = CATALOG.some((release) => release.slug === hash);
+    if (found) {
+      this._lockPageScroll();
+      this.setState({ openSlug:hash, badHash:false }, () => this._focusClose());
+    } else {
+      this._unlockPageScroll();
+      this.setState({ openSlug:null, badHash:true });
+    }
+  }
+
+  _focusClose() {
+    requestAnimationFrame(() => {
+      const close = document.querySelector('[data-focus-close]');
+      if (close) close.focus();
+    });
+  }
+
+  _open(slug, element) {
+    this._returnTo = element || this._returnTo || null;
+    this._lockPageScroll();
+    history.replaceState(null, '', location.pathname + location.search + '#' + slug);
+    this.setState({ openSlug:slug, badHash:false }, () => this._focusClose());
+  }
+
+  _close() {
+    history.replaceState(null, '', location.pathname + location.search);
+    const backTo = this._returnTo;
+    this._unlockPageScroll();
+    this.setState({ openSlug:null }, () => requestAnimationFrame(() => {
+      if (backTo && backTo.focus) backTo.focus({ preventScroll:true });
+    }));
+  }
+
+  _imageLoaded(e) { if (e.currentTarget.parentElement) e.currentTarget.parentElement.classList.add('is-loaded'); }
+  _imageError(e) {
+    const shell = e.currentTarget.parentElement;
+    if (shell) shell.classList.add('is-error');
+    e.currentTarget.style.display = 'none';
+  }
+
+  _stepOnShelf(current, direction) {
+    const shelf = CATALOG.filter((release) => release.collection === current.collection);
+    const index = shelf.findIndex((release) => release.slug === current.slug);
+    return shelf[(index + direction + shelf.length) % shelf.length];
+  }
+
+  _stepOpenRelease(direction) {
+    const current = CATALOG.find((release) => release.slug === this.state.openSlug);
+    if (current) this._open(this._stepOnShelf(current, direction).slug, this._returnTo);
+  }
+
+  renderVals() {
+    const density = this.props.density ?? 'Comfortable';
+    document.documentElement.style.setProperty('--tile', density === 'Dense' ? '168px' : '224px');
+    const showGenre = this.props.showGenreTags ?? true;
+    const decorate = (release) => ({
+      ...release,
+      alt:'Cover artwork for ' + release.title + ' by Kosi',
+      sub:showGenre ? release.collection + '  ·  ' + release.genre : release.collection,
+      open:(e) => this._open(release.slug, e.currentTarget),
+      keyOpen:(e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this._open(release.slug, e.currentTarget); }
+      },
+      imageLoaded:(e) => this._imageLoaded(e),
+      imageError:(e) => this._imageError(e)
+    });
+    const mixes = CATALOG.filter((release) => release.collection === 'DJ MIX').map(decorate);
+    const edits = CATALOG.filter((release) => release.collection === 'MASHUPS / EDITS').map(decorate);
+    const projects = CATALOG.filter((release) => release.collection === 'PROJECTS / ORIGINALS').map(decorate);
+    const shelfData = (label, headingId, items, emptyNote) => ({
+      label, headingId, items, emptyNote, empty:items.length === 0,
+      count:items.length + (items.length === 1 ? ' RELEASE' : ' RELEASES')
+    });
+    const current = CATALOG.find((release) => release.slug === this.state.openSlug) || null;
+    let focus = null;
+    if (current) {
+      const sameShelf = CATALOG.filter((release) => release.collection === current.collection);
+      const shelfIndex = sameShelf.findIndex((release) => release.slug === current.slug);
+      const firstPlatform = current.youtube ? 'youtube' : current.soundcloud ? 'soundcloud' : current.bandcamp ? 'bandcamp' : 'spotify';
+      focus = {
+        ...current,
+        alt:'Cover artwork for ' + current.title + ' by Kosi',
+        sub:current.collection + '  ·  ' + current.genre + '  ·  ' + current.year,
+        position:String(shelfIndex + 1).padStart(2, '0') + ' / ' + String(sameShelf.length).padStart(2, '0'),
+        hasYoutube:Boolean(current.youtube),
+        hasSoundcloud:Boolean(current.soundcloud),
+        hasBandcamp:Boolean(current.bandcamp),
+        hasSpotify:Boolean(current.spotify),
+        youtubeClass:firstPlatform === 'youtube' ? 'primary' : '',
+        soundcloudClass:firstPlatform === 'soundcloud' ? 'primary' : '',
+        bandcampClass:firstPlatform === 'bandcamp' ? 'primary' : '',
+        spotifyClass:firstPlatform === 'spotify' ? 'primary' : '',
+        imageError:(e) => this._imageError(e)
+      };
+    }
+    return {
+      shelves:[
+        shelfData('DJ Mixes', 'dj-mixes', mixes, 'New mixes coming soon — check the Mashups / Edits shelf.'),
+        shelfData('Mashups / Edits', 'mashups-edits', edits, 'New mashups coming soon — check the DJ Mixes shelf.'),
+        shelfData('Projects / Originals', 'projects-originals', projects, 'New original projects coming soon.')
+      ],
+      countLabel:CATALOG.length + ' RELEASES · UPDATED SEPT 2026',
+      badHash:this.state.badHash,
+      clearBadHash:() => { history.replaceState(null, '', location.pathname + location.search + '#shop'); this.setState({ badHash:false }); },
+      focus,
+      close:() => this._close(),
+      stop:(e) => e.stopPropagation(),
+      holdOverlay:(e) => e.preventDefault(),
+      previous:() => { if (current) this._open(this._stepOnShelf(current, -1).slug, this._returnTo); },
+      next:() => { if (current) this._open(this._stepOnShelf(current, 1).slug, this._returnTo); },
+      gridKeys:(e) => {
+        if (!['ArrowRight','ArrowLeft','ArrowDown','ArrowUp'].includes(e.key)) return;
+        const tiles = Array.from(e.currentTarget.querySelectorAll('[data-tile]'));
+        const at = tiles.indexOf(document.activeElement);
+        if (at < 0) return;
+        e.preventDefault();
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          const step = e.key === 'ArrowRight' ? 1 : -1;
+          tiles[(at + step + tiles.length) % tiles.length].focus({ preventScroll:true });
+          return;
+        }
+        const currentTile = tiles[at];
+        const direction = e.key === 'ArrowDown' ? 1 : -1;
+        const candidates = tiles.filter((tile) => direction > 0 ? tile.offsetTop > currentTile.offsetTop : tile.offsetTop < currentTile.offsetTop);
+        if (!candidates.length) return;
+        const nearestRowTop = direction > 0 ? Math.min(...candidates.map((tile) => tile.offsetTop)) : Math.max(...candidates.map((tile) => tile.offsetTop));
+        const row = candidates.filter((tile) => tile.offsetTop === nearestRowTop);
+        row.sort((a,b) => Math.abs(a.offsetLeft-currentTile.offsetLeft)-Math.abs(b.offsetLeft-currentTile.offsetLeft));
+        row[0].focus({ preventScroll:true });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
