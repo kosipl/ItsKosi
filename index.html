@@ -101,18 +101,23 @@
   .social-player-dialog{width:min(520px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#F7F4EE;border:1px solid rgba(43,38,34,.28);padding:clamp(20px,4vw,36px);box-shadow:0 22px 70px rgba(43,38,34,.22);animation:pickerPanelIn .42s cubic-bezier(.16,.84,.44,1) both;}
   .social-player-viewport{height:min(64vh,640px);aspect-ratio:9/16;max-width:100%;margin:22px auto 18px;background:#CFC7B9;}
   .social-player-viewport iframe{display:block;width:100%;height:100%;border:0;background:#CFC7B9;}
-  .scroll-cue{position:absolute;left:50%;bottom:clamp(18px,3.5vw,42px);z-index:4;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:9px;color:#F7F4EE!important;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.22em;text-shadow:0 1px 12px rgba(43,38,34,.48);animation:scrollCueIn .8s 1.45s ease both;}
+  .scroll-cue{position:absolute;left:50%;bottom:clamp(18px,3.5vw,42px);z-index:4;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:9px;color:#F7F4EE!important;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.22em;text-shadow:0 1px 12px rgba(43,38,34,.48);}
   .scroll-cue:hover{color:#F7F4EE!important;}
   .scroll-cue-line{position:relative;width:1px;height:38px;overflow:hidden;background:rgba(247,244,238,.4);}
   .scroll-cue-line::after{content:"";position:absolute;left:0;top:0;width:1px;height:16px;background:#F7F4EE;animation:scrollCueTravel 1.65s .25s cubic-bezier(.55,0,.45,1) infinite;}
+  .hero-wordmark span{display:inline-block;will-change:auto;}
+  .hero-intro{position:fixed;inset:0;z-index:75;display:none;overflow:hidden;pointer-events:none;}
+  .hero-intro.kosi-intro-visible{display:block;}
+  .hero-intro-panel{position:absolute;top:0;bottom:0;width:calc(50vw + 3px);background:#141210;will-change:transform;}
+  .hero-intro-panel[data-intro-left]{right:50%;}
+  .hero-intro-panel[data-intro-right]{left:50%;}
+  html.kosi-intro-lock,html.kosi-intro-lock body{overscroll-behavior:none;}
   [data-layer]{overflow:hidden;}
   [data-layer]:not([data-layer="0"]){visibility:hidden;clip-path:circle(0% at 50% 110%);}
   [data-bleed]{display:none!important;}
   [data-dim]{height:100%!important;}
   body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.055;mix-blend-mode:multiply;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22/></filter><rect width=%22160%22 height=%22160%22 filter=%22url(%23n)%22/></svg>');}
   @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-  @keyframes heroZoom{0%{transform:scale(1.14)}100%{transform:scale(1)}}
-  @keyframes riseWord{0%{opacity:0;transform:translateY(96px)}100%{opacity:1;transform:translateY(0)}}
   @keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
   @keyframes menuReveal{0%{opacity:.4;clip-path:circle(0% at 96% 4%)}100%{opacity:1;clip-path:circle(150% at 96% 4%)}}
   @keyframes menuClose{0%{opacity:1;clip-path:circle(150% at 96% 4%)}100%{opacity:.35;clip-path:circle(0% at 96% 4%)}}
@@ -125,7 +130,6 @@
   @keyframes recordLabelIn{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:none}}
   @keyframes pickerFadeIn{0%{opacity:0}100%{opacity:1}}
   @keyframes pickerPanelIn{0%{opacity:0;transform:translateY(22px) scale(.985)}100%{opacity:1;transform:translateY(0) scale(1)}}
-  @keyframes scrollCueIn{0%{opacity:0;transform:translate(-50%,18px)}100%{opacity:1;transform:translate(-50%,0)}}
   @keyframes scrollCueTravel{0%{transform:translateY(-120%);opacity:0}18%{opacity:1}78%{opacity:1}100%{transform:translateY(250%);opacity:0}}
   @media (max-width:700px){
     body::after{display:none;}
@@ -158,13 +162,13 @@
     .watch-card{width:clamp(170px,52vw,225px)}
     .watch-deck{height:430px}
   }
-  @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important;}.scroll-cue-line::after{animation:none!important;transform:translateY(68%);opacity:1;}}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important;}.hero-intro{display:none!important;}.scroll-cue-line::after{animation:none!important;transform:translateY(68%);opacity:1;}}
 </style>
 </helmet>
 
 <div>
 
-  <div class="floating-header" style="position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,4vw,56px);mix-blend-mode:difference;animation:fadeIn 1s .85s both;">
+  <div class="floating-header" style="position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,4vw,56px);mix-blend-mode:difference;">
     <a href="#top" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:20px;letter-spacing:.04em;color:#F7F4EE;">KOSI</a>
     <button onClick="{{ openMenu }}" style="background:none;border:1px solid #F7F4EE;color:#F7F4EE;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:9px 16px;cursor:pointer;">MENU</button>
   </div>
@@ -266,15 +270,19 @@
     <section id="top" data-screen-label="Hero" style="position:relative;height:100vh;overflow:hidden;background:#E6E1D7;display:flex;align-items:center;justify-content:center;">
       <picture>
         <source media="(max-width:700px)" srcset="assets/kosi-wide-mobile.jpeg">
-        <img class="hero-image" src="assets/kosi-wide.jpeg" alt="Kosi playing an outdoor set at Gas Works Park" decoding="async" fetchpriority="high" width="1365" height="2048" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 46%;animation:heroZoom 2.8s cubic-bezier(.16,.84,.44,1) both;">
+        <img class="hero-image" src="assets/kosi-wide.jpeg" alt="Kosi playing an outdoor set at Gas Works Park" decoding="async" fetchpriority="high" width="1365" height="2048" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 46%;">
       </picture>
       <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(43,38,34,.18) 0%,rgba(43,38,34,0) 34%,rgba(43,38,34,.34) 100%);animation:fadeIn 1.8s both;"></div>
-      <h1 style="position:relative;z-index:2;animation:riseWord 1.5s .3s cubic-bezier(.16,.84,.44,1) both;margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 78;font-weight:900;font-size:clamp(96px,26vw,440px);line-height:.8;letter-spacing:-.02em;color:#F7F4EE;">KOSI</h1>
+      <h1 class="hero-wordmark" aria-label="Kosi" style="position:relative;z-index:2;margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 78;font-weight:900;font-size:clamp(96px,26vw,440px);line-height:.8;letter-spacing:-.02em;color:#F7F4EE;"><span aria-hidden="true">K</span><span aria-hidden="true">O</span><span aria-hidden="true">S</span><span aria-hidden="true">I</span></h1>
       <a class="scroll-cue" href="#bio" aria-label="Scroll to Kosi's introduction">
         <span>SCROLL TO EXPLORE</span>
         <span class="scroll-cue-line" aria-hidden="true"></span>
       </a>
     </section>
+    <div class="hero-intro" data-hero-intro hidden aria-hidden="true">
+      <div class="hero-intro-panel" data-intro-left></div>
+      <div class="hero-intro-panel" data-intro-right></div>
+    </div>
     <div data-bleed style="position:absolute;top:100%;left:0;right:0;height:26vh;background:#E6E1D7;"></div>
     <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
   </div>
@@ -489,7 +497,7 @@
   <div data-layer="4" style="position:absolute;inset:0;height:100vh;z-index:5;visibility:hidden;clip-path:circle(0% at 50% 110%);">
     <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#EADFCB;;display:flex;flex-direction:column;justify-content:safe center">
       <div data-fitbox style="width:100%;">
-      <section id="about" data-screen-label="About" style="position:relative;background:#2B2622;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
+      <section id="about" data-screen-label="About" style="position:relative;min-height:100vh;overflow:hidden;background:#2B2622;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
       <picture class="about-media">
         <source media="(max-width:700px)" srcset="assets/kosi-gasworks-mobile.jpeg">
         <img class="about-bg" src="assets/kosi-gasworks.jpeg" alt="Kosi at the decks, golden hour" loading="lazy" decoding="async" width="1365" height="2048">
@@ -742,7 +750,12 @@ class Component extends DCLogic {
         this._frame();
       });
     };
-    this._onResize = () => { this._layout(); this._frame(); };
+    this._onResize = (event) => {
+      if (this._introActive && event && event.type === 'resize') this._finishHeroIntro(true);
+      this._layout();
+      this._frame();
+    };
+    this._onVisibilityChange = () => { this._layout(); this._frame(); };
     this._onClick = (e) => this._jump(e);
     this._onGlobalKey = (e) => {
       const overlayOpen = this.state.pickerOpen || this.state.watchOpen || this.state.residencyOpen || this.state.menu;
@@ -757,7 +770,7 @@ class Component extends DCLogic {
     addEventListener('load', this._onResize);
     document.addEventListener('click', this._onClick);
     document.addEventListener('keydown', this._onGlobalKey);
-    document.addEventListener('visibilitychange', this._onResize);
+    document.addEventListener('visibilitychange', this._onVisibilityChange);
     if (typeof ResizeObserver === 'function') {
       this._ro = new ResizeObserver(this._onResize);
       this._ro.observe(document.documentElement);
@@ -765,6 +778,7 @@ class Component extends DCLogic {
     const sectionParam = new URLSearchParams(location.search).get('section');
     const initialHash = sectionParam || decodeURIComponent((location.hash || '').replace(/^#/, ''));
     if (sectionParam) history.replaceState(null, '', location.pathname + '#' + encodeURIComponent(sectionParam));
+    this._prepareHeroIntro(initialHash);
     const enterDeepLink = () => {
       this._layout();
       if (initialHash && initialHash !== 'top') this._jumpToId(initialHash, 'auto');
@@ -775,26 +789,180 @@ class Component extends DCLogic {
       requestAnimationFrame(() => requestAnimationFrame(enterDeepLink));
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(enterDeepLink);
     }
-    setTimeout(this._onResize, 0);
-    setTimeout(this._onResize, 400);
+    this._layoutTimer0 = setTimeout(() => { this._layout(); this._frame(); }, 0);
+    this._layoutTimer400 = setTimeout(() => { this._layout(); this._frame(); }, 400);
   }
   componentDidUpdate() {
     this._layout();
     this._frame();
   }
   componentWillUnmount() {
+    this._finishHeroIntro(true);
     if (this._frameRequest) cancelAnimationFrame(this._frameRequest);
     if (this._ro) this._ro.disconnect();
     if (this._retryId) clearInterval(this._retryId);
     if (this._menuTimer) clearTimeout(this._menuTimer);
     if (this._musicTimer) clearTimeout(this._musicTimer);
+    if (this._layoutTimer0) clearTimeout(this._layoutTimer0);
+    if (this._layoutTimer400) clearTimeout(this._layoutTimer400);
     document.body.style.overflow = '';
-    document.removeEventListener('visibilitychange', this._onResize);
+    document.removeEventListener('visibilitychange', this._onVisibilityChange);
     removeEventListener('scroll', this._onScroll);
     removeEventListener('resize', this._onResize);
     removeEventListener('load', this._onResize);
     document.removeEventListener('click', this._onClick);
     document.removeEventListener('keydown', this._onGlobalKey);
+  }
+
+  // ---- hero intro ----------------------------------------------------------
+  _prepareHeroIntro(initialHash) {
+    const reduceMotion = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this._intro = document.querySelector('[data-hero-intro]');
+    this._introWord = document.querySelector('.hero-wordmark');
+    if (initialHash || reduceMotion) {
+      if (this._intro) this._intro.hidden = true;
+      return;
+    }
+    if (!this._intro || !this._introWord || typeof this._intro.animate !== 'function') return;
+
+    this._introActive = true;
+    this._introAnimations = [];
+    this._intro.hidden = false;
+    this._intro.classList.add('kosi-intro-visible');
+    this._introBodyOverflow = document.body.style.overflow;
+    this._introHtmlOverflow = document.documentElement.style.overflow;
+    scrollTo(0, 0);
+    document.documentElement.classList.add('kosi-intro-lock');
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+
+    this._onIntroSkip = (event) => {
+      if (!this._introActive) return;
+      if (event.cancelable) event.preventDefault();
+      event.stopImmediatePropagation();
+      this._finishHeroIntro(true);
+    };
+    addEventListener('wheel', this._onIntroSkip, { capture: true, passive: false });
+    addEventListener('touchstart', this._onIntroSkip, { capture: true, passive: false });
+    document.addEventListener('keydown', this._onIntroSkip, true);
+    document.addEventListener('click', this._onIntroSkip, true);
+
+    let started = false;
+    const start = () => {
+      if (started || !this._introActive) return;
+      started = true;
+      if (this._introFontTimer) clearTimeout(this._introFontTimer);
+      this._introFontTimer = null;
+      this._startHeroIntro();
+    };
+    this._introFontTimer = setTimeout(start, 600);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(start, start);
+    else start();
+  }
+
+  _startHeroIntro() {
+    if (!this._introActive) return;
+    const mobile = typeof matchMedia === 'function' && matchMedia('(max-width:700px), (pointer:coarse)').matches;
+    const timingScale = mobile ? 0.75 : 1;
+    const ms = (value) => Math.round(value * timingScale);
+    const letters = Array.from(this._introWord.querySelectorAll('span'));
+    const boxes = letters.map(letter => letter.getBoundingClientRect());
+    const wordLeft = Math.min(...boxes.map(box => box.left));
+    const wordRight = Math.max(...boxes.map(box => box.right));
+    const wordCentre = (wordLeft + wordRight) / 2;
+    const wordHalf = (wordRight - wordLeft) / 2 + 10;
+    const phase1 = { duration: ms(950), delay: ms(100), easing: 'cubic-bezier(.16,.84,.44,1)', fill: 'both' };
+
+    letters.forEach((letter, index) => {
+      const centre = boxes[index].left + boxes[index].width / 2;
+      const offset = centre - wordCentre;
+      this._introAnimations.push(letter.animate([
+        { transform: 'translateX(' + (-offset) + 'px)' },
+        { transform: 'translateX(0px)' }
+      ], phase1));
+    });
+
+    const left = this._intro.querySelector('[data-intro-left]');
+    const right = this._intro.querySelector('[data-intro-right]');
+    const fullOpen = innerWidth / 2 + 8;
+    this._introAnimations.push(left.animate([
+      { transform: 'translateX(-1px)' },
+      { transform: 'translateX(' + (-wordHalf) + 'px)' }
+    ], phase1));
+    this._introAnimations.push(right.animate([
+      { transform: 'translateX(1px)' },
+      { transform: 'translateX(' + wordHalf + 'px)' }
+    ], phase1));
+
+    const phase2 = { duration: ms(700), delay: ms(1200), easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' };
+    this._introAnimations.push(left.animate([
+      { transform: 'translateX(' + (-wordHalf) + 'px)' },
+      { transform: 'translateX(' + (-fullOpen) + 'px)' }
+    ], phase2));
+    this._introAnimations.push(right.animate([
+      { transform: 'translateX(' + wordHalf + 'px)' },
+      { transform: 'translateX(' + fullOpen + 'px)' }
+    ], phase2));
+
+    const hero = document.querySelector('.hero-image');
+    const header = document.querySelector('.floating-header');
+    const cue = document.querySelector('.scroll-cue');
+    if (hero) this._introAnimations.push(hero.animate([
+      { transform: 'scale(1.14)' },
+      { transform: 'scale(1)' }
+    ], { duration: ms(1400), delay: ms(1200), easing: 'cubic-bezier(.16,.84,.44,1)', fill: 'both' }));
+    if (header) this._introAnimations.push(header.animate([
+      { opacity: 0 },
+      { opacity: 1 }
+    ], { duration: ms(600), delay: ms(1950), easing: 'ease', fill: 'both' }));
+    if (cue) this._introAnimations.push(cue.animate([
+      { opacity: 0, transform: 'translate(-50%,18px)' },
+      { opacity: 1, transform: 'translate(-50%,0)' }
+    ], { duration: ms(800), delay: ms(2050), easing: 'ease', fill: 'both' }));
+
+    this._introCurtainTimer = setTimeout(() => this._finishHeroIntro(false), ms(1900));
+    this._introCleanupTimer = setTimeout(() => this._cleanupHeroIntroAnimations(), ms(2950));
+  }
+
+  _removeHeroIntroListeners() {
+    if (!this._onIntroSkip) return;
+    removeEventListener('wheel', this._onIntroSkip, true);
+    removeEventListener('touchstart', this._onIntroSkip, true);
+    document.removeEventListener('keydown', this._onIntroSkip, true);
+    document.removeEventListener('click', this._onIntroSkip, true);
+    this._onIntroSkip = null;
+  }
+
+  _unlockHeroIntro() {
+    document.documentElement.classList.remove('kosi-intro-lock');
+    if (this._introHtmlOverflow !== undefined) document.documentElement.style.overflow = this._introHtmlOverflow;
+    if (this._introBodyOverflow !== undefined) document.body.style.overflow = this._introBodyOverflow;
+  }
+
+  _cleanupHeroIntroAnimations() {
+    if (this._introCleanupTimer) clearTimeout(this._introCleanupTimer);
+    this._introCleanupTimer = null;
+    (this._introAnimations || []).forEach(animation => animation.cancel());
+    this._introAnimations = [];
+  }
+
+  _finishHeroIntro(skip) {
+    if (this._introFontTimer) clearTimeout(this._introFontTimer);
+    if (this._introCurtainTimer) clearTimeout(this._introCurtainTimer);
+    this._introFontTimer = null;
+    this._introCurtainTimer = null;
+    this._introActive = false;
+    if (this._intro) {
+      this._intro.classList.remove('kosi-intro-visible');
+      this._intro.hidden = true;
+    }
+    this._removeHeroIntroListeners();
+    this._unlockHeroIntro();
+    if (skip) {
+      if (this._introCleanupTimer) clearTimeout(this._introCleanupTimer);
+      this._introCleanupTimer = null;
+      this._cleanupHeroIntroAnimations();
+    }
   }
 
   // ---- mixes ---------------------------------------------------------------
