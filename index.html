@@ -100,7 +100,7 @@
   @keyframes pickerPanelIn{0%{opacity:0;transform:translateY(22px) scale(.985)}100%{opacity:1;transform:translateY(0) scale(1)}}
   @keyframes scrollCueIn{0%{opacity:0;transform:translate(-50%,18px)}100%{opacity:1;transform:translate(-50%,0)}}
   @keyframes scrollCueTravel{0%{transform:translateY(-120%);opacity:0}18%{opacity:1}78%{opacity:1}100%{transform:translateY(250%);opacity:0}}
-  @media (max-width:700px){.mix-card{width:clamp(180px,58vw,250px)}.mix-control{width:42px;height:42px}.mix-deck{height:330px!important;}.watch-card{width:clamp(170px,52vw,225px)}.watch-deck{height:430px}}
+  @media (max-width:700px){.mix-card{width:clamp(180px,58vw,250px)}.mix-control{width:42px;height:42px}.mix-deck{height:330px!important;}.watch-card{width:clamp(170px,52vw,225px)}.watch-deck{height:430px}.event-row,.press-row{grid-template-columns:minmax(64px,80px) minmax(0,1fr)!important}.event-row>a,.press-row>a{grid-column:2;justify-self:start}}
   @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important;}.scroll-cue-line::after{animation:none!important;transform:translateY(68%);opacity:1;}}
 </style>
 </helmet>
@@ -312,10 +312,21 @@
             </div>
             <button type="button" onClick="{{ openResidency }}" style="border:0;background:#2B2622;color:#F7F4EE;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;padding:15px 28px;white-space:nowrap;cursor:pointer;">DETAILS</button>
           </div>
-          <div data-rise="y" data-rise-delay="150" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);display:grid;grid-template-columns:minmax(96px,140px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(43,38,34,.16);">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">UP NEXT</span>
-            <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 86;font-weight:700;font-size:clamp(19px,2.2vw,26px);text-transform:uppercase;color:#2B2622;">New dates announcing soon</span>
-            <a href="#booking" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;border-bottom:1px solid rgba(43,38,34,.4);padding-bottom:2px;">BOOK KOSI</a>
+          <div class="event-row" data-rise="y" data-rise-delay="150" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);display:grid;grid-template-columns:minmax(96px,140px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(43,38,34,.16);">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">09/04</span>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 86;font-weight:700;font-size:clamp(19px,2.2vw,26px);text-transform:uppercase;color:#2B2622;">Comet Tavern · Capitol Hill</span>
+              <span style="font-size:16px;line-height:1.5;color:#6B6259;">Seattle · 10 PM — 2 AM</span>
+            </div>
+            <a href="https://www.instagram.com/comet_tavern/" target="_blank" rel="noopener noreferrer" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;border-bottom:1px solid rgba(43,38,34,.4);padding-bottom:2px;white-space:nowrap;">INSTAGRAM ↗</a>
+          </div>
+          <div class="event-row" data-rise="y" data-rise-delay="210" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);display:grid;grid-template-columns:minmax(96px,140px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(43,38,34,.16);">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">09/05</span>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 86;font-weight:700;font-size:clamp(19px,2.2vw,26px);text-transform:uppercase;color:#2B2622;">Big Marios Pizza · Capitol Hill</span>
+              <span style="font-size:16px;line-height:1.5;color:#6B6259;">Seattle · 10 PM — 2 AM</span>
+            </div>
+            <a href="https://www.instagram.com/bigmariospizza/" target="_blank" rel="noopener noreferrer" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;border-bottom:1px solid rgba(43,38,34,.4);padding-bottom:2px;white-space:nowrap;">INSTAGRAM ↗</a>
           </div>
         </div>
       </div>
@@ -379,29 +390,13 @@
         </div>
         <h2 data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(28px,3.4vw,46px);font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Press</h2>
         <div data-rise="y" data-rise-delay="120" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);border-top:1px solid rgba(43,38,34,.22);">
-          <div style="display:grid;grid-template-columns:minmax(96px,150px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(43,38,34,.16);">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">[ DATE ]</span>
+          <div class="press-row" style="display:grid;grid-template-columns:minmax(96px,150px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(43,38,34,.16);">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">08/03/23</span>
             <div style="display:flex;flex-direction:column;gap:6px;">
               <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 86;font-weight:700;font-size:clamp(19px,2.2vw,26px);text-transform:uppercase;color:#2B2622;">Billboard</span>
-              <span style="font-size:16px;line-height:1.5;color:#6B6259;">Quoted in a feature on the decline of slow dancing.</span>
+              <span style="font-size:16px;line-height:1.5;color:#6B6259;">Quoted on how slow dancing has evolved for Gen Z.</span>
             </div>
-            <a href="#press" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;border-bottom:1px solid rgba(43,38,34,.4);padding-bottom:2px;">READ</a>
-          </div>
-          <div style="display:grid;grid-template-columns:minmax(96px,150px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(43,38,34,.16);">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">[ DATE ]</span>
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 86;font-weight:700;font-size:clamp(19px,2.2vw,26px);text-transform:uppercase;color:#2B2622;">Jill Scott</span>
-              <span style="font-size:16px;line-height:1.5;color:#6B6259;">Quote-tweeted a set clip.</span>
-            </div>
-            <a href="#press" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;border-bottom:1px solid rgba(43,38,34,.4);padding-bottom:2px;">VIEW</a>
-          </div>
-          <div style="display:grid;grid-template-columns:minmax(96px,150px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(43,38,34,.16);">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">[ DATE ]</span>
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 86;font-weight:700;font-size:clamp(19px,2.2vw,26px);text-transform:uppercase;color:#2B2622;">Leon Thomas</span>
-              <span style="font-size:16px;line-height:1.5;color:#6B6259;">Engaged with a mashup online.</span>
-            </div>
-            <a href="#press" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;border-bottom:1px solid rgba(43,38,34,.4);padding-bottom:2px;">VIEW</a>
+            <a href="https://www.billboard.com/music/rb-hip-hop/slow-dance-dead-gen-z-evolution-usher-keke-palmer-1235384473/" target="_blank" rel="noopener noreferrer" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;border-bottom:1px solid rgba(43,38,34,.4);padding-bottom:2px;">READ ↗</a>
           </div>
         </div>
       </div>
