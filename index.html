@@ -56,6 +56,10 @@
   .watch-card{position:absolute;left:50%;top:12px;width:clamp(190px,24vw,310px);padding:0;border:0;background:none;cursor:pointer;transform-origin:50% 88%;transition:transform .72s cubic-bezier(.18,.86,.22,1),opacity .44s ease,filter .4s ease;}
   .watch-card-sleeve{position:relative;display:block;aspect-ratio:9/16;overflow:hidden;background:#C9C0B1;border:1px solid rgba(43,38,34,.24);transition:transform .28s cubic-bezier(.18,.86,.22,1),box-shadow .28s ease;}
   .watch-card iframe{display:block;width:100%;height:100%;border:0;background:#C9C0B1;pointer-events:none;}
+  .watch-card-poster{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;}
+  .about-media{position:absolute;inset:0;display:block;}
+  .about-bg{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 34%;}
+  .about-scrim{position:absolute;inset:0;background:linear-gradient(102deg,rgba(43,38,34,.9) 0%,rgba(43,38,34,.78) 30%,rgba(43,38,34,.54) 60%,rgba(43,38,34,.34) 100%);}
   .watch-card[data-active="true"]{filter:saturate(1);}
   .watch-card:not([data-active="true"]){filter:saturate(.82) brightness(.94);}
   .watch-card-platform{position:absolute;left:10px;top:9px;background:#2B2622;color:#F7F4EE;padding:6px 8px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;}
@@ -67,7 +71,7 @@
   .watch-card:focus-visible{outline:2px solid #2B2622;outline-offset:5px;}
   .listen-choice{border:1px solid rgba(43,38,34,.34);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.18em;color:#2B2622;transition:background .2s ease,color .2s ease;}
   .listen-choice:hover{background:#2B2622;color:#F7F4EE;}
-  .menu-panel{touch-action:none;overscroll-behavior:contain;}
+  .menu-panel{touch-action:pan-y;overscroll-behavior:contain;overflow-y:auto;-webkit-overflow-scrolling:touch;}
   .menu-panel.menu-opening{animation:menuReveal .74s cubic-bezier(.16,.84,.44,1) both;}
   .menu-opening .menu-meta{animation:menuMetaIn .48s .18s ease both;}
   .menu-opening .menu-nav>.menu-music-group,.menu-opening .menu-nav>.menu-primary{opacity:0;animation:menuItemIn .62s cubic-bezier(.16,.84,.44,1) both;}
@@ -101,7 +105,7 @@
   .scroll-cue:hover{color:#F7F4EE!important;}
   .scroll-cue-line{position:relative;width:1px;height:38px;overflow:hidden;background:rgba(247,244,238,.4);}
   .scroll-cue-line::after{content:"";position:absolute;left:0;top:0;width:1px;height:16px;background:#F7F4EE;animation:scrollCueTravel 1.65s .25s cubic-bezier(.55,0,.45,1) infinite;}
-  [data-layer]{overflow:hidden;will-change:clip-path;}
+  [data-layer]{overflow:hidden;}
   [data-layer]:not([data-layer="0"]){visibility:hidden;clip-path:circle(0% at 50% 110%);}
   [data-bleed]{display:none!important;}
   [data-dim]{height:100%!important;}
@@ -123,20 +127,50 @@
   @keyframes pickerPanelIn{0%{opacity:0;transform:translateY(22px) scale(.985)}100%{opacity:1;transform:translateY(0) scale(1)}}
   @keyframes scrollCueIn{0%{opacity:0;transform:translate(-50%,18px)}100%{opacity:1;transform:translate(-50%,0)}}
   @keyframes scrollCueTravel{0%{transform:translateY(-120%);opacity:0}18%{opacity:1}78%{opacity:1}100%{transform:translateY(250%);opacity:0}}
-  @media (max-width:700px){.mix-card{width:clamp(180px,58vw,250px)}.mix-control{width:42px;height:42px}.mix-deck{height:330px!important;}.watch-card{width:clamp(170px,52vw,225px)}.watch-deck{height:430px}.event-row,.press-row{grid-template-columns:minmax(64px,80px) minmax(0,1fr)!important}.event-row>a,.press-row>a{grid-column:2;justify-self:start}.menu-primary{font-size:clamp(38px,min(11vw,8.6vh),70px)!important}.menu-sublink{font-size:clamp(11px,min(3.3vw,1.9vh),15px)!important;}}
+  @media (max-width:700px){
+    body::after{display:none;}
+    .about-bg{object-position:50% 26%;}
+    .about-scrim{background:linear-gradient(to bottom,rgba(43,38,34,.58) 0%,rgba(43,38,34,.72) 44%,rgba(43,38,34,.9) 100%);}
+    [data-layer]{will-change:opacity;}
+    .floating-header{padding:13px 18px!important;mix-blend-mode:normal!important;background:rgba(247,244,238,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,38,34,.14);}
+    .floating-header a,.floating-header button{color:#2B2622!important;border-color:#2B2622!important;}
+    .floating-header button{min-height:44px;padding:10px 15px!important;}
+    .menu-panel{height:100dvh;padding:18px!important;gap:28px;justify-content:flex-start!important;}
+    .menu-meta:first-child{position:sticky;top:0;z-index:2;background:#F7F4EE;padding-bottom:12px;}
+    .menu-nav{gap:5px!important;margin:auto 0;}
+    .menu-primary{font-size:clamp(34px,min(10vw,7.2vh),58px)!important;line-height:.95!important;}
+    .menu-music-group{gap:7px;}
+    .menu-sublink{font-size:clamp(11px,min(3vw,1.7vh),14px)!important;line-height:1.35!important;}
+    .menu-meta:last-child{gap:14px 22px!important;padding-bottom:max(4px,env(safe-area-inset-bottom));}
+    #mixes,#watch,#press,#about,#booking{padding-top:96px!important;padding-bottom:52px!important;}
+    .shows-content{padding-top:96px!important;padding-bottom:58px!important;}
+    .chapter-meta{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:start!important;gap:8px 14px!important;font-size:10px!important;letter-spacing:.16em!important;}
+    .chapter-title{font-size:clamp(48px,15vw,70px)!important;line-height:.86!important;margin-bottom:30px!important;}
+    .played-row{grid-template-columns:1fr!important;gap:14px!important;padding:18px 0!important;}
+    .played-list{gap:10px 12px!important;font-size:13px!important;letter-spacing:.1em!important;}
+    .residency-card{grid-template-columns:1fr!important;gap:20px!important;align-items:start!important;}
+    .residency-card button{width:100%;min-height:48px;}
+    .event-row,.press-row{grid-template-columns:minmax(62px,74px) minmax(0,1fr)!important;gap:16px 18px!important;align-items:start!important;}
+    .event-row>a,.press-row>a{grid-column:2;justify-self:start;min-height:36px;display:flex;align-items:center;}
+    .mix-card{width:clamp(180px,58vw,250px)}
+    .mix-control{width:44px;height:44px}
+    .mix-deck{height:330px!important;}
+    .watch-card{width:clamp(170px,52vw,225px)}
+    .watch-deck{height:430px}
+  }
   @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important;}.scroll-cue-line::after{animation:none!important;transform:translateY(68%);opacity:1;}}
 </style>
 </helmet>
 
 <div>
 
-  <div style="position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,4vw,56px);mix-blend-mode:difference;animation:fadeIn 1s .85s both;">
+  <div class="floating-header" style="position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,4vw,56px);mix-blend-mode:difference;animation:fadeIn 1s .85s both;">
     <a href="#top" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;font-size:20px;letter-spacing:.04em;color:#F7F4EE;">KOSI</a>
     <button onClick="{{ openMenu }}" style="background:none;border:1px solid #F7F4EE;color:#F7F4EE;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:9px 16px;cursor:pointer;">MENU</button>
   </div>
 
   <sc-if value="{{ menu }}" hint-placeholder-val="{{ false }}">
-    <div class="menu-panel {{ menuClass }}" onWheel="{{ holdOverlay }}" onTouchMove="{{ holdOverlay }}" style="position:fixed;inset:0;z-index:90;background:#F7F4EE;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(24px,5vw,64px);">
+    <div class="menu-panel {{ menuClass }}" style="position:fixed;inset:0;z-index:90;background:#F7F4EE;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(24px,5vw,64px);">
       <div class="menu-meta" style="display:flex;justify-content:space-between;align-items:flex-start;">
         <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;">ITSKOSI.COM</span>
         <button onClick="{{ closeMenu }}" style="background:none;border:1px solid #2B2622;color:#2B2622;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:9px 16px;cursor:pointer;">CLOSE</button>
@@ -230,7 +264,10 @@
   <!-- CHAPTER 1 · HERO -->
   <div data-layer="0" style="position:absolute;left:0;right:0;top:0;height:100vh;z-index:1;transform:none;">
     <section id="top" data-screen-label="Hero" style="position:relative;height:100vh;overflow:hidden;background:#E6E1D7;display:flex;align-items:center;justify-content:center;">
-      <img src="assets/kosi-wide.jpeg" alt="Kosi playing an outdoor set at Gas Works Park" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 46%;animation:heroZoom 2.8s cubic-bezier(.16,.84,.44,1) both;">
+      <picture>
+        <source media="(max-width:700px)" srcset="assets/kosi-wide-mobile.jpeg">
+        <img class="hero-image" src="assets/kosi-wide.jpeg" alt="Kosi playing an outdoor set at Gas Works Park" decoding="async" fetchpriority="high" width="1365" height="2048" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 46%;animation:heroZoom 2.8s cubic-bezier(.16,.84,.44,1) both;">
+      </picture>
       <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(43,38,34,.18) 0%,rgba(43,38,34,0) 34%,rgba(43,38,34,.34) 100%);animation:fadeIn 1.8s both;"></div>
       <h1 style="position:relative;z-index:2;animation:riseWord 1.5s .3s cubic-bezier(.16,.84,.44,1) both;margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 78;font-weight:900;font-size:clamp(96px,26vw,440px);line-height:.8;letter-spacing:-.02em;color:#F7F4EE;">KOSI</h1>
       <a class="scroll-cue" href="#bio" aria-label="Scroll to Kosi's introduction">
@@ -264,7 +301,7 @@
       <section id="mixes" data-screen-label="The Mixes" style="position:relative;background:#E6E1D7;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
       <div data-inner style="width:100%;">
       <div style="max-width:1360px;margin:0 auto;width:100%;position:relative;">
-        <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:18px;">
+        <div class="chapter-meta" style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:18px;">
           <span>01 — RECENT RELEASES</span>
           <span>YOUTUBE · SOUNDCLOUD</span>
         </div>
@@ -307,7 +344,7 @@
       <div data-inner style="width:100%;">
       <sc-if value="{{ marquee }}" hint-placeholder-val="{{ true }}">
         <div data-screen-label="Credibility" style="background:#EADFCB;border-bottom:1px solid rgba(43,38,34,.16);padding:clamp(18px,2.6vw,30px) 0;overflow:hidden;">
-          <div style="display:flex;width:max-content;animation:marquee 38s linear infinite;">
+          <div class="credit-marquee" style="display:flex;width:max-content;animation:marquee 38s linear infinite;">
             <div style="display:flex;align-items:center;gap:44px;padding-right:44px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 74;font-weight:800;font-size:clamp(26px,4vw,56px);line-height:1;text-transform:uppercase;letter-spacing:.01em;color:#2B2622;white-space:nowrap;">
               <span>FIFA</span><span style="opacity:.4;">·</span><span>Complex</span><span style="opacity:.4;">·</span><span>Amazon</span><span style="opacity:.4;">·</span><span>Microsoft</span><span style="opacity:.4;">·</span><span>ESPN</span><span style="opacity:.4;">·</span><span>Polymarket</span><span style="opacity:.4;">·</span><span>NYFW</span><span style="opacity:.4;">·</span><span>Capitol Hill Block Party</span><span style="opacity:.4;">·</span><span>Opened for Shordie Shordie</span><span style="opacity:.4;">·</span>
             </div>
@@ -322,20 +359,20 @@
           <p style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 74;font-weight:800;font-size:clamp(22px,3vw,44px);line-height:1.1;text-transform:uppercase;color:#2B2622;">FIFA · Complex · Amazon · Microsoft · ESPN · Polymarket · NYFW · Capitol Hill Block Party · Opened for Shordie Shordie</p>
         </div>
       </sc-if>
-      <div style="padding:clamp(48px,6vw,86px) clamp(20px,5vw,72px) clamp(60px,7vw,100px);">
+      <div class="shows-content" style="padding:clamp(48px,6vw,86px) clamp(20px,5vw,72px) clamp(60px,7vw,100px);">
         <div style="max-width:1240px;margin:0 auto;">
-          <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:22px;">
+          <div class="chapter-meta" style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:22px;">
             <span>02 — RESIDENCY &amp; SHOWS</span>
             <span>SEATTLE + INTERNATIONAL</span>
           </div>
-          <h2 data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(30px,4vw,52px);font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Where to<br>catch me</h2>
-          <div data-rise="y" data-rise-delay="60" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);display:grid;grid-template-columns:minmax(110px,150px) minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:start;padding:18px 0;border-top:1px solid rgba(43,38,34,.22);">
+          <h2 class="chapter-title" data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(30px,4vw,52px);font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Where to<br>catch me</h2>
+          <div class="played-row" data-rise="y" data-rise-delay="60" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);display:grid;grid-template-columns:minmax(110px,150px) minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:start;padding:18px 0;border-top:1px solid rgba(43,38,34,.22);">
             <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.2em;color:#7A6E60;">PLAYED ACROSS</span>
-            <div style="display:flex;flex-wrap:wrap;gap:10px 16px;font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.35;letter-spacing:.12em;text-transform:uppercase;color:#2B2622;">
+            <div class="played-list" style="display:flex;flex-wrap:wrap;gap:10px 16px;font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.35;letter-spacing:.12em;text-transform:uppercase;color:#2B2622;">
               <span>Seattle</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>London</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>Norway</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>Switzerland</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>Mexico</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>New York City</span><span aria-hidden="true" style="color:#A1988C;">↗</span><span>San Francisco</span>
             </div>
           </div>
-          <div data-rise="y" data-rise-delay="90" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);border-top:1px solid rgba(43,38,34,.22);border-bottom:1px solid rgba(43,38,34,.22);padding:clamp(20px,2.6vw,32px) 0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;">
+          <div class="residency-card" data-rise="y" data-rise-delay="90" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);border-top:1px solid rgba(43,38,34,.22);border-bottom:1px solid rgba(43,38,34,.22);padding:clamp(20px,2.6vw,32px) 0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;">
             <div style="display:flex;flex-direction:column;gap:8px;">
               <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;">WEEKLY RESIDENCY</span>
               <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 76;font-weight:800;font-size:clamp(28px,4.2vw,56px);line-height:.96;text-transform:uppercase;color:#2B2622;">Big Marios Pizza</span>
@@ -377,7 +414,7 @@
         <section id="watch" data-screen-label="The Feed" style="position:relative;background:#E6E1D7;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
       <div data-inner style="width:100%;">
         <div style="max-width:1240px;margin:0 auto;width:100%;">
-          <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:20px;">
+          <div class="chapter-meta" style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:20px;">
             <span>03 — THE FEED</span>
             <span>INSTAGRAM · TIKTOK</span>
           </div>
@@ -389,7 +426,16 @@
                 <sc-for list="{{ watchCards }}" as="clip" hint-placeholder-count="9">
                   <button type="button" class="watch-card" data-active="{{ clip.active }}" onClick="{{ clip.select }}" aria-label="{{ clip.label }}" style="transform:{{ clip.transform }};opacity:{{ clip.opacity }};z-index:{{ clip.z }};pointer-events:{{ clip.pointer }};">
                     <span class="watch-card-sleeve">
-                      <iframe src="{{ clip.embed }}" title="{{ clip.title }} preview" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
+                      <sc-if value="{{ clip.richPreview }}" hint-placeholder-val="true">
+                        <iframe src="{{ clip.embed }}" title="{{ clip.title }} preview" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
+                      </sc-if>
+                      <sc-if value="{{ clip.lightPreview }}" hint-placeholder-val="false">
+                        <span class="watch-card-placeholder" aria-hidden="true" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;text-align:center;background:#2B2622;color:#F7F4EE;">
+                          <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 72;font-weight:900;font-size:clamp(18px,3.2vw,25px);line-height:1;text-transform:uppercase;text-wrap:balance;">{{ clip.title }}</span>
+                          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.24em;opacity:.72;">PLAY VIDEO</span>
+                        </span>
+                        <img class="watch-card-poster" src="{{ clip.poster }}" alt="" aria-hidden="true" loading="lazy" decoding="async" fetchpriority="low" width="405" height="720">
+                      </sc-if>
                       <span class="watch-card-platform">{{ clip.platform }}</span>
                       <span class="watch-card-cue"><span>{{ clip.cue }}</span></span>
                     </span>
@@ -415,11 +461,11 @@
       <section id="press" data-screen-label="Press and Moments" style="position:relative;background:#F7F4EE;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
       <div data-inner style="width:100%;">
       <div style="max-width:1240px;margin:0 auto;width:100%;">
-        <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:22px;">
+        <div class="chapter-meta" style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:22px;">
           <span>04 — PRESS &amp; MOMENTS</span>
           <span>ONGOING</span>
         </div>
-        <h2 data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(28px,3.4vw,46px);font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Press</h2>
+        <h2 class="chapter-title" data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(28px,3.4vw,46px);font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Press</h2>
         <div data-rise="y" data-rise-delay="120" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);border-top:1px solid rgba(43,38,34,.22);">
           <div class="press-row" style="display:grid;grid-template-columns:minmax(96px,150px) minmax(0,1fr) auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(43,38,34,.16);">
             <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#2B2622;">08/03/23</span>
@@ -443,26 +489,28 @@
   <div data-layer="4" style="position:absolute;inset:0;height:100vh;z-index:5;visibility:hidden;clip-path:circle(0% at 50% 110%);">
     <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#EADFCB;;display:flex;flex-direction:column;justify-content:safe center">
       <div data-fitbox style="width:100%;">
-      <section id="about" data-screen-label="About" style="position:relative;background:#EADFCB;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
-      <div data-inner style="width:100%;">
-      <div style="max-width:1240px;margin:0 auto;width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,4vw,64px);align-items:center;">
+      <section id="about" data-screen-label="About" style="position:relative;background:#2B2622;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
+      <picture class="about-media">
+        <source media="(max-width:700px)" srcset="assets/kosi-gasworks-mobile.jpeg">
+        <img class="about-bg" src="assets/kosi-gasworks.jpeg" alt="Kosi at the decks, golden hour" loading="lazy" decoding="async" width="1365" height="2048">
+      </picture>
+      <div class="about-scrim" aria-hidden="true"></div>
+      <div data-inner style="width:100%;position:relative;z-index:2;">
+      <div style="max-width:1240px;margin:0 auto;width:100%;">
         <div data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:20px;">05 — ABOUT</div>
-          <h2 style="margin:0 0 24px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(48px,8vw,124px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">About<br>Kosi</h2>
-          <div style="display:flex;flex-direction:column;gap:16px;max-width:520px;">
-            <p style="margin:0;font-size:17px;line-height:1.6;color:#4A423A;text-wrap:pretty;">Producing since 2017 and DJing since 2022, Kosi works open format — Hip-Hop, R&amp;B, and Dancehall held together by reading the room rather than a fixed setlist.</p>
-            <p style="margin:0;font-size:17px;line-height:1.6;color:#4A423A;text-wrap:pretty;">Seattle is home base, with regular travel for dates across the U.S. and abroad. The rooms range from a 200-capacity club to a 2,000-plus outdoor crowd, with every set shaped to the room, the audience, and the moment.</p>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:rgba(247,244,238,.72);padding-bottom:20px;">05 — ABOUT</div>
+          <h2 style="margin:0 0 24px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(48px,8vw,124px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#F7F4EE;">About<br>Kosi</h2>
+          <div style="display:flex;flex-direction:column;gap:16px;max-width:560px;">
+            <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(247,244,238,.88);text-wrap:pretty;">Producing since 2017 and DJing since 2022, Kosi works open format — Hip-Hop, R&amp;B, and Dancehall held together by reading the room rather than a fixed setlist.</p>
+            <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(247,244,238,.88);text-wrap:pretty;">Seattle is home base, with regular travel for dates across the U.S. and abroad. The rooms range from a 200-capacity club to a 2,000-plus outdoor crowd, with every set shaped to the room, the audience, and the moment.</p>
           </div>
-        </div>
-        <div style="display:flex;justify-content:safe center;">
-          <img src="assets/kosi-gasworks.jpeg" alt="Kosi at the decks, golden hour" data-rise="y" data-rise-delay="160" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);width:100%;max-width:400px;aspect-ratio:4/5;object-fit:cover;object-position:50% 35%;border-radius:50% 50% 0 0 / 46% 46% 0 0;">
         </div>
       </div>
     </div>
     </section>
       </div>
     </section>
-    <div data-bleed style="position:absolute;top:100%;left:0;right:0;height:26vh;background:#EADFCB;"></div>
+    <div data-bleed style="position:absolute;top:100%;left:0;right:0;height:26vh;background:#2B2622;"></div>
     <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
   </div>
 
@@ -474,7 +522,7 @@
       <div data-inner style="width:100%;">
       <div style="max-width:1000px;margin:0 auto;width:100%;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:#7A6E60;padding-bottom:20px;">06 — BOOKING</div>
-        <h2 data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 16px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Let's make<br>it loud</h2>
+        <h2 class="chapter-title" data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 16px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Let's make<br>it loud</h2>
         <p data-rise="y" data-rise-delay="110" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 clamp(28px,3.4vw,44px);font-size:17px;line-height:1.6;color:#6B6259;max-width:520px;">Tell me what the room is and I'll come back with availability and a quote. Every inquiry gets a reply within 24 hours.</p>
         <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
           <form action="https://formsubmit.co/ajax/6870be49db96c158057a0ae0fe96b5ae" method="POST" onSubmit="{{ submit }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(18px,2.6vw,30px);">
@@ -630,55 +678,70 @@ class Component extends DCLogic {
   _watchClips = [
     {
       title: 'Instagram Clip 01', platform: 'INSTAGRAM',
+      poster: 'assets/feed/ig-01.jpg',
       url: 'https://www.instagram.com/p/DbwkA9AzVGA/',
       embed: 'https://www.instagram.com/p/DbwkA9AzVGA/embed/'
     },
     {
       title: 'Instagram Clip 02', platform: 'INSTAGRAM',
+      poster: 'assets/feed/ig-02.jpg',
       url: 'https://www.instagram.com/p/DcCfd1ZTJ6y/',
       embed: 'https://www.instagram.com/p/DcCfd1ZTJ6y/embed/'
     },
     {
       title: 'Instagram Reel 03', platform: 'INSTAGRAM',
+      poster: 'assets/feed/ig-03.jpg',
       url: 'https://www.instagram.com/reel/DbEFr9XzlYi/',
       embed: 'https://www.instagram.com/reel/DbEFr9XzlYi/embed/'
     },
     {
       title: 'Make It Rain Quietly on the Creek', platform: 'TIKTOK',
+      poster: 'assets/feed/tt-make-it-rain.jpg',
       url: 'https://www.tiktok.com/@kosipl/video/7664781801998568735',
       embed: 'https://www.tiktok.com/player/v1/7664781801998568735?autoplay=0&loop=0&music_info=1&description=1'
     },
     {
       title: 'Love x He Loves Me x Love Me x Love Tonight', platform: 'TIKTOK',
+      poster: 'assets/feed/tt-love-x-he-loves-me.jpg',
       url: 'https://www.tiktok.com/@kosipl/video/7656195283000331551',
       embed: 'https://www.tiktok.com/player/v1/7656195283000331551?autoplay=0&loop=0&music_info=1&description=1'
     },
     {
       title: 'Salsa Bounce', platform: 'TIKTOK',
+      poster: 'assets/feed/tt-salsa-bounce.jpg',
       url: 'https://www.tiktok.com/@kosipl/video/7611182994077781278',
       embed: 'https://www.tiktok.com/player/v1/7611182994077781278?autoplay=0&loop=0&music_info=1&description=1'
     },
     {
       title: 'Beyonce x Rihanna Mashup', platform: 'TIKTOK',
+      poster: 'assets/feed/tt-beyonce-x-rihanna.jpg',
       url: 'https://www.tiktok.com/@kosipl/video/7677496652944411934',
       embed: 'https://www.tiktok.com/player/v1/7677496652944411934?autoplay=0&loop=0&music_info=1&description=1'
     },
     {
       title: 'Yes He Loves Me a Million', platform: 'TIKTOK',
+      poster: 'assets/feed/tt-yes-he-loves-me.jpg',
       url: 'https://www.tiktok.com/@kosipl/video/7672958082934115615',
       embed: 'https://www.tiktok.com/player/v1/7672958082934115615?autoplay=0&loop=0&music_info=1&description=1'
     },
     {
       title: 'Wale x Rihanna Mashup', platform: 'TIKTOK',
+      poster: 'assets/feed/tt-wale-x-rihanna.jpg',
       url: 'https://www.tiktok.com/@kosipl/video/7675112510646750495',
       embed: 'https://www.tiktok.com/player/v1/7675112510646750495?autoplay=0&loop=0&music_info=1&description=1'
     }
   ];
 
   componentDidMount() {
-    // Called straight from the scroll event: _frame only writes styles and
-    // never reads layout, so there is nothing to batch and nothing to defer.
-    this._onScroll = () => this._frame();
+    // Keep scroll work to one visual update per painted frame. Mobile browsers
+    // can dispatch many more scroll events than they can render.
+    this._onScroll = () => {
+      if (this._frameRequest) return;
+      this._frameRequest = requestAnimationFrame(() => {
+        this._frameRequest = null;
+        this._frame();
+      });
+    };
     this._onResize = () => { this._layout(); this._frame(); };
     this._onClick = (e) => this._jump(e);
     this._onGlobalKey = (e) => {
@@ -720,6 +783,7 @@ class Component extends DCLogic {
     this._frame();
   }
   componentWillUnmount() {
+    if (this._frameRequest) cancelAnimationFrame(this._frameRequest);
     if (this._ro) this._ro.disconnect();
     if (this._retryId) clearInterval(this._retryId);
     if (this._menuTimer) clearTimeout(this._menuTimer);
@@ -1066,7 +1130,9 @@ class Component extends DCLogic {
     // wait for a real measurement rather than publishing nonsense.
     if (!vh) { this._retryLayout(); return; }
     if (this._retryId) { clearInterval(this._retryId); this._retryId = null; }
-    const hold = (this.props.holdLength ?? 44) / 100 * vh;
+    this._mobileLite = matchMedia('(max-width:700px), (pointer:coarse)').matches;
+    const holdRatio = this._mobileLite ? 18 : (this.props.holdLength ?? 44);
+    const hold = holdRatio / 100 * vh;
     this._layers = Array.from(document.querySelectorAll('[data-layer]'));
     this._sideLabel = document.querySelector('[data-side-label]');
     this._parts = this._layers.map(L => ({
@@ -1074,13 +1140,14 @@ class Component extends DCLogic {
       box: L.querySelector('[data-fitbox]'),
       risers: Array.from(L.querySelectorAll('[data-rise]'))
     }));
-    this._trans = (this.props.revealLength ?? 112) / 100 * vh;
+    const revealRatio = this._mobileLite ? 68 : (this.props.revealLength ?? 112);
+    this._trans = revealRatio / 100 * vh;
     this._hold = hold;
     // Give each entered chapter a settled zone before its entrance reverses.
     // Internal chapters stay lighter; Booking gets a little more resistance
     // because it contains the inquiry form and sits at the end of the track.
     const last = this._layers.length - 1;
-    this._guards = this._layers.map((_, i) => i === 0 ? 0 : (i === last ? 0.34 * vh : 0.24 * vh));
+    this._guards = this._layers.map((_, i) => i === 0 ? 0 : this._mobileLite ? (i === last ? 0.18 * vh : 0.12 * vh) : (i === last ? 0.34 * vh : 0.24 * vh));
 
     // Natural content height per scene -> read allowance.
     this._over = this._layers.map(L => {
@@ -1146,9 +1213,15 @@ class Component extends DCLogic {
       // layer is clipped, so the outgoing scene remains visually dominant.
       if (i > 0) {
         L.style.visibility = pIn === 0 ? 'hidden' : 'visible';
-        L.style.clipPath = pIn >= 1
-          ? 'none'
-          : 'circle(' + (155 * grow).toFixed(3) + '% at 50% 110%)';
+        if (this._mobileLite) {
+          L.style.clipPath = 'none';
+          L.style.opacity = pIn >= 1 ? '1' : easeOut(pIn).toFixed(4);
+        } else {
+          L.style.opacity = '1';
+          L.style.clipPath = pIn >= 1
+            ? 'none'
+            : 'circle(' + (155 * grow).toFixed(3) + '% at 50% 110%)';
+        }
       }
 
       // A light late-stage dim lets the reveal read cleanly without making the
@@ -1172,7 +1245,8 @@ class Component extends DCLogic {
   // Parked is the safe resting state: an unrevealed layer is clipped to a point
   // and hidden so it cannot cover the scene beneath it.
   _park(L) {
-    L.style.clipPath = 'circle(0% at 50% 110%)';
+    L.style.clipPath = this._mobileLite ? 'none' : 'circle(0% at 50% 110%)';
+    L.style.opacity = this._mobileLite ? '0' : '1';
     L.style.visibility = 'hidden';
   }
   _parkAll() {
@@ -1245,6 +1319,7 @@ class Component extends DCLogic {
     const watchTotal = this._watchClips.length;
     const watchActive = ((this.state.activeWatch % watchTotal) + watchTotal) % watchTotal;
     const watch = this._watchClips[watchActive];
+    const lightWatchPreviews = typeof matchMedia === 'function' && matchMedia('(max-width:700px), (pointer:coarse)').matches;
     const watchCards = this._watchClips.map((clip, index) => {
       let delta = index - watchActive;
       if (delta > watchTotal / 2) delta -= watchTotal;
@@ -1254,6 +1329,9 @@ class Component extends DCLogic {
         title: clip.title,
         platform: clip.platform,
         embed: clip.embed,
+        poster: clip.poster,
+        lightPreview: lightWatchPreviews,
+        richPreview: !lightWatchPreviews,
         active: delta === 0 ? 'true' : 'false',
         transform: this._watchCardTransform(delta),
         opacity: visible ? '1' : '0',
