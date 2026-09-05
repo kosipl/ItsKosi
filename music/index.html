@@ -190,14 +190,8 @@
   <div class="floating-header">
     <span class="header-scrim" aria-hidden="true"></span>
     <nav class="header-nav" aria-label="Primary">
-      <div class="header-music" data-music-menu>
-        <button type="button" class="header-link header-music-trigger" data-current aria-expanded="false" aria-controls="header-music-panel">Music<span class="header-caret" aria-hidden="true"></span></button>
-        <div class="header-music-panel" id="header-music-panel" hidden>
-          <a class="header-music-item" href="../?section=mixes"><span>The Mixes</span><span class="header-music-tag">Featured</span></a>
-          <a class="header-music-item" href="#shop" aria-current="page"><span>Kosi’s Record Shop</span><span class="header-music-tag">Current</span></a>
-        </div>
-      </div>
-      <a class="header-link" href="../?section=shows">Shows</a>
+      <a class="header-link" href="/music/">Music</a>
+      <a class="header-link" href="/shows/">Shows</a>
     </nav>
     <a class="header-wordmark" href="../" aria-label="Kosi home">KOSI</a>
     <div class="header-right">
@@ -208,7 +202,7 @@
         <a class="header-social" href="https://www.youtube.com/@iisokk" target="_blank" rel="noopener noreferrer" aria-label="Kosi on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
         <a class="header-social" href="https://iisokk.bandcamp.com/" target="_blank" rel="noopener noreferrer" aria-label="Kosi on Bandcamp"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/></svg></a>
       </div>
-      <a class="header-book" href="../?section=booking">Book</a>
+      <a class="header-book" href="/booking/">Book</a>
     </div>
   </div>
 
@@ -221,14 +215,10 @@
         <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;color:var(--muted);">ITSKOSI.COM</span>
       </div>
       <nav class="menu-nav" style="display:flex;flex-direction:column;gap:clamp(1px,.45vh,6px);">
-        <div class="menu-music-group">
-          <span class="menu-primary" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Music</span>
-          <a class="menu-sublink" href="../?section=mixes">↳ THE MIXES · FEATURED</a>
-          <a class="menu-sublink" href="#shop" aria-current="page" onClick="{{ closeMenuHere }}">↳ KOSI’S RECORD SHOP · ALL</a>
-        </div>
-        <a class="menu-primary" href="../?section=shows" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Shows</a>
-        <a class="menu-primary" href="../?section=about" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">About</a>
-        <a class="menu-primary" href="../?section=booking" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Booking</a>
+        <a class="menu-primary" href="/music/" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Music</a>
+        <a class="menu-primary" href="/shows/" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Shows</a>
+        <a class="menu-primary" href="/about/" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">About</a>
+        <a class="menu-primary" href="/booking/" style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 70;font-weight:800;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;">Booking</a>
       </nav>
       <div class="menu-meta" style="display:flex;gap:28px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--muted);flex-wrap:wrap;">
         <a href="https://soundcloud.com/iisokk" target="_blank" rel="noopener noreferrer">SOUNDCLOUD</a>
@@ -290,10 +280,10 @@
       <div style="display:flex;flex-direction:column;gap:12px;">
         <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--muted);">PAGES</span>
         <a href="../" style="font-size:16px;">Home</a>
-        <a href="../?section=mixes" style="font-size:16px;">The Mixes</a>
+        <a href="/music/" style="font-size:16px;">Music</a>
         <a href="#shop" style="font-size:16px;">Kosi’s Record Shop</a>
-        <a href="../?section=shows" style="font-size:16px;">Shows</a>
-        <a href="../?section=booking" style="font-size:16px;">Booking</a>
+        <a href="/shows/" style="font-size:16px;">Shows</a>
+        <a href="/booking/" style="font-size:16px;">Booking</a>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;">
         <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--muted);">LISTEN</span>

@@ -1,0 +1,43 @@
+.mix-heading-text{display:inline-block;}
+/* The tracking-in is done with scaleX, not letter-spacing. letter-spacing
+   reflows: at rest it pushed THE MIXES onto a second line, so _layout()
+   measured the chapter 59px taller than it ends up once the entrance settles
+   and the scrub over-travelled, exposing the layer behind it. */
+.home-motion-ready #mixes .mix-heading-text{opacity:0;filter:blur(8px);transform:translateY(24px) scaleX(1.035);}
+.home-motion-ready #mixes .mix-card{visibility:hidden;}
+.home-motion-ready #mixes .mix-title,
+.home-motion-ready #mixes .mix-detail,
+.home-motion-ready #mixes .mix-control,
+.home-motion-ready #mixes .mix-all{opacity:0;}
+.home-motion-ready #mixes.mixes-entered .mix-card{visibility:visible;}
+.home-motion-ready #mixes.mixes-entered .mix-heading-text{animation:mixHeadingIn 1.25s cubic-bezier(.16,.84,.44,1) both;}
+.home-motion-ready #mixes.mixes-entered .mix-title,
+.home-motion-ready #mixes.mixes-entered .mix-detail{animation:mixMetaIn .7s 1550ms ease both;}
+.home-motion-ready #mixes.mixes-entered .mix-control{animation:mixMetaIn .65s 1680ms ease both;}
+.home-motion-ready #mixes.mixes-entered .mix-all{animation:mixMetaIn .7s 1820ms ease both;}
+
+/* Same restore rule as the shows section: re-asserting `mixes-entered` after
+   the entrance has played must not rewind the heading and meta. */
+.home-motion-ready #mixes.mixes-settled .mix-heading-text,
+.home-motion-ready #mixes.mixes-settled .mix-title,
+.home-motion-ready #mixes.mixes-settled .mix-detail,
+.home-motion-ready #mixes.mixes-settled .mix-control,
+.home-motion-ready #mixes.mixes-settled .mix-all{animation:none;opacity:1;filter:none;transform:none;}
+
+@keyframes mixHeadingIn{
+  from{opacity:0;filter:blur(8px);transform:translateY(24px) scaleX(1.035);}
+  to{opacity:1;filter:blur(0);transform:translateY(0) scaleX(1);}
+}
+@keyframes mixMetaIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .home-motion-ready #mixes .mix-heading-text,
+  .home-motion-ready #mixes .mix-card,
+  .home-motion-ready #mixes .mix-title,
+  .home-motion-ready #mixes .mix-detail,
+  .home-motion-ready #mixes .mix-control,
+  .home-motion-ready #mixes .mix-all{visibility:visible!important;opacity:1!important;filter:none!important;transform:none;animation:none!important;}
+}

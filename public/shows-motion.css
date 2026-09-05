@@ -1,0 +1,38 @@
+.shows-heading-line{display:block;overflow:hidden;padding-bottom:.035em;}
+.shows-heading-line>span{display:block;}
+.events-list{position:relative;}
+.events-list::before{content:"";position:absolute;z-index:2;top:0;left:0;right:0;height:1px;background:rgba(43,38,34,.28);transform-origin:left center;}
+
+.shows-motion-ready .shows-heading-line>span{opacity:0;transform:translateY(112%);}
+.shows-motion-ready .events-list::before{transform:scaleX(0);}
+.shows-motion-ready .event-row{opacity:0;filter:blur(5px);transform:translateY(30px);}
+.shows-motion-ready .shows-animated .shows-heading-line>span{animation:showsHeadingRoll .82s cubic-bezier(.16,.84,.44,1) both;}
+.shows-motion-ready .shows-animated .shows-heading-line:nth-child(2)>span{animation-delay:110ms;}
+.shows-motion-ready .shows-animated .events-list::before{animation:showsRuleDraw .72s 230ms cubic-bezier(.16,.84,.44,1) both;}
+.shows-motion-ready .shows-animated .event-row{animation:showsRowIn .7s cubic-bezier(.16,.84,.44,1) both;animation-delay:calc(300ms + var(--event-index,0) * 95ms);}
+
+/* A re-render hands back fresh nodes, so the entrance classes are re-applied
+   on every sync. Past the stagger that must land on the finished state
+   instead of replaying the whole run. */
+.shows-motion-ready .shows-settled .shows-heading-line>span,
+.shows-motion-ready .shows-settled .events-list::before,
+.shows-motion-ready .shows-settled .event-row{animation:none;opacity:1;filter:none;transform:none;}
+
+@keyframes showsHeadingRoll{
+  from{opacity:0;transform:translateY(112%);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes showsRuleDraw{
+  from{transform:scaleX(0);}
+  to{transform:scaleX(1);}
+}
+@keyframes showsRowIn{
+  from{opacity:0;filter:blur(5px);transform:translateY(30px);}
+  to{opacity:1;filter:blur(0);transform:translateY(0);}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .shows-motion-ready .shows-heading-line>span,
+  .shows-motion-ready .events-list::before,
+  .shows-motion-ready .event-row{opacity:1!important;filter:none!important;transform:none!important;animation:none!important;}
+}

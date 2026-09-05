@@ -9,6 +9,9 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, "index.html"),
+        shows: path.resolve(__dirname, "shows/index.html"),
+about: path.resolve(__dirname, "about/index.html"),
+booking: path.resolve(__dirname, "booking/index.html"),
         music: path.resolve(__dirname, "music/index.html"),
       },
     },

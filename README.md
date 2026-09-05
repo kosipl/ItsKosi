@@ -22,6 +22,9 @@ The production-ready site is generated in `dist/`.
 ## Site structure
 
 - `index.html` contains the page structure, styles, content, and interactive sections.
+- `music/index.html` is Kosi’s Record Shop.
+- `shows/index.html`, `about/index.html`, and `booking/index.html` are standalone pages. Navigation uses normal links for full document loads; the homepage retains its sections and preview links.
+- All five HTML pages are build entries in `vite.config.ts`.
 - `public/support.js` contains the shared menu, modal, navigation, and accessibility behavior.
 - `public/assets/` contains the site photography and artwork.
 
