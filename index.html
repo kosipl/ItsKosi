@@ -158,11 +158,6 @@
   .menu-close svg{width:46%;height:46%;display:block;}
   .menu-close:hover,.menu-close:focus-visible{background:#2B2622;color:#F7F4EE;transform:rotate(90deg);}
   .menu-close:focus-visible{outline:none;box-shadow:0 0 0 2px #F7F4EE,0 0 0 4px #2B2622;}
-  .record-transition{position:fixed;inset:0;z-index:150;display:grid;place-items:center;background:#EADFCB;clip-path:circle(0 at 50% 50%);animation:recordWipe .82s cubic-bezier(.76,0,.24,1) both;pointer-events:none;}
-  .record-transition::before,.record-transition::after{content:"";position:absolute;left:50%;top:50%;border:1px solid rgba(43,38,34,.28);border-radius:50%;transform:translate(-50%,-50%);animation:recordRing .68s .08s cubic-bezier(.16,.84,.44,1) both;}
-  .record-transition::before{width:24vmin;height:24vmin;}
-  .record-transition::after{width:42vmin;height:42vmin;}
-  .record-transition span{position:relative;z-index:1;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(30px,6vw,86px);line-height:.9;letter-spacing:-.015em;text-align:center;text-transform:uppercase;color:#2B2622;opacity:0;animation:recordLabelIn .5s .16s ease both;}
   .picker-backdrop{animation:pickerFadeIn .28s ease both;touch-action:none;overscroll-behavior:contain;}
   .picker-panel{animation:pickerPanelIn .42s cubic-bezier(.16,.84,.44,1) both;}
   .social-player-dialog{width:min(520px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#F7F4EE;border:1px solid rgba(43,38,34,.28);padding:clamp(20px,4vw,36px);box-shadow:0 22px 70px rgba(43,38,34,.22);animation:pickerPanelIn .42s cubic-bezier(.16,.84,.44,1) both;}
@@ -192,9 +187,6 @@
   @keyframes menuMetaOut{0%{opacity:1}100%{opacity:0}}
   @keyframes menuItemIn{0%{opacity:0;transform:translateX(-34px)}100%{opacity:1;transform:translateX(0)}}
   @keyframes menuItemOut{0%{opacity:1;transform:translateX(0)}100%{opacity:0;transform:translateX(-18px)}}
-  @keyframes recordWipe{0%{clip-path:circle(0 at 50% 50%)}100%{clip-path:circle(76vmax at 50% 50%)}}
-  @keyframes recordRing{0%{opacity:0;transform:translate(-50%,-50%) scale(.25)}100%{opacity:1;transform:translate(-50%,-50%) scale(1)}}
-  @keyframes recordLabelIn{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:none}}
   @keyframes pickerFadeIn{0%{opacity:0}100%{opacity:1}}
   @keyframes pickerPanelIn{0%{opacity:0;transform:translateY(22px) scale(.985)}100%{opacity:1;transform:translateY(0) scale(1)}}
   @keyframes scrollCueTravel{0%{transform:translateY(-120%);opacity:0}18%{opacity:1}78%{opacity:1}100%{transform:translateY(250%);opacity:0}}
@@ -280,10 +272,6 @@
         <a href="https://iisokk.bandcamp.com/" target="_blank" rel="noopener noreferrer">BANDCAMP</a>
       </div>
     </div>
-  </sc-if>
-
-  <sc-if value="{{ transitionOut }}" hint-placeholder-val="{{ false }}">
-    <div class="record-transition" aria-hidden="true"><span>KOSI’S RECORD SHOP</span></div>
   </sc-if>
 
   <sc-if value="{{ pickerOpen }}" hint-placeholder-val="{{ false }}">
@@ -424,7 +412,7 @@
           </div>
         </div>
         <div style="display:flex;justify-content:safe center;padding-top:clamp(26px,3vw,42px);">
-          <a class="mix-all" href="music/" onClick="{{ openMusic }}" style="display:inline-block;background:#F7F4EE;color:#1E1C1A;border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:17px 34px;cursor:pointer;">HEAR EVERYTHING</a>
+          <a class="mix-all" href="music/" style="display:inline-block;background:#F7F4EE;color:#1E1C1A;border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:17px 34px;cursor:pointer;">HEAR EVERYTHING</a>
         </div>
       </div>
     </div>
@@ -594,7 +582,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;revealLength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:112,&quot;min&quot;:70,&quot;max&quot;:160,&quot;step&quot;:2,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll transitions&quot;},&quot;holdLength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:44,&quot;min&quot;:0,&quot;max&quot;:110,&quot;step&quot;:2,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll transitions&quot;},&quot;marquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showWatch&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showPress&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
 class Component extends DCLogic {
-  state = { menu: false, menuClosing: false, transitionOut: false, sent: false, submitting: false, submitError: false, activeMix: 0, activeWatch: 0, watchOpen: false, watchIndex: 0, pickerOpen: false, pickerIndex: 0, pickerAll: false };
+  state = { menu: false, menuClosing: false, sent: false, submitting: false, submitError: false, activeMix: 0, activeWatch: 0, watchOpen: false, watchIndex: 0, pickerOpen: false, pickerIndex: 0, pickerAll: false };
 
   _mixes = [
     {
@@ -774,7 +762,6 @@ class Component extends DCLogic {
     if (this._ro) this._ro.disconnect();
     if (this._retryId) clearInterval(this._retryId);
     if (this._menuTimer) clearTimeout(this._menuTimer);
-    if (this._musicTimer) clearTimeout(this._musicTimer);
     this._teardownHeaderMenu();
     if (this._layoutTimer0) clearTimeout(this._layoutTimer0);
     if (this._layoutTimer400) clearTimeout(this._layoutTimer400);
@@ -1282,7 +1269,7 @@ class Component extends DCLogic {
   }
 
   _openMenu(e) {
-    if (this.state.menu || this.state.transitionOut) return;
+    if (this.state.menu) return;
     this._menuTrigger = e && e.currentTarget;
     this._menuScrollY = scrollY;
     this.setState({ menu: true, menuClosing: false });
@@ -1312,20 +1299,6 @@ class Component extends DCLogic {
     e.stopPropagation();
     const id = e.currentTarget.getAttribute('href').replace(/^#/, '');
     this._closeMenu(false, () => this._jumpToId(id));
-  }
-
-  _startMusicTransition(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    if (this.state.transitionOut) return;
-    const href = e.currentTarget.href;
-    try { sessionStorage.setItem('kosi:record-shop-entry', '1'); } catch (_) {}
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      location.assign(href);
-      return;
-    }
-    this.setState({ transitionOut: true });
-    this._musicTimer = setTimeout(() => location.assign(href), 820);
   }
 
   async _submit(e) {
@@ -1656,7 +1629,6 @@ class Component extends DCLogic {
       menu: this.state.menu,
       menuExpanded: this.state.menu ? 'true' : 'false',
       menuClass: this.state.menuClosing ? 'menu-closing' : 'menu-opening',
-      transitionOut: this.state.transitionOut,
       sent: this.state.sent,
       notSent: !this.state.sent,
       submitting: this.state.submitting,
@@ -1708,7 +1680,6 @@ class Component extends DCLogic {
       openMenu: (e) => this._openMenu(e),
       closeMenu: () => this._closeMenu(true),
       closeMenuNav: (e) => this._closeMenuTo(e),
-      openMusic: (e) => this._startMusicTransition(e),
       submit: (e) => this._submit(e)
     };
   }

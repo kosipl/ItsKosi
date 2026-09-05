@@ -20,18 +20,9 @@
 <meta name="twitter:title" content="Kosi’s Record Shop">
 <meta name="twitter:description" content="Every Kosi DJ mix, mashup, and edit in one place.">
 <meta name="twitter:image" content="https://itskosi.com/og-image.png">
-<script>try{if(sessionStorage.getItem('kosi:record-shop-entry')){document.documentElement.classList.add('from-home');sessionStorage.removeItem('kosi:record-shop-entry');}}catch(_){}</script>
-<style>
-  .music-entry{display:none;}
-  html.from-home .music-entry{position:fixed;inset:0;z-index:999;display:grid;place-items:center;background:#EADFCB;pointer-events:none;animation:musicEntryAway .52s .1s ease both;}
-  .music-entry span{font-family:'Arial Narrow',sans-serif;font-size:clamp(30px,6vw,86px);font-weight:900;line-height:.9;letter-spacing:-.02em;text-align:center;text-transform:uppercase;color:#2B2622;}
-  @keyframes musicEntryAway{0%{opacity:1}100%{opacity:0}}
-  @media (prefers-reduced-motion:reduce){html.from-home .music-entry{display:none;}}
-</style>
 <script src="../support.js"></script>
 </head>
 <body>
-<div class="music-entry" aria-hidden="true"><span>KOSI’S RECORD SHOP</span></div>
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
