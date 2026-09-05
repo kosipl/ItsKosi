@@ -209,6 +209,7 @@
     .event-row>a,.press-row>a{grid-column:2;justify-self:start;min-height:36px;display:flex;align-items:center;}
     .event-row .event-date{grid-column:1;grid-row:1/span 3;}
     .event-row .event-venue,.event-row .event-location{grid-column:2;}
+    .booking-form{grid-template-columns:1fr!important;}
     .mix-card{width:clamp(180px,58vw,250px)}
     .mix-control{width:44px;height:44px}
     .mix-deck{height:330px!important;}
@@ -532,7 +533,7 @@
         <h2 class="chapter-title" data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 16px;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Let's make<br>it loud</h2>
         <p data-rise="y" data-rise-delay="110" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 auto clamp(28px,3.4vw,44px);font-size:17px;line-height:1.6;color:#6B6259;max-width:520px;text-align:center;">Tell me what the room is and I'll come back with availability and a quote. Every inquiry gets a reply within 24 hours.</p>
         <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
-          <form action="https://formsubmit.co/ajax/6870be49db96c158057a0ae0fe96b5ae" method="POST" onSubmit="{{ submit }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(18px,2.6vw,30px);">
+          <form class="booking-form" action="https://formsubmit.co/ajax/6870be49db96c158057a0ae0fe96b5ae" method="POST" onSubmit="{{ submit }}" style="width:100%;max-width:860px;margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.6vw,30px);">
             <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
             <label style="display:flex;flex-direction:column;gap:9px;">
               <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">NAME</span>
@@ -554,7 +555,7 @@
               <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">TELL ME ABOUT IT</span>
               <textarea name="message" rows="3" required="required" style="background:none;border:none;border-bottom:1px solid rgba(43,38,34,.4);padding:10px 0;font-size:17px;color:#2B2622;outline:none;resize:vertical;"></textarea>
             </label>
-            <div style="grid-column:1/-1;">
+            <div style="grid-column:1/-1;display:flex;justify-content:center;">
               <sc-if value="{{ notSubmitting }}" hint-placeholder-val="{{ true }}">
                 <button type="submit" style="background:#2B2622;color:#F7F4EE;border:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.24em;padding:19px 42px;cursor:pointer;">SEND INQUIRY</button>
               </sc-if>
@@ -563,12 +564,12 @@
               </sc-if>
             </div>
             <sc-if value="{{ submitError }}" hint-placeholder-val="{{ false }}">
-              <p role="alert" style="grid-column:1/-1;margin:0;font-size:16px;line-height:1.5;color:#7A342A;">That inquiry didn't send. Please check your connection and try again.</p>
+              <p role="alert" style="grid-column:1/-1;margin:0;text-align:center;font-size:16px;line-height:1.5;color:#7A342A;">That inquiry didn't send. Please check your connection and try again.</p>
             </sc-if>
           </form>
         </sc-if>
         <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
-          <div style="border:1px solid rgba(43,38,34,.3);padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:12px;">
+          <div style="max-width:860px;margin:0 auto;border:1px solid rgba(43,38,34,.3);padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;">
             <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:#7A6E60;">INQUIRY SENT</span>
             <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 80;font-weight:800;font-size:clamp(26px,3.4vw,44px);line-height:1;text-transform:uppercase;color:#2B2622;">Talk soon.</span>
             <span style="font-size:17px;color:#6B6259;">You'll hear back within 24 hours.</span>
@@ -1407,7 +1408,10 @@ class Component extends DCLogic {
     if (!vh) { this._retryLayout(); return; }
     if (this._retryId) { clearInterval(this._retryId); this._retryId = null; }
     this._mobileLite = matchMedia('(max-width:700px), (pointer:coarse)').matches;
-    const holdRatio = this._mobileLite ? 18 : (this.props.holdLength ?? 44);
+    // Touch scrolling carries more momentum than a mouse wheel. Give mobile
+    // chapters a meaningful settled pause so a small corrective swipe does not
+    // immediately reverse the scene the user just entered.
+    const holdRatio = this._mobileLite ? 32 : (this.props.holdLength ?? 44);
     const hold = holdRatio / 100 * vh;
     this._layers = Array.from(document.querySelectorAll('[data-layer]'));
     this._headerEl = document.querySelector('.floating-header');
@@ -1417,14 +1421,18 @@ class Component extends DCLogic {
       box: L.querySelector('[data-fitbox]'),
       risers: Array.from(L.querySelectorAll('[data-rise]'))
     }));
-    const revealRatio = this._mobileLite ? 68 : (this.props.revealLength ?? 112);
+    const revealRatio = this._mobileLite ? 90 : (this.props.revealLength ?? 112);
     this._trans = revealRatio / 100 * vh;
+    // Finish a touch reveal before its scroll segment ends. The remaining
+    // distance is a fully settled plateau, so reversing direction first moves
+    // through a calm buffer instead of immediately fading the chapter away.
+    this._entrySettle = this._mobileLite ? 0.16 * vh : 0;
     this._hold = hold;
     // Give each entered chapter a settled zone before its entrance reverses.
-    // Internal chapters stay lighter; Booking gets a little more resistance
-    // because it contains the inquiry form and sits at the end of the track.
+    // The final pinned chapter gets extra resistance because it contains the
+    // interactive Mixes and Feed carousels.
     const last = this._layers.length - 1;
-    this._guards = this._layers.map((_, i) => i === 0 ? 0 : this._mobileLite ? (i === last ? 0.18 * vh : 0.12 * vh) : (i === last ? 0.34 * vh : 0.24 * vh));
+    this._guards = this._layers.map((_, i) => i === 0 ? 0 : this._mobileLite ? (i === last ? 0.42 * vh : 0.30 * vh) : (i === last ? 0.34 * vh : 0.24 * vh));
 
     // Natural content height per scene -> read allowance.
     this._over = this._layers.map(L => {
@@ -1471,7 +1479,8 @@ class Component extends DCLogic {
     const enter = (i) => {
       if (i < 1) return 1;
       const from = this._rest[i - 1] + (this._guards[i - 1] || 0) + this._over[i - 1] + hold;
-      const raw = (y - from) / trans;
+      const activeTrans = Math.max(1, trans - (this._entrySettle || 0));
+      const raw = (y - from) / activeTrans;
       return raw < 0 ? 0 : raw > 1 ? 1 : raw;
     };
     // The bar belongs to the hero only. As chapter 1 reveals over it the
