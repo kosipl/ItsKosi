@@ -116,3 +116,27 @@ body:not(.home-page) .header-scrim {
     text-shadow: none !important;
   }
 }
+
+@media (max-width: 700px) {
+  .home-page .header-scrim {
+    z-index: 0;
+  }
+
+  .home-page .header-wordmark,
+  .home-page .header-right {
+    position: relative;
+    z-index: 1;
+    opacity: clamp(0, calc(var(--hfo, 1) * 1.7), 1) !important;
+  }
+
+  .home-page .header-wordmark,
+  .home-page .header-book {
+    color: #fff !important;
+    text-shadow: none !important;
+  }
+
+  .home-page .header-book {
+    border-color: #fff !important;
+    box-shadow: none !important;
+  }
+}

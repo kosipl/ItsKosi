@@ -74,9 +74,16 @@
   .watch-card-sleeve{position:relative;display:block;aspect-ratio:9/16;overflow:hidden;background:#C9C0B1;border:1px solid rgba(43,38,34,.24);transition:transform .28s cubic-bezier(.18,.86,.22,1),box-shadow .28s ease;}
   .watch-card iframe{display:block;width:100%;height:100%;border:0;background:#C9C0B1;pointer-events:none;}
   .watch-card-poster{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;}
-  .about-media{position:absolute;inset:0;display:block;}
+  .about-media{position:absolute;inset:0;display:block;overflow:hidden;}
+  .about-media picture{position:absolute;inset:0;display:block;}
   .about-bg{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 34%;}
+  .about-video-slot{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;}
+  .about-video-loaded .about-video-slot{opacity:1;}
+  .about-video{display:block;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none;}
   .about-scrim{position:absolute;inset:0;background:linear-gradient(102deg,rgba(43,38,34,.9) 0%,rgba(43,38,34,.78) 30%,rgba(43,38,34,.54) 60%,rgba(43,38,34,.34) 100%);}
+  #mixes,#about{border:0!important;outline:0!important;}
+  #about{margin-top:-18px;overflow:visible!important;justify-content:flex-start!important;padding-top:clamp(150px,18vh,190px)!important;}
+  .about-feather{position:absolute;z-index:1;top:-24px;left:0;right:0;height:clamp(130px,calc(13vh + 24px),175px);pointer-events:none;background:linear-gradient(to bottom,#1E1C1A 0 24px,rgba(30,28,26,.96) 34px,rgba(30,28,26,.7) 43%,rgba(30,28,26,.26) 72%,rgba(30,28,26,0) 100%);}
   :root{--hdr-x:clamp(20px,4vw,56px);--hdr-y:22px;--hdr-h:38px;}
   .header-burger{position:fixed;top:var(--hdr-y);left:var(--hdr-x);width:var(--hdr-h);height:var(--hdr-h);z-index:81;display:flex;align-items:center;justify-content:flex-start;background:none;border:0;padding:0;cursor:pointer;filter:drop-shadow(0 1px 10px rgba(43,38,34,.5));}
   .header-burger[data-solo]{mix-blend-mode:difference;filter:none;}
@@ -170,6 +177,12 @@
   .scroll-cue:hover{color:#F7F4EE!important;}
   .scroll-cue-line{position:relative;width:1px;height:38px;overflow:hidden;background:rgba(247,244,238,.4);}
   .scroll-cue-line::after{content:"";position:absolute;left:0;top:0;width:1px;height:16px;background:#F7F4EE;animation:scrollCueTravel 1.65s .25s cubic-bezier(.55,0,.45,1) infinite;}
+  .hero-media{position:absolute;inset:0;overflow:hidden;background:#E6E1D7;}
+  .hero-media picture{position:absolute;inset:0;display:block;}
+  .hero-image{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:50% 46%;}
+  .hero-video-slot{position:absolute;inset:0;overflow:hidden;opacity:0;transition:opacity .8s ease;}
+  .hero-video-loaded .hero-video-slot{opacity:1;}
+  .hero-video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none;}
   .hero-wordmark span{display:inline-block;will-change:auto;}
   .hero-intro{position:fixed;inset:0;z-index:75;display:none;overflow:hidden;pointer-events:none;}
   .hero-intro.kosi-intro-visible{display:block;}
@@ -224,7 +237,7 @@
     .watch-card{width:clamp(170px,52vw,225px)}
     .watch-deck{height:430px}
   }
-  @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important;}.hero-intro{display:none!important;}.scroll-cue-line::after{animation:none!important;transform:translateY(68%);opacity:1;}}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important;}.hero-video-slot,.about-video-slot{display:none!important;}.hero-intro{display:none!important;}.scroll-cue-line::after{animation:none!important;transform:translateY(68%);opacity:1;}}
 </style>
 </helmet>
 
@@ -317,10 +330,13 @@
   <!-- CHAPTER 1 · HERO -->
   <div data-layer="0" style="position:absolute;left:0;right:0;top:0;height:100vh;z-index:1;transform:none;">
     <section id="top" data-screen-label="Hero" style="position:relative;height:100vh;overflow:hidden;background:#E6E1D7;display:flex;align-items:center;justify-content:center;">
-      <picture>
-        <source media="(max-width:700px)" srcset="assets/kosi-wide-mobile.jpeg">
-        <img class="hero-image" src="assets/kosi-wide.jpeg" alt="Kosi playing an outdoor set at Gas Works Park" decoding="async" fetchpriority="high" width="1365" height="2048" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 46%;">
-      </picture>
+      <div class="hero-media" data-hero-media>
+        <picture>
+          <source media="(max-width:700px)" srcset="assets/kosi-wide-mobile.jpeg">
+          <img class="hero-image" src="assets/kosi-wide.jpeg" alt="Kosi playing an outdoor set at Gas Works Park" decoding="async" fetchpriority="high" width="1365" height="2048">
+        </picture>
+        <div class="hero-video-slot" data-hero-video-slot aria-hidden="true"></div>
+      </div>
       <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(43,38,34,.18) 0%,rgba(43,38,34,0) 34%,rgba(43,38,34,.34) 100%);animation:fadeIn 1.8s both;"></div>
       <h1 class="hero-wordmark" aria-label="Kosi" style="position:relative;z-index:2;margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 78;font-weight:900;font-size:clamp(96px,26vw,440px);line-height:.8;letter-spacing:-.02em;color:#F7F4EE;"><span aria-hidden="true">K</span><span aria-hidden="true">O</span><span aria-hidden="true">S</span><span aria-hidden="true">I</span></h1>
       <a class="scroll-cue" href="#bio" aria-label="Scroll to Kosi's introduction">
@@ -401,11 +417,15 @@
     </div>
     </section>
       <section id="about" data-screen-label="About" style="position:relative;min-height:100vh;overflow:hidden;background:#2B2622;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
-      <picture class="about-media">
-        <source media="(max-width:700px)" srcset="assets/kosi-gasworks-mobile.jpeg">
-        <img class="about-bg" src="assets/kosi-gasworks.jpeg" alt="Kosi at the decks, golden hour" loading="lazy" decoding="async" width="1365" height="2048">
-      </picture>
+      <div class="about-media" data-about-media>
+        <picture>
+          <source media="(max-width:700px)" srcset="assets/kosi-gasworks-mobile.jpeg">
+          <img class="about-bg" src="assets/kosi-gasworks.jpeg" alt="Kosi at the decks, golden hour" loading="lazy" decoding="async" width="1365" height="2048">
+        </picture>
+        <div class="about-video-slot" data-about-video-slot aria-hidden="true"></div>
+      </div>
       <div class="about-scrim" aria-hidden="true"></div>
+      <div class="about-feather" aria-hidden="true"></div>
       <div data-inner style="width:100%;position:relative;z-index:2;">
       <div style="max-width:1240px;margin:0 auto;width:100%;">
         <div data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);">
@@ -734,6 +754,8 @@ class Component extends DCLogic {
     this._setupHeaderMenu();
     this._setupFlowReveals();
     this._prepareHeroIntro(initialHash);
+    this._setupHeroVideo();
+    this._setupAboutVideo();
     const enterDeepLink = () => {
       this._layout();
       if (initialHash && initialHash !== 'top') this._jumpToId(initialHash, 'auto');
@@ -755,6 +777,8 @@ class Component extends DCLogic {
     this._layoutTimer400 = setTimeout(() => { this._layout(); this._frame(); }, 400);
   }
   componentDidUpdate() {
+    this._syncHeroVideo();
+    this._syncAboutVideo();
     this._layout();
     this._frame();
   }
@@ -767,6 +791,8 @@ class Component extends DCLogic {
     this._teardownHeaderMenu();
     if (this._layoutTimer0) clearTimeout(this._layoutTimer0);
     if (this._layoutTimer400) clearTimeout(this._layoutTimer400);
+    if (this._heroMotionQuery && this._onHeroMotionChange) this._heroMotionQuery.removeEventListener('change', this._onHeroMotionChange);
+    if (this._aboutVideoObserver) this._aboutVideoObserver.disconnect();
     document.body.style.overflow = '';
     document.removeEventListener('visibilitychange', this._onVisibilityChange);
     removeEventListener('scroll', this._onScroll);
@@ -774,6 +800,106 @@ class Component extends DCLogic {
     removeEventListener('load', this._onResize);
     document.removeEventListener('click', this._onClick);
     document.removeEventListener('keydown', this._onGlobalKey);
+  }
+
+  // ---- hero background video ----------------------------------------------
+  _setupHeroVideo() {
+    this._heroMotionQuery = matchMedia('(prefers-reduced-motion: reduce)');
+    this._onHeroMotionChange = () => {
+      this._syncHeroVideo();
+      this._syncAboutVideo();
+    };
+    this._heroMotionQuery.addEventListener('change', this._onHeroMotionChange);
+    this._syncHeroVideo();
+  }
+
+  _syncHeroVideo() {
+    const media = document.querySelector('[data-hero-media]');
+    const slot = document.querySelector('[data-hero-video-slot]');
+    if (!media || !slot) return;
+
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const lowData = Boolean(connection && (connection.saveData || connection.effectiveType === 'slow-2g'));
+    const shouldUseStill = Boolean(this._heroMotionQuery && this._heroMotionQuery.matches) || lowData;
+    const existing = slot.querySelector('video');
+
+    if (shouldUseStill) {
+      if (existing) existing.remove();
+      media.classList.remove('hero-video-loaded');
+      return;
+    }
+    if (existing) return;
+
+    const player = document.createElement('video');
+    player.className = 'hero-video';
+    player.autoplay = true;
+    player.muted = true;
+    player.defaultMuted = true;
+    player.loop = true;
+    player.playsInline = true;
+    player.preload = 'auto';
+    player.disablePictureInPicture = true;
+    player.setAttribute('aria-hidden', 'true');
+    player.src = '/assets/kosi-showcase-reel.mp4';
+    player.addEventListener('canplay', () => {
+      media.classList.add('hero-video-loaded');
+      player.play().catch(() => media.classList.remove('hero-video-loaded'));
+    }, { once: true });
+    player.addEventListener('error', () => media.classList.remove('hero-video-loaded'));
+    slot.appendChild(player);
+  }
+
+  _setupAboutVideo() {
+    const section = document.getElementById('about');
+    if (!section) return;
+    if (typeof IntersectionObserver !== 'function') {
+      this._aboutVideoEligible = true;
+      this._syncAboutVideo();
+      return;
+    }
+    this._aboutVideoObserver = new IntersectionObserver((entries) => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      this._aboutVideoEligible = true;
+      this._aboutVideoObserver.disconnect();
+      this._syncAboutVideo();
+    }, { rootMargin: '500px 0px' });
+    this._aboutVideoObserver.observe(section);
+  }
+
+  _syncAboutVideo() {
+    const media = document.querySelector('[data-about-media]');
+    const slot = document.querySelector('[data-about-video-slot]');
+    if (!media || !slot) return;
+
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const lowData = Boolean(connection && (connection.saveData || connection.effectiveType === 'slow-2g'));
+    const shouldUseStill = Boolean(this._heroMotionQuery && this._heroMotionQuery.matches) || lowData;
+    const existing = slot.querySelector('video');
+
+    if (shouldUseStill) {
+      if (existing) existing.remove();
+      media.classList.remove('about-video-loaded');
+      return;
+    }
+    if (!this._aboutVideoEligible || existing) return;
+
+    const player = document.createElement('video');
+    player.className = 'about-video';
+    player.autoplay = true;
+    player.muted = true;
+    player.defaultMuted = true;
+    player.loop = true;
+    player.playsInline = true;
+    player.preload = 'auto';
+    player.disablePictureInPicture = true;
+    player.setAttribute('aria-hidden', 'true');
+    player.src = '/assets/kosi-beyond-the-mix-loop.mp4';
+    player.addEventListener('canplay', () => {
+      media.classList.add('about-video-loaded');
+      player.play().catch(() => media.classList.remove('about-video-loaded'));
+    }, { once: true });
+    player.addEventListener('error', () => media.classList.remove('about-video-loaded'));
+    slot.appendChild(player);
   }
 
   // ---- flow reveals --------------------------------------------------------
@@ -998,7 +1124,7 @@ class Component extends DCLogic {
       { transform: 'translateX(' + fullOpen + 'px)' }
     ], phase2));
 
-    const hero = document.querySelector('.hero-image');
+    const hero = document.querySelector('.hero-media');
     const header = document.querySelector('.floating-header');
     const cue = document.querySelector('.scroll-cue');
     if (hero) this._introAnimations.push(hero.animate([

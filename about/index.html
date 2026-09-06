@@ -266,7 +266,7 @@
     .bio-kicker{display:block;margin-bottom:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;}
     #about.bio-hero{position:relative;min-height:calc(100vh - 90px);overflow:hidden;background:#2B2622;display:flex;align-items:flex-end;padding:clamp(80px,10vw,130px) clamp(20px,5vw,72px)!important;}
     .bio-hero-copy{position:relative;z-index:2;max-width:760px;color:#F7F4EE;}
-    .bio-hero h1{margin:0 0 28px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 66;font-weight:900;font-size:clamp(64px,12vw,176px);line-height:.78;letter-spacing:-.035em;text-transform:uppercase;}
+    .bio-hero h1{margin:0 0 28px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 66;font-weight:900;font-size:clamp(64px,12vw,176px);line-height:.78;letter-spacing:-.035em;text-transform:uppercase;animation:bioHeroTitleIn .9s cubic-bezier(.16,.84,.44,1) .16s both;}
     .bio-lede{margin:0;max-width:700px;font-size:clamp(19px,2vw,27px);line-height:1.42;color:rgba(247,244,238,.92);text-wrap:balance;}
     .bio-section{padding:clamp(72px,9vw,126px) clamp(20px,5vw,72px);}
     .bio-story{background:#F7F4EE;}
@@ -274,7 +274,9 @@
     .bio-display{margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(48px,7vw,100px);line-height:.86;letter-spacing:-.025em;text-transform:uppercase;}
     .bio-copy{display:flex;flex-direction:column;gap:22px;max-width:720px;}
     .bio-copy p{margin:0;font-size:clamp(17px,1.6vw,20px);line-height:1.65;color:#514A43;text-wrap:pretty;}
-    .bio-pull{margin:0!important;padding-top:28px;border-top:1px solid rgba(43,38,34,.25);font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 80;font-weight:750;font-size:clamp(25px,3.4vw,42px)!important;line-height:1.08!important;letter-spacing:-.015em;color:#2B2622!important;}
+    .bio-pull{margin:0!important;padding-top:28px;border-top:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 80;font-weight:750;font-size:clamp(25px,3.4vw,42px)!important;line-height:1.08!important;letter-spacing:-.015em;color:#2B2622!important;}
+    .bio-copy p.bio-reveal{opacity:0;transform:translateY(34px);transition:opacity .72s ease,transform .82s cubic-bezier(.16,.84,.44,1);will-change:opacity,transform;}
+    .bio-copy p.bio-reveal.is-visible{opacity:1;transform:none;will-change:auto;}
     .bio-moments{background:#EADFCB;}
     .bio-moments-grid{display:grid;grid-template-columns:minmax(230px,.68fr) minmax(0,1.32fr);gap:clamp(48px,8vw,120px);align-items:start;}
     .bio-moments-heading{position:sticky;top:130px;}
@@ -293,11 +295,19 @@
     .bio-action{display:inline-flex;padding:17px 28px;border:1px solid #2B2622;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;}
     .bio-action-primary{background:#2B2622;color:#F7F4EE;}
     .bio-action-primary:hover{color:#F7F4EE;background:#514A43;}
+    @keyframes bioHeroTitleIn{
+      from{opacity:0;transform:translateY(24px);}
+      to{opacity:1;transform:none;}
+    }
     @media(max-width:780px){
       .bio-story-grid,.bio-moments-grid{grid-template-columns:1fr;}
       .bio-moments-heading{position:static;}
       .bio-moment{grid-template-columns:26px 1fr;gap:8px 14px;}
       .bio-moment-detail{grid-column:2;text-align:left;max-width:none;}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .bio-hero h1{animation:none;opacity:1;transform:none;}
+      .bio-copy p.bio-reveal{opacity:1;transform:none;transition:none;}
     }
   </style>
   <main>
@@ -308,7 +318,6 @@
       </picture>
       <div class="about-scrim" aria-hidden="true"></div>
       <div class="bio-shell bio-hero-copy">
-        <span class="bio-kicker">Open-format DJ · Producer · Creator</span>
         <h1>About<br>Kosi</h1>
         <p class="bio-lede">I’m Kosi, a Seattle-based DJ and producer raised in South Florida. I love digging for the song that changes the feeling in a room—and being right there with you when it happens.</p>
       </div>
@@ -321,13 +330,13 @@
           <h2 class="bio-display">Built for<br>the room</h2>
         </div>
         <div class="bio-copy">
-          <p>Music has been part of Kosi’s life almost from the beginning. A first-generation American raised in South Florida by Jamaican and Haitian parents, he draws deep inspiration from both sides of his heritage. At the same time, he grew up listening across nearly every genre he could find. He started playing violin at age three and learned piano while he was still young.</p>
-          <p>By his junior year of high school in 2017, curiosity about how a complete track could be built from nothing pulled him into production. Creating became a way to put his ideas and energy into the world—and to give someone else a reason to smile.</p>
-          <p>He stepped behind the decks in 2022 and brought that same instinct with him. His open-format sets are grounded in R&amp;B, Hip-Hop, and Dancehall, with Afrobeats, House, Amapiano, Funk, Soul, forgotten favorites, new discoveries, and his own edits moving naturally through the same night.</p>
-          <p>There is no fixed formula. Kosi reads the room and decides what it needs: a journey, a rediscovered song, an unexpected transition, or simply the right atmosphere for people to feel present. That approach has carried him from intimate clubs to festival stages, corporate rooms, fashion events, live television, and outdoor crowds of more than 2,000.</p>
-          <p>That connection is personal. He dances behind the decks, catches people’s eyes, and sometimes steps into the crowd to join the party. For Kosi, music can carry people through memories and emotions while bringing them fully into the present. He wants the people in front of him to feel seen, enjoy the moment, and leave feeling like they went somewhere together.</p>
-          <p>Raised in South Florida, Kosi moved to Seattle in 2023. The city is now home base, while his work has continued across the United States and internationally—from New York City and San Francisco to London, Norway, Switzerland, and Mexico.</p>
-          <p class="bio-pull">“If I can make even one person smile or enjoy something I created, I’m happy.”</p>
+          <p class="bio-reveal">Music has been part of Kosi’s life almost from the beginning. A first-generation American raised in South Florida by Jamaican and Haitian parents, he draws deep inspiration from both sides of his heritage. At the same time, he grew up listening across nearly every genre he could find. He started playing violin at age three and learned piano while he was still young.</p>
+          <p class="bio-reveal">By his junior year of high school in 2017, curiosity about how a complete track could be built from nothing pulled him into production. Creating became a way to put his ideas and energy into the world—and to give someone else a reason to smile.</p>
+          <p class="bio-reveal">He stepped behind the decks in 2022 and brought that same instinct with him. His open-format sets are grounded in R&amp;B, Hip-Hop, and Dancehall, with Afrobeats, House, Amapiano, Funk, Soul, forgotten favorites, new discoveries, and his own edits moving naturally through the same night.</p>
+          <p class="bio-reveal">There is no fixed formula. Kosi reads the room and decides what it needs: a journey, a rediscovered song, an unexpected transition, or simply the right atmosphere for people to feel present. That approach has carried him from intimate clubs to festival stages, corporate rooms, fashion events, live television, and outdoor crowds of more than 2,000.</p>
+          <p class="bio-reveal">That connection is personal. He dances behind the decks, catches people’s eyes, and sometimes steps into the crowd to join the party. For Kosi, music can carry people through memories and emotions while bringing them fully into the present. He wants the people in front of him to feel seen, enjoy the moment, and leave feeling like they went somewhere together.</p>
+          <p class="bio-reveal">Raised in South Florida, Kosi moved to Seattle in 2023. The city is now home base, while his work has continued across the United States and internationally—from New York City and San Francisco to London, Norway, Switzerland, and Mexico.</p>
+          <p class="bio-pull bio-reveal">“If I can make even one person smile or enjoy something I created, I’m happy.”</p>
         </div>
       </div>
     </section>
@@ -407,6 +416,20 @@
     </footer></div></x-dc><script type="text/x-dc" data-dc-script>class Component extends DCLogic {
  state = { menu: false, sent: false, submitting: false, submitError: false };
  componentDidMount() {
+  const bioParagraphs = [...document.querySelectorAll('.bio-copy > p')];
+  bioParagraphs.forEach((paragraph) => paragraph.classList.add('bio-reveal'));
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+   bioParagraphs.forEach((paragraph) => paragraph.classList.add('is-visible'));
+  } else {
+   this._bioObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+     if (!entry.isIntersecting) return;
+     entry.target.classList.add('is-visible');
+     this._bioObserver.unobserve(entry.target);
+    });
+   }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+   bioParagraphs.forEach((paragraph) => this._bioObserver.observe(paragraph));
+  }
   this._keys = (e) => {
    if (!this.state.menu) return;
    if (e.key === 'Escape') this._closeMenu();
@@ -419,7 +442,7 @@
   };
   document.addEventListener('keydown', this._keys);
  }
- componentWillUnmount() { document.removeEventListener('keydown', this._keys); document.body.style.overflow = ''; }
+ componentWillUnmount() { this._bioObserver?.disconnect(); document.removeEventListener('keydown', this._keys); document.body.style.overflow = ''; }
  _closeMenu() { this.setState({menu:false}); document.body.style.overflow = ''; document.querySelector('.header-burger').focus(); }
  renderVals() { return {
   ...this.state, menuExpanded: String(this.state.menu), menuClass: 'menu-opening',
