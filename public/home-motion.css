@@ -42,21 +42,53 @@
   .home-motion-ready #mixes .mix-all{visibility:visible!important;opacity:1!important;filter:none!important;transform:none;animation:none!important;}
 }
 
-/* The opening line shares the shows chapter instead of requiring a full-screen stop. */
-.hero-description{position:absolute;z-index:2;left:20px;right:20px;bottom:112px;margin:0;text-align:center;color:#F7F4EE;font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.7;letter-spacing:.13em;text-shadow:0 2px 12px rgba(0,0,0,.8);}
-.hero-description span{display:block;font-size:12px;letter-spacing:.1em;}
-.home-introduction{background:#F7F4EE;padding:clamp(72px,9vw,120px) clamp(24px,6vw,88px) clamp(48px,6vw,80px);}
-.home-introduction p{max-width:900px;margin:0 auto;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 92;font-weight:500;font-size:clamp(24px,3.3vw,44px);line-height:1.24;letter-spacing:-.02em;text-wrap:balance;}
-.home-story{background:#2B2622;color:#F7F4EE;padding:clamp(64px,8vw,112px) clamp(24px,5vw,72px);}
-.home-story-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1fr);gap:clamp(40px,7vw,108px);max-width:1240px;margin:0 auto;align-items:center;}
-.home-story-photo{margin:0;}
-.home-story-photo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 48%;}
-.home-story-photo figcaption{margin-top:18px;font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.6;letter-spacing:.08em;color:#C7BEB2;}
-.home-story-copy .story-kicker{margin:0 0 24px;font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.18em;color:#C7BEB2;}
-.home-story-copy h2{margin:0 0 32px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,6.7vw,100px);line-height:.9;letter-spacing:-.025em;text-transform:uppercase;}
-.home-story-copy>p{margin:0 0 20px;font-size:clamp(17px,1.5vw,20px);line-height:1.65;color:#E4DED5;text-wrap:pretty;}
-.story-actions{display:flex;flex-direction:column;align-items:flex-start;gap:22px;margin-top:32px;padding-top:28px;border-top:1px solid #675E53;}
-.story-actions a{color:#F7F4EE;font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.5;letter-spacing:.04em;text-underline-offset:6px;}
-.story-actions a:hover{text-decoration:underline;}
-.story-actions a:focus-visible{outline:2px solid #F7F4EE;outline-offset:6px;}
-@media(max-width:760px){.home-story-grid{grid-template-columns:1fr;gap:36px;}.home-story-photo img{aspect-ratio:1;}.hero-description{bottom:108px;font-size:12px;}.hero-description span{font-size:12px;letter-spacing:.03em;}}
+.about-cta{
+  position:relative;
+  z-index:2;
+  display:flex;
+  width:100%;
+  max-width:1240px;
+  margin:20px auto 0;
+  justify-content:flex-start;
+  color:#2B2622!important;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  letter-spacing:.16em;
+}
+.about-cta span{
+  display:inline-block;
+  padding:16px 22px;
+  border:1px solid rgba(247,244,238,.9);
+  background:#F7F4EE;
+  box-shadow:0 10px 28px rgba(0,0,0,.18);
+  transition:transform .25s cubic-bezier(.16,.84,.44,1),background-color .25s ease,color .25s ease;
+}
+.about-cta:hover span{transform:translateY(-3px);background:#2B2622;color:#F7F4EE;}
+.about-cta:focus-visible{outline:2px solid #F7F4EE;outline-offset:6px;}
+
+.shows-cta{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:center;
+  padding:24px clamp(20px,5vw,72px) 38px;
+  color:#F7F4EE!important;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  letter-spacing:.14em;
+}
+.shows-cta span{
+  display:inline-block;
+  padding:17px 24px;
+  border:1px solid #2B2622;
+  background:#2B2622;
+  box-shadow:0 10px 26px rgba(43,38,34,.16);
+  transition:transform .25s cubic-bezier(.16,.84,.44,1),background-color .25s ease,color .25s ease;
+}
+.shows-cta:hover span{transform:translateY(-3px);background:#F7F4EE;color:#2B2622;}
+.shows-cta:focus-visible{outline:2px solid #2B2622;outline-offset:5px;}
+
+@media(max-width:700px){
+  .about-cta{justify-content:center;margin-top:8px;font-size:12px;}
+  .shows-cta{font-size:12px;letter-spacing:.1em;}
+}
