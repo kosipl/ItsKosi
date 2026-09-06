@@ -310,7 +310,7 @@
   </sc-if>
 
 
-  <div data-track style="position:relative;height:calc(3 * (var(--reveal) + var(--hold)) + 80vh + 100vh);">
+  <div data-track style="position:relative;height:calc(var(--reveal) + var(--hold) + 100vh);">
     <div style="position:sticky;top:0;height:100vh;overflow:hidden;">
       <div data-stage style="position:absolute;inset:0;">
   <!-- CHAPTER 1 · HERO -->
@@ -322,6 +322,7 @@
       </picture>
       <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(43,38,34,.18) 0%,rgba(43,38,34,0) 34%,rgba(43,38,34,.34) 100%);animation:fadeIn 1.8s both;"></div>
       <h1 class="hero-wordmark" aria-label="Kosi" style="position:relative;z-index:2;margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 78;font-weight:900;font-size:clamp(96px,26vw,440px);line-height:.8;letter-spacing:-.02em;color:#F7F4EE;"><span aria-hidden="true">K</span><span aria-hidden="true">O</span><span aria-hidden="true">S</span><span aria-hidden="true">I</span></h1>
+      <p class="hero-description">OPEN-FORMAT DJ &amp; MC<span>SEATTLE-BASED · AVAILABLE WORLDWIDE</span></p>
       <a class="scroll-cue" href="#bio" aria-label="Scroll to Kosi's introduction">
         <span>SCROLL TO EXPLORE</span>
         <span class="scroll-cue-line" aria-hidden="true"></span>
@@ -335,46 +336,14 @@
     <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
   </div>
 
-  <!-- CHAPTER 2 · BIO -->
-  <div data-layer="1" style="position:absolute;inset:0;height:100vh;z-index:2;visibility:hidden;clip-path:circle(0% at 50% 110%);">
-    <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#F7F4EE;display:flex;flex-direction:column;justify-content:center;">
-      <div data-fitbox style="width:100%;min-height:100vh;display:grid;place-items:center;">
-      <section id="bio" data-screen-label="Bio" style="position:relative;width:100%;background:#F7F4EE;padding:clamp(90px,12vw,150px) clamp(20px,5vw,72px);">
-      <div data-inner style="width:100%;">
-      <p data-rise="y" data-rise-delay="120" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);max-width:1040px;margin:0 auto;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 92;font-weight:500;font-size:clamp(22px,3vw,42px);line-height:1.24;letter-spacing:-.01em;text-wrap:pretty;color:#2B2622;">Sometimes all it takes is the right song to remember who you are.</p>
-    </div>
-    </section>
-      </div>
-    </section>
-    <div data-bleed style="position:absolute;top:100%;left:0;right:0;height:26vh;background:#F7F4EE;"></div>
-    <div data-dim style="position:absolute;left:0;right:0;top:0;height:calc(100% + 26vh);background:#2B2622;opacity:0;pointer-events:none;"></div>
-  </div>
-
-  <!-- CHAPTER 3 · ABOUT + SHOWS + MIXES + FEED + PRESS -->
-  <div data-layer="2" style="position:absolute;inset:0;height:100vh;z-index:3;visibility:hidden;clip-path:circle(0% at 50% 110%);">
-    <!-- Ground matches the section that ends this chapter (#mixes), not the one
-         that opens it: any sub-pixel drift in the read scrub then shows more of
-         the same black instead of a light band under the deck. -->
+  <!-- CHAPTER 2 · INTRO + SHOWS + MIXES + ABOUT + FEED + PRESS -->
+  <div data-layer="1" style="position:absolute;inset:0;height:100vh;z-index:3;visibility:hidden;clip-path:circle(0% at 50% 110%);">
+    <!-- One continuous chapter keeps the introduction brief and the music accessible. -->
     <section data-chapter style="position:relative;height:100vh;overflow:hidden;background:#1E1C1A;">
       <div data-fitbox style="width:100%;">
-      <section id="about" data-screen-label="About" style="position:relative;min-height:100vh;overflow:hidden;background:#2B2622;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
-      <picture class="about-media">
-        <source media="(max-width:700px)" srcset="assets/kosi-gasworks-mobile.jpeg">
-        <img class="about-bg" src="assets/kosi-gasworks.jpeg" alt="Kosi at the decks, golden hour" loading="lazy" decoding="async" width="1365" height="2048">
-      </picture>
-      <div class="about-scrim" aria-hidden="true"></div>
-      <div data-inner style="width:100%;position:relative;z-index:2;">
-      <div style="max-width:1240px;margin:0 auto;width:100%;">
-        <div data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);">
-          <h2 style="margin:0 0 24px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(48px,8vw,124px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#F7F4EE;">About<br>Kosi</h2>
-          <div style="display:flex;flex-direction:column;gap:16px;max-width:560px;">
-            <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(247,244,238,.88);text-wrap:pretty;">Producing since 2017 and DJing since 2022, Kosi works open format — Hip-Hop, R&amp;B, and Dancehall held together by reading the room rather than a fixed setlist.</p>
-            <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(247,244,238,.88);text-wrap:pretty;">Seattle is home base, with regular travel for dates across the U.S. and abroad. The rooms range from a 200-capacity club to a 2,000-plus outdoor crowd, with every set shaped to the room, the audience, and the moment.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <a href="/about/" style="position:relative;z-index:2;display:block;text-align:center;padding:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;color:#F7F4EE;">MORE ABOUT KOSI ↗</a></section>
+      <section id="bio" class="home-introduction" data-screen-label="Introduction">
+        <p>Sometimes all it takes is the right song to remember who you are.</p>
+      </section>
       <section id="shows" data-screen-label="Upcoming Shows" style="position:relative;background:#F7F4EE;">
       <div data-inner style="width:100%;">
       <div class="shows-content" style="padding:clamp(48px,6vw,86px) clamp(20px,5vw,72px) clamp(60px,7vw,100px);">
@@ -419,6 +388,22 @@
       </div>
     </div>
     </section>
+      <section id="about" class="home-story" data-screen-label="About Kosi">
+        <div class="home-story-grid">
+          <figure class="home-story-photo">
+            <img src="/assets/kosi-gasworks.jpeg" alt="Kosi at the decks at Gas Works Park in Seattle" loading="lazy" decoding="async" width="1365" height="2048">
+            <figcaption>SEATTLE IS HOME. MUSIC TAKES ME EVERYWHERE.</figcaption>
+          </figure>
+          <div class="home-story-copy">
+            <p class="story-kicker">ABOUT KOSI</p>
+            <h2>I’m in it<br>with you.</h2>
+            <p>If you see me dancing behind the decks, it’s because I love the song too. And if I step into the crowd, it’s because I want to be part of the party.</p>
+            <p>I’m watching the room, catching someone’s eye, digging into my music bag for the right song at the right time. A familiar chorus can take you back years. The next track can bring you right into this moment, with the people around you.</p>
+            <p>That’s what I’m chasing: a room where people feel seen, let go, and have a good time. Wherever we are, I want you to leave feeling like we went somewhere together.</p>
+            <div class="story-actions"><a href="/about/">GET TO KNOW ME ↗</a><a href="/booking/">BRING ME TO YOUR NEXT EVENT ↗</a></div>
+          </div>
+        </div>
+      </section>
       <!-- THE FEED + PRESS CONTINUE IN THE SAME SCROLLING CHAPTER -->
       <sc-if value="{{ showWatch }}" hint-placeholder-val="{{ true }}">
         <section id="watch" data-screen-label="The Feed" style="position:relative;background:#E6E1D7;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(70px,9vw,110px) clamp(20px,5vw,72px);">
