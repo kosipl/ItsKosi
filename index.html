@@ -726,6 +726,20 @@ class Component extends DCLogic {
     };
     this._onResize = (event) => {
       if (this._introActive && event && event.type === 'resize') this._finishHeroIntro(true);
+      const nextWidth = document.documentElement.clientWidth || innerWidth;
+      const mobile = matchMedia('(max-width:700px), (pointer:coarse)').matches;
+      const widthUnchanged = Number.isFinite(this._layoutViewportWidth) &&
+        Math.abs(nextWidth - this._layoutViewportWidth) < 2;
+      // Collapsing and expanding mobile browser chrome fires resize events even
+      // though the page's layout width has not changed. Rebuilding the pinned
+      // track from the new innerHeight moves the normal-flow Booking section,
+      // which produces a visible jump beneath an active touch scroll. Keep the
+      // existing geometry for height-only mobile resizes; genuine rotations and
+      // responsive breakpoint changes still remeasure because their width moves.
+      if (mobile && widthUnchanged) {
+        this._frame();
+        return;
+      }
       this._layout();
       this._frame();
     };
@@ -1496,6 +1510,7 @@ class Component extends DCLogic {
     // wait for a real measurement rather than publishing nonsense.
     if (!vh) { this._retryLayout(); return; }
     if (this._retryId) { clearInterval(this._retryId); this._retryId = null; }
+    this._layoutViewportWidth = document.documentElement.clientWidth || innerWidth;
     this._mobileLite = matchMedia('(max-width:700px), (pointer:coarse)').matches;
     // Touch scrolling carries more momentum than a mouse wheel. Give mobile
     // chapters a meaningful settled pause so a small corrective swipe does not
