@@ -34,6 +34,11 @@
       venue: "Big Mario's Pizza · Capitol Hill",
       location: 'Seattle · 10 PM — 2 AM',
       url: 'https://www.instagram.com/bigmariospizza/'
+    },
+    {
+      date: 'SEP 30',
+      venue: 'TBA',
+      location: 'Details coming soon'
     }
   ];
 
