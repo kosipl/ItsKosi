@@ -27,7 +27,7 @@
     {
       date: 'SEP 17',
       venue: 'TBA',
-      location: 'Details coming soon'
+      location: 'Seattle'
     },
     {
       date: 'SEP 19',
