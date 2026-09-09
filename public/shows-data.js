@@ -30,6 +30,11 @@
       location: 'Seattle'
     },
     {
+      date: 'SEP 18',
+      venue: 'Public House',
+      location: 'Seattle'
+    },
+    {
       date: 'SEP 19',
       venue: "Big Mario's Pizza · Capitol Hill",
       location: 'Seattle · 10 PM — 2 AM',
@@ -37,7 +42,7 @@
     },
     {
       date: 'SEP 30',
-      venue: 'TBA',
+      venue: 'Vice',
       location: 'Details coming soon'
     }
   ];
