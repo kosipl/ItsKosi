@@ -5,45 +5,63 @@
     {
       date: 'SEP 04',
       venue: 'Comet Tavern · Capitol Hill',
-      location: 'Seattle · 10 PM — 2 AM',
+      location: 'Seattle',
       url: 'https://www.instagram.com/comet_tavern/'
     },
     {
       date: 'SEP 05',
       venue: "Big Mario's Pizza · Capitol Hill",
-      location: 'Seattle · 10 PM — 2 AM',
+      location: 'Seattle',
       url: 'https://www.instagram.com/bigmariospizza/'
     },
     {
       date: 'SEP 11',
-      venue: 'Private Event'
+      venue: 'Private Event',
+      location: 'Seattle'
     },
     {
       date: 'SEP 12',
       venue: "Big Mario's Pizza · Capitol Hill",
-      location: 'Seattle · 10 PM — 2 AM',
+      location: 'Seattle',
       url: 'https://www.instagram.com/bigmariospizza/'
     },
     {
       date: 'SEP 17',
       venue: 'TBA',
-      location: 'Seattle'
+      location: 'Tacoma'
     },
     {
       date: 'SEP 18',
       venue: 'Public House',
-      location: 'Seattle'
+      location: 'Seattle',
+      url: 'https://www.instagram.com/publichouseseattle/'
     },
     {
       date: 'SEP 19',
       venue: "Big Mario's Pizza · Capitol Hill",
-      location: 'Seattle · 10 PM — 2 AM',
+      location: 'Seattle',
       url: 'https://www.instagram.com/bigmariospizza/'
+    },
+    {
+      date: 'SEP 22',
+      venue: 'TBA',
+      location: 'Atlanta'
+    },
+    {
+      date: 'SEP 23',
+      venue: 'TBA',
+      location: 'Atlanta'
+    },
+    {
+      date: 'SEP 25',
+      venue: 'Private Event',
+      location: 'Atlanta'
     },
     {
       date: 'SEP 30',
       venue: 'Vice',
-      location: 'Details coming soon'
+      location: 'Seattle',
+      url: 'https://www.instagram.com/viceseattle/?hl=en'
     }
   ];
 
