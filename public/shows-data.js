@@ -1,7 +1,7 @@
 (function () {
   document.documentElement.classList.add('shows-motion-ready');
 
-  const shows = [
+  const archivedShows = [
     {
       date: 'SEP 04',
       venue: 'Comet Tavern · Capitol Hill',
@@ -65,6 +65,58 @@
     }
   ];
 
+  const shows = [
+    {
+      date: 'OCT 08',
+      venue: 'El Malo',
+      location: 'Atlanta',
+      url: 'https://www.instagram.com/p/Dd3_52JtjwR/'
+    },
+    {
+      date: 'OCT 08',
+      venue: 'The Listening Room',
+      location: 'Atlanta',
+      url: 'https://posh.vip/e/the-listening-room-26'
+    },
+    {
+      date: 'OCT 10',
+      venue: 'Homecoming · More info TBA',
+      location: 'Atlanta'
+    },
+    {
+      date: 'OCT 16',
+      venue: 'Late Night R&B',
+      location: 'Bellevue',
+      url: 'https://www.instagram.com/latenightsrnb/'
+    },
+    {
+      date: 'OCT 17',
+      venue: 'Wheres The Love',
+      location: 'Tacoma',
+      url: 'https://www.instagram.com/p/Dd8wFoqCxSP/'
+    },
+    {
+      date: 'OCT 18',
+      venue: 'Jahm Session',
+      location: 'Seattle',
+      url: 'https://www.instagram.com/jahmsessions/'
+    },
+    {
+      date: 'OCT 23',
+      venue: 'Private Event'
+    },
+    {
+      date: 'OCT 24',
+      venue: 'Private Event'
+    },
+    {
+      date: 'OCT 27',
+      venue: 'Creative Economy Career Day',
+      location: 'Seattle',
+      url: 'https://creativeeconomycareerday.com/'
+    }
+  ];
+
   // Row stagger, mirrored from shows-motion.css. Used only to decide when an
   // entrance is old enough that restoring it must not replay it.
   const ROW_DELAY = 300;
@@ -85,9 +137,10 @@
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const fill = (list) => {
+    const entries = list.dataset.showsList === 'archive' ? archivedShows : shows;
     const requestedLimit = Number.parseInt(list.dataset.limit || '', 10);
-    const visibleShows = Number.isFinite(requestedLimit) ? shows.slice(0, requestedLimit) : shows;
-    const stamp = shows.length + ':' + visibleShows.length;
+    const visibleShows = Number.isFinite(requestedLimit) ? entries.slice(0, requestedLimit) : entries;
+    const stamp = list.dataset.showsList + ':' + entries.length + ':' + visibleShows.length;
     if (list.dataset.showsRendered === stamp) return visibleShows.length;
 
     const fragment = document.createDocumentFragment();
