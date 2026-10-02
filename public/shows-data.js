@@ -26,11 +26,6 @@
       url: 'https://www.instagram.com/bigmariospizza/'
     },
     {
-      date: 'SEP 17',
-      venue: 'TBA',
-      location: 'Tacoma'
-    },
-    {
       date: 'SEP 18',
       venue: 'Public House',
       location: 'Seattle',
@@ -41,16 +36,6 @@
       venue: "Big Mario's Pizza · Capitol Hill",
       location: 'Seattle',
       url: 'https://www.instagram.com/bigmariospizza/'
-    },
-    {
-      date: 'SEP 22',
-      venue: 'TBA',
-      location: 'Atlanta'
-    },
-    {
-      date: 'SEP 23',
-      venue: 'TBA',
-      location: 'Atlanta'
     },
     {
       date: 'SEP 25',
