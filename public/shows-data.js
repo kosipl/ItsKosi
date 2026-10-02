@@ -52,6 +52,12 @@
 
   const shows = [
     {
+      date: 'OCT 03',
+      venue: 'Barboza',
+      location: 'Seattle',
+      url: 'https://www.instagram.com/barboza206/'
+    },
+    {
       date: 'OCT 08',
       venue: 'El Malo',
       location: 'Atlanta',
