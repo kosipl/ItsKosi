@@ -340,7 +340,9 @@
       </div>
       <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(43,38,34,.18) 0%,rgba(43,38,34,0) 34%,rgba(43,38,34,.34) 100%);animation:fadeIn 1.8s both;"></div>
       <h1 class="hero-wordmark" aria-label="Kosi" style="position:relative;z-index:2;margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 78;font-weight:900;font-size:clamp(96px,26vw,440px);line-height:.8;letter-spacing:-.02em;color:#F7F4EE;"><span aria-hidden="true">K</span><span aria-hidden="true">O</span><span aria-hidden="true">S</span><span aria-hidden="true">I</span></h1>
+      <sc-if value="{{ showFeatured }}" hint-placeholder-val="{{ true }}">
       <aside class="new-release" style="{{ featuredStyle }}" aria-labelledby="new-release-title">
+        <button class="new-release-close" type="button" onClick="{{ closeFeatured }}" aria-label="Dismiss new release"><span aria-hidden="true">×</span></button>
         <img class="new-release-art" src="{{ featuredImage }}" alt="{{ featuredAlt }}" width="500" height="500" decoding="async">
         <div class="new-release-copy">
           <span class="new-release-label">NEW RELEASE</span>
@@ -349,6 +351,7 @@
           <button class="new-release-listen" type="button" onClick="{{ openFeatured }}" aria-haspopup="dialog" aria-label="Listen to {{ featuredTitle }} — choose a platform">LISTEN NOW <span aria-hidden="true">↗</span></button>
         </div>
       </aside>
+      </sc-if>
       <a class="scroll-cue" href="#bio" aria-label="Scroll to Kosi's introduction">
         <span>SCROLL TO EXPLORE</span>
         <span class="scroll-cue-line" aria-hidden="true"></span>
@@ -614,7 +617,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;revealLength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:112,&quot;min&quot;:70,&quot;max&quot;:160,&quot;step&quot;:2,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll transitions&quot;},&quot;holdLength&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:44,&quot;min&quot;:0,&quot;max&quot;:110,&quot;step&quot;:2,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Scroll transitions&quot;},&quot;marquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showWatch&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showPress&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
 class Component extends DCLogic {
-  state = { menu: false, menuClosing: false, sent: false, submitting: false, submitError: false, activeMix: 0, activeWatch: 0, watchOpen: false, watchIndex: 0, pickerOpen: false, pickerIndex: 0, pickerAll: false };
+  state = { featuredDismissed: false, menu: false, menuClosing: false, sent: false, submitting: false, submitError: false, activeMix: 0, activeWatch: 0, watchOpen: false, watchIndex: 0, pickerOpen: false, pickerIndex: 0, pickerAll: false };
 
   _mixes = [
     {
@@ -1789,6 +1792,10 @@ class Component extends DCLogic {
     const featured = this._mixes[featuredIndex];
     const picked = this.state.pickerAll ? null : this._mixes[this.state.pickerIndex];
     return {
+      showFeatured: !this.state.featuredDismissed,
+      closeFeatured: () => this.setState({ featuredDismissed: true }, () => {
+        document.querySelector('.scroll-cue')?.focus({ preventScroll: true });
+      }),
       featuredTitle: featured.featured.title,
       featuredSubtitle: featured.featured.subtitle,
       featuredImage: featured.image,
