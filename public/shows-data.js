@@ -71,8 +71,9 @@
     },
     {
       date: 'OCT 10',
-      venue: 'Homecoming · More info TBA',
-      location: 'Atlanta'
+      venue: 'Soulfest: Morehouse Homecoming',
+      location: 'Atlanta',
+      url: 'https://posh.vip/e/soulfest-4th-edition?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaeVVgtpHgEvhnXpckov_tjoNcaxPLJplfLOUzuGrs4kZ4-Yk0KYoL-TQfFLSQ_aem_AGqf6a22UPgTe-zcbjcWmw'
     },
     {
       date: 'OCT 16',
