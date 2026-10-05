@@ -340,6 +340,15 @@
       </div>
       <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(43,38,34,.18) 0%,rgba(43,38,34,0) 34%,rgba(43,38,34,.34) 100%);animation:fadeIn 1.8s both;"></div>
       <h1 class="hero-wordmark" aria-label="Kosi" style="position:relative;z-index:2;margin:0;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 78;font-weight:900;font-size:clamp(96px,26vw,440px);line-height:.8;letter-spacing:-.02em;color:#F7F4EE;"><span aria-hidden="true">K</span><span aria-hidden="true">O</span><span aria-hidden="true">S</span><span aria-hidden="true">I</span></h1>
+      <aside class="new-release" style="{{ featuredStyle }}" aria-labelledby="new-release-title">
+        <img class="new-release-art" src="{{ featuredImage }}" alt="{{ featuredAlt }}" width="500" height="500" decoding="async">
+        <div class="new-release-copy">
+          <span class="new-release-label">NEW RELEASE</span>
+          <h2 id="new-release-title">{{ featuredTitle }}</h2>
+          <p class="new-release-subtitle">{{ featuredSubtitle }}</p>
+          <button class="new-release-listen" type="button" onClick="{{ openFeatured }}" aria-haspopup="dialog" aria-label="Listen to {{ featuredTitle }} — choose a platform">LISTEN NOW <span aria-hidden="true">↗</span></button>
+        </div>
+      </aside>
       <a class="scroll-cue" href="#bio" aria-label="Scroll to Kosi's introduction">
         <span>SCROLL TO EXPLORE</span>
         <span class="scroll-cue-line" aria-hidden="true"></span>
@@ -610,6 +619,8 @@ class Component extends DCLogic {
   _mixes = [
     {
       title: 'Ghostbusters [Kosi Bounce Mix]', kind: 'MASHUPS / EDITS',
+      // Move this feature metadata with the promoted track; use the site’s cream-and-dark palette.
+      featured: { title: 'Ghostbusters', subtitle: 'Kosi Bounce Mix', background: '#F7F4EE', ink: '#2B2622' },
       image: 'https://i1.sndcdn.com/artworks-6xpeZyZEDSt5MQiH-u2o43w-t500x500.jpg',
       soundcloud: 'https://soundcloud.com/iisokk/ghostbusters-kosi-bounce-mix',
       youtube: 'https://www.youtube.com/watch?v=M7T0kg2s9ZY'
@@ -1774,8 +1785,16 @@ class Component extends DCLogic {
     });
     const overlayIndex = ((this.state.watchIndex % watchTotal) + watchTotal) % watchTotal;
     const watchOverlay = this._watchClips[overlayIndex];
+    const featuredIndex = this._mixes.findIndex((mix) => mix.featured);
+    const featured = this._mixes[featuredIndex];
     const picked = this.state.pickerAll ? null : this._mixes[this.state.pickerIndex];
     return {
+      featuredTitle: featured.featured.title,
+      featuredSubtitle: featured.featured.subtitle,
+      featuredImage: featured.image,
+      featuredAlt: 'Cover artwork for ' + featured.title,
+      featuredStyle: '--release-bg:' + featured.featured.background + ';--release-ink:' + featured.featured.ink,
+      openFeatured: (e) => this._openPicker(featuredIndex, e),
       menu: this.state.menu,
       menuExpanded: this.state.menu ? 'true' : 'false',
       menuClass: this.state.menuClosing ? 'menu-closing' : 'menu-opening',
