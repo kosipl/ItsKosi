@@ -125,6 +125,14 @@
   .watch-card:focus-visible{outline:2px solid #2B2622;outline-offset:5px;}
   .listen-choice{border:1px solid rgba(43,38,34,.34);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.18em;color:#2B2622;transition:background .2s ease,color .2s ease;}
   .listen-choice:hover{background:#2B2622;color:#F7F4EE;}
+  .booking-direct{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:860px;margin:0 auto clamp(30px,3vw,42px);padding:20px 24px;border:1px solid #2B2622;background:#2B2622;color:#F7F4EE;flex-wrap:wrap;}
+  .booking-direct-text{min-width:0;flex:1 1 220px;}
+  .booking-direct-link{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:8px 12px;border:1px solid rgba(247,244,238,.55);color:#F7F4EE;font-size:14px;white-space:nowrap;flex:none;}
+  .booking-direct-link:hover{background:#F7F4EE;color:#2B2622;}
+  .booking-direct-link:focus-visible{outline:2px solid #F7F4EE;outline-offset:4px;}
+  .booking-direct-label{display:block;margin-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;}
+  .booking-direct-address{display:block;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 85;font-size:clamp(20px,2.5vw,30px);font-weight:800;line-height:1.1;overflow-wrap:anywhere;cursor:text;user-select:text;-webkit-user-select:text;}
+  .booking-direct-arrow{font-size:26px;line-height:1;flex:none;}
   .menu-panel{touch-action:pan-y;overscroll-behavior:contain;overflow-y:auto;-webkit-overflow-scrolling:touch;}
   .menu-panel.menu-opening{animation:menuReveal .74s cubic-bezier(.16,.84,.44,1) both;}
   .menu-opening .menu-meta{animation:menuMetaIn .48s .18s ease both;}
@@ -206,6 +214,7 @@
     .event-row .event-date{grid-column:1;grid-row:1/span 3;}
     .event-row .event-venue,.event-row .event-location{grid-column:2;}
     .booking-form{grid-template-columns:1fr!important;}
+    .booking-direct{padding:17px 18px;}
     .mix-card{width:clamp(180px,58vw,250px)}
     .mix-control{width:44px;height:44px}
     .mix-deck{height:330px!important;}
@@ -266,6 +275,10 @@
       <div style="max-width:1000px;margin:0 auto;width:100%;">
         <h1 class="chapter-title" data-rise="y" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 0 16px;text-align:center;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 68;font-weight:900;font-size:clamp(52px,9.5vw,150px);line-height:.84;letter-spacing:-.02em;text-transform:uppercase;color:#2B2622;">Booking inquiry</h1>
         <p data-rise="y" data-rise-delay="110" style="opacity:0;transform:translateY(38px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1);margin:0 auto clamp(28px,3.4vw,44px);font-size:17px;line-height:1.6;color:#6B6259;max-width:520px;text-align:center;">Tell me what the room is and I'll come back with availability and a quote.</p>
+        <div class="booking-direct">
+          <div class="booking-direct-text"><span class="booking-direct-label">Prefer to email directly?</span><span class="booking-direct-address">contact@itskosi.com</span></div>
+          <a class="booking-direct-link" href="mailto:contact@itskosi.com?subject=Booking%20inquiry" aria-label="Email Kosi directly at contact@itskosi.com">Email me <span class="booking-direct-arrow" aria-hidden="true">↗</span></a>
+        </div>
         <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
           <form class="booking-form" action="https://formsubmit.co/ajax/6870be49db96c158057a0ae0fe96b5ae" method="POST" onSubmit="{{ submit }}" style="width:100%;max-width:860px;margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.6vw,30px);">
             <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
