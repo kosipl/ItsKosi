@@ -1,113 +1,141 @@
 (function () {
   document.documentElement.classList.add('shows-motion-ready');
 
-  const archivedShows = [
+  // Store full dates so shows keep their original year as the calendar advances.
+  const shows = [
     {
-      date: 'SEP 04',
+      date: '2026-09-04',
       venue: 'Comet Tavern · Capitol Hill',
       location: 'Seattle',
       url: 'https://www.instagram.com/comet_tavern/'
     },
     {
-      date: 'SEP 05',
+      date: '2026-09-05',
       venue: "Big Mario's Pizza · Capitol Hill",
       location: 'Seattle',
       url: 'https://www.instagram.com/bigmariospizza/'
     },
     {
-      date: 'SEP 11',
+      date: '2026-09-11',
       venue: 'Private Event',
       location: 'Seattle'
     },
     {
-      date: 'SEP 12',
+      date: '2026-09-12',
       venue: "Big Mario's Pizza · Capitol Hill",
       location: 'Seattle',
       url: 'https://www.instagram.com/bigmariospizza/'
     },
     {
-      date: 'SEP 18',
+      date: '2026-09-18',
       venue: 'Public House',
       location: 'Seattle',
       url: 'https://www.instagram.com/publichouseseattle/'
     },
     {
-      date: 'SEP 19',
+      date: '2026-09-19',
       venue: "Big Mario's Pizza · Capitol Hill",
       location: 'Seattle',
       url: 'https://www.instagram.com/bigmariospizza/'
     },
     {
-      date: 'SEP 25',
+      date: '2026-09-25',
       venue: 'Private Event',
-      location: 'Atlanta'
+      location: 'Atlanta',
+      timeZone: 'America/New_York'
     },
     {
-      date: 'SEP 30',
+      date: '2026-09-30',
       venue: 'Vice',
       location: 'Seattle',
       url: 'https://www.instagram.com/viceseattle/?hl=en'
-    }
-  ];
-
-  const shows = [
+    },
     {
-      date: 'OCT 03',
+      date: '2026-10-03',
       venue: 'Barboza',
       location: 'Seattle',
       url: 'https://www.instagram.com/barboza206/'
     },
     {
-      date: 'OCT 08',
+      date: '2026-10-08',
       venue: 'El Malo',
       location: 'Atlanta',
+      timeZone: 'America/New_York',
       url: 'https://www.instagram.com/p/Dd3_52JtjwR/'
     },
     {
-      date: 'OCT 08',
+      date: '2026-10-08',
       venue: 'The Listening Room',
       location: 'Atlanta',
+      timeZone: 'America/New_York',
       url: 'https://posh.vip/e/the-listening-room-26'
     },
     {
-      date: 'OCT 10',
+      date: '2026-10-10',
       venue: 'Soulfest: Morehouse Homecoming',
       location: 'Atlanta',
+      timeZone: 'America/New_York',
       url: 'https://posh.vip/e/soulfest-4th-edition?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaeVVgtpHgEvhnXpckov_tjoNcaxPLJplfLOUzuGrs4kZ4-Yk0KYoL-TQfFLSQ_aem_AGqf6a22UPgTe-zcbjcWmw'
     },
     {
-      date: 'OCT 16',
+      date: '2026-10-16',
       venue: 'Late Night R&B',
       location: 'Bellevue',
       url: 'https://www.instagram.com/latenightsrnb/'
     },
     {
-      date: 'OCT 17',
+      date: '2026-10-17',
       venue: 'Wheres The Love',
       location: 'Tacoma',
       url: 'https://www.instagram.com/p/Dd8wFoqCxSP/'
     },
     {
-      date: 'OCT 18',
+      date: '2026-10-18',
       venue: 'Jahm Session',
       location: 'Seattle',
       url: 'https://www.instagram.com/jahmsessions/'
     },
     {
-      date: 'OCT 23',
+      date: '2026-10-23',
       venue: 'Private Event'
     },
     {
-      date: 'OCT 24',
+      date: '2026-10-24',
       venue: 'Private Event'
     },
     {
-      date: 'OCT 27',
+      date: '2026-10-27',
       venue: 'Creative Economy Career Day',
       location: 'Seattle',
       url: 'https://creativeeconomycareerday.com/'
     }
   ];
+
+  const dateFormat = new Intl.DateTimeFormat('en-US', {
+    month: 'short', day: '2-digit', timeZone: 'UTC'
+  });
+  const calendars = new Map();
+  const localDate = (now, timeZone) => {
+    if (!calendars.has(timeZone)) {
+      calendars.set(timeZone, new Intl.DateTimeFormat('en-US', {
+        year: 'numeric', month: '2-digit', day: '2-digit', timeZone
+      }));
+    }
+    const parts = Object.fromEntries(calendars.get(timeZone).formatToParts(now)
+      .map(({ type, value }) => [type, value]));
+    return `${parts.year}-${parts.month}-${parts.day}`;
+  };
+  const groupShows = (now) => {
+    const upcoming = [], archive = [];
+    shows.forEach((show) => {
+      // Keep a show upcoming through its entire local calendar date.
+      const today = localDate(now, show.timeZone || 'America/Los_Angeles');
+      (show.date < today ? archive : upcoming).push(show);
+    });
+    upcoming.sort((a, b) => a.date.localeCompare(b.date));
+    archive.sort((a, b) => b.date.localeCompare(a.date));
+    return { upcoming, archive };
+  };
 
   // Row stagger, mirrored from shows-motion.css. Used only to decide when an
   // entrance is old enough that restoring it must not replay it.
@@ -128,18 +156,23 @@
   const entered = new Map();
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const fill = (list) => {
-    const entries = list.dataset.showsList === 'archive' ? archivedShows : shows;
+  const fill = (list, groups) => {
+    const isArchive = list.dataset.showsList === 'archive';
+    const entries = isArchive ? groups.archive : groups.upcoming;
     const requestedLimit = Number.parseInt(list.dataset.limit || '', 10);
     const visibleShows = Number.isFinite(requestedLimit) ? entries.slice(0, requestedLimit) : entries;
-    const stamp = list.dataset.showsList + ':' + entries.length + ':' + visibleShows.length;
+    const stamp = (isArchive ? 'archive:' : 'upcoming:') +
+      visibleShows.map((show) => show.date + ':' + show.venue).join('|');
     if (list.dataset.showsRendered === stamp) return visibleShows.length;
 
     const fragment = document.createDocumentFragment();
     visibleShows.forEach((show, index) => {
       const row = make('div', 'event-row');
       row.style.setProperty('--event-index', index);
-      row.append(make('span', 'event-date', show.date));
+      const date = make('time', 'event-date', dateFormat.format(new Date(show.date + 'T00:00:00Z')).toUpperCase() +
+        (isArchive ? ' · ' + show.date.slice(0, 4) : ''));
+      date.dateTime = show.date;
+      row.append(date);
       row.append(make('span', 'event-venue', show.venue));
       if (show.location) row.append(make('span', 'event-location', show.location));
 
@@ -154,6 +187,13 @@
       fragment.append(row);
     });
 
+    if (!visibleShows.length) {
+      const message = make('p', 'shows-empty', isArchive
+        ? 'No past shows yet.'
+        : 'More shows coming soon. Check back for new dates.');
+      message.style.padding = '24px 0';
+      fragment.append(message);
+    }
     list.replaceChildren(fragment);
     list.dataset.showsRendered = stamp;
     return visibleShows.length;
@@ -177,9 +217,10 @@
     const lists = document.querySelectorAll('[data-shows-list]');
     if (!lists.length) return;
 
+    const groups = groupShows(new Date());
     const rowsPerSection = new Map();
     lists.forEach((list) => {
-      const rows = fill(list);
+      const rows = fill(list, groups);
       const section = list.closest('section');
       if (section) rowsPerSection.set(section, Math.max(rowsPerSection.get(section) || 0, rows));
     });
@@ -219,6 +260,12 @@
 
   addEventListener('scroll', schedule, { passive: true });
   addEventListener('resize', schedule, { passive: true });
+  addEventListener('pageshow', schedule);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) schedule();
+  });
+  // Refresh even when someone leaves the page open across midnight.
+  setInterval(schedule, 60 * 1000);
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', sync, { once: true });
