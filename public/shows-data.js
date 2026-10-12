@@ -97,11 +97,13 @@
     },
     {
       date: '2026-10-23',
-      venue: 'Private Event'
+      venue: 'Private Event',
+      location: 'Seattle'
     },
     {
       date: '2026-10-24',
-      venue: 'Private Event'
+      venue: 'Private Event',
+      location: 'Seattle'
     },
     {
       date: '2026-10-27',
