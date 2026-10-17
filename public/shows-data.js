@@ -110,6 +110,18 @@
       venue: 'Creative Economy Career Day',
       location: 'Seattle',
       url: 'https://creativeeconomycareerday.com/'
+    },
+    {
+      date: '2026-10-31',
+      venue: 'Vice',
+      location: 'Seattle',
+      url: 'https://www.instagram.com/viceseattle/?hl=en'
+    },
+    {
+      date: '2027-01-28',
+      endDate: '2027-01-31',
+      venue: 'Winter Haus 2027 | Black Ski Weekend',
+      location: 'South Lake Tahoe, CA'
     }
   ];
 
@@ -130,9 +142,9 @@
   const groupShows = (now) => {
     const upcoming = [], archive = [];
     shows.forEach((show) => {
-      // Keep a show upcoming through its entire local calendar date.
+      // Keep a show upcoming through its final local calendar date.
       const today = localDate(now, show.timeZone || 'America/Los_Angeles');
-      (show.date < today ? archive : upcoming).push(show);
+      ((show.endDate || show.date) < today ? archive : upcoming).push(show);
     });
     upcoming.sort((a, b) => a.date.localeCompare(b.date));
     archive.sort((a, b) => b.date.localeCompare(a.date));
@@ -164,16 +176,21 @@
     const requestedLimit = Number.parseInt(list.dataset.limit || '', 10);
     const visibleShows = Number.isFinite(requestedLimit) ? entries.slice(0, requestedLimit) : entries;
     const stamp = (isArchive ? 'archive:' : 'upcoming:') +
-      visibleShows.map((show) => show.date + ':' + show.venue).join('|');
+      visibleShows.map((show) => show.date + ':' + (show.endDate || '') + ':' + show.venue).join('|');
     if (list.dataset.showsRendered === stamp) return visibleShows.length;
 
     const fragment = document.createDocumentFragment();
     visibleShows.forEach((show, index) => {
       const row = make('div', 'event-row');
       row.style.setProperty('--event-index', index);
-      const date = make('time', 'event-date', dateFormat.format(new Date(show.date + 'T00:00:00Z')).toUpperCase() +
+      const start = new Date(show.date + 'T00:00:00Z');
+      const label = show.endDate
+        ? dateFormat.formatRange(start, new Date(show.endDate + 'T00:00:00Z'))
+        : dateFormat.format(start);
+      const date = make('time', 'event-date', label.toUpperCase() +
         (isArchive ? ' · ' + show.date.slice(0, 4) : ''));
       date.dateTime = show.date;
+      if (show.endDate) date.setAttribute('aria-label', `${show.date} through ${show.endDate}`);
       row.append(date);
       row.append(make('span', 'event-venue', show.venue));
       if (show.location) row.append(make('span', 'event-location', show.location));
