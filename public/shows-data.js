@@ -121,7 +121,8 @@
       date: '2027-01-28',
       endDate: '2027-01-31',
       venue: 'Winter Haus 2027 | Black Ski Weekend',
-      location: 'South Lake Tahoe, CA'
+      location: 'South Lake Tahoe, CA',
+      url: 'https://www.theafrohaus.com/'
     }
   ];
 
