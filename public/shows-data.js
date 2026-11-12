@@ -118,6 +118,39 @@
       url: 'https://www.instagram.com/viceseattle/?hl=en'
     },
     {
+      date: '2026-11-06',
+      venue: 'THE LIFT @ Hello Bar Brooklyn',
+      location: 'Brooklyn, NYC',
+      timeZone: 'America/New_York',
+      url: 'https://www.instagram.com/p/DfQZ_eox9PI/'
+    },
+    {
+      date: '2026-11-15',
+      venue: 'SUNDAY SUITE',
+      location: 'Bellevue, WA',
+      url: 'https://partiful.com/e/WyCCI3W1yRpcAVALsyIX'
+    },
+    {
+      date: '2026-11-20',
+      venue: 'TBA',
+      location: 'Seattle, WA'
+    },
+    {
+      date: '2026-11-27',
+      venue: 'TBA',
+      location: 'Seattle, WA'
+    },
+    {
+      date: '2026-11-28',
+      venue: 'Whose Night Is It Anyways? Kaytranada Night',
+      location: 'Seattle, WA',
+      url: 'https://www.ticketweb.com/event/whose-night-is-it-anyways-chop-suey-tickets/14438014'
+    },
+    {
+      date: '2026-11-29',
+      venue: 'Private Event'
+    },
+    {
       date: '2027-01-28',
       endDate: '2027-01-31',
       venue: 'Winter Haus 2027 | Black Ski Weekend',
