@@ -151,6 +151,10 @@
       venue: 'Private Event'
     },
     {
+      date: '2026-12-04',
+      venue: 'Private Event'
+    },
+    {
       date: '2027-01-28',
       endDate: '2027-01-31',
       venue: 'Winter Haus 2027 | Black Ski Weekend',
