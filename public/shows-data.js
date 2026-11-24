@@ -132,13 +132,15 @@
     },
     {
       date: '2026-11-20',
-      venue: 'TBA',
-      location: 'Seattle, WA'
+      venue: "Kickin' It",
+      location: 'Seattle, WA',
+      url: 'https://partiful.com/e/uuURFjbAScACXo1gppXV'
     },
     {
       date: '2026-11-27',
-      venue: 'TBA',
-      location: 'Seattle, WA'
+      venue: 'CLUBSGIVING @ COMET TAVERN',
+      location: 'Seattle, WA',
+      url: 'https://www.instagram.com/p/Df0qmdHOLm_/'
     },
     {
       date: '2026-11-28',
@@ -148,11 +150,18 @@
     },
     {
       date: '2026-11-29',
-      venue: 'Private Event'
+      venue: 'Private Event',
+      location: 'Seattle, WA'
     },
     {
       date: '2026-12-04',
-      venue: 'Private Event'
+      venue: 'Private Event',
+      location: 'Seattle, WA'
+    },
+    {
+      date: '2026-12-18',
+      venue: "Kickin' It",
+      location: 'Seattle, WA'
     },
     {
       date: '2027-01-28',
